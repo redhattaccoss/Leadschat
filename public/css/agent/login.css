@@ -1,0 +1,31 @@
+body{
+	margin:0;
+	padding:0;
+	text-align:center;
+	background-color:#525252;
+}
+#login{
+	width:400px;
+	text-align:left;
+	margin:auto;
+	background-color:#E1E1E1;
+	color:#555;
+	border-radius:10px;
+	border:1px solid #C2C2C2;
+	margin-top:10px;
+}
+#login input[type=text], #login input[type=password]{
+	background-color:#555555;
+	border:none;
+	padding:8px;
+	border-radius:10px;
+	width:80%;
+	color:#fff;
+}
+#login button{
+	background:url(../../images/login-button.png) repeat-x transparent;
+	height:30px;
+	border:1px solid #4D4E53;
+	border-radius:10px;
+	cursor:pointer;
+}

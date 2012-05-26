@@ -1,0 +1,212 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body {
+	background-color:rgb(82,82,82);
+	padding:0;
+	margin:0;
+}
+#chat-container{
+	background-color:rgb(232,232,232);
+	-moz-box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
+	box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
+	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true)";
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true);
+	width:650px;
+	min-height:591px;
+	border-radius: 5px;
+	margin-bottom:10px;
+}
+#header{
+	background-color:rgb(35,35,35);
+	height:67px;
+	border-radius:5px 5px 0 0;
+}
+#header h2{
+	text-align: center;
+	padding-top:17px;
+}
+#header .close-container{
+	width:60px;
+	height:67px;
+	float:right;
+	margin-top:17px;
+	text-align: right;
+	padding-right:20px;
+}
+#header .close-container button{
+	background:url(../images/close.png) no-repeat transparent;
+	border:none;
+	width:28px;
+	height: 28px;
+}
+.chat-header-support{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:20px;
+	font-weight:bold;
+	line-height:120%;
+	color:rgb(255,255,255);
+	text-align:left;
+}
+span.window{
+	color:#0F547A;
+}
+#chat-list{
+	background-color:rgb(255,255,255);
+	overflow-x:hidden;
+	overflow-y:auto;
+	margin:0 12px;
+	padding-bottom: 13px;
+	height: 329px;
+}
+.chat-item .content .name{
+	float:left;
+	font-weight:bold;
+	color:#999;
+}
+.chat-item .content .agent-name{
+	color:#0161A3;
+}
+.chat-item .content, .chat-item .time{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	line-height:120%;
+	color:rgb(51,51,51);
+	text-align:left;
+	text-shadow:0px 1px 0px rgba(233,233,233,0.75);
+	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true)";zoom:1;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true);
+}
+.chat-item{
+	overflow: hidden;
+	padding-top:13px;
+}
+.chat-item .content{
+	float:left;
+	width:89%;
+	padding-left:1%;
+}
+.chat-item .time{
+	float:right;
+	width:9%;
+	text-align: right;
+	padding-right: 1%;
+}
+.chat-item .content p{
+	margin:0;
+	text-indent: 2em;
+}
+#agent-info{
+	height:56px;
+	margin:10px 12px 12px 12px;
+	
+}
+.picture-container{
+	float:left;
+	background: #fff;
+	width:56px;
+	height:56px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;	
+	margin-right:12px;
+}
+.picture-container img{
+	margin:2px;
+	height:50px;
+	width:50px;
+}
+.agent-info{
+	width:500px;
+	float:left;
+	display: inline-block;
+}
+.agent-info .name{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	line-height:120%;
+	color:rgb(62,61,61);
+	text-align:left;
+	text-shadow:0px 1px 0px rgba(233,233,233,0.75);
+	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true)";zoom:1;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true);	
+}
+.live-support{
+	margin-top:10px;
+	background-color:rgb(255,153,0);
+	width:84px;
+	height:21px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	text-align: center;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	line-height:120%;
+	color:rgb(255,255,255);
+	padding-top:2px;
+}
+#chat-messenger{
+	margin:17px 12px 12px 12px;
+	padding-bottom:29px;
+	overflow: hidden;
+}
+#chat-messenger textarea{
+	padding:10px 9px;
+	background-color:rgb(255,255,255);
+	width:502px;
+	height:60px;
+	border-color:rgb(204,204,204);
+	border-width:1px;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border-radius:1px;
+	border-style:solid;
+	max-width: 502px;
+	max-height: 80px;
+	min-width: 502px;
+	min-height: 80px;
+	float: left;
+	margin-right: 13px;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	line-height:120%;
+	color:rgb(204,204,204);
+	text-shadow:0px 1px 0px rgba(233,233,233,0.75);
+	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true)";zoom:1;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true);
+}
+#chat-messenger button{
+	cursor:pointer;
+	float:left;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	line-height:120%;
+	color:rgb(255,255,255);
+	text-align:center;
+	text-shadow:0px 1px 0px rgba(0,0,0,0.75);
+	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true)";zoom:1;
+	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true);
+	background-image:-moz-linear-gradient(48% -8% -90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%); 
+	background-image:-webkit-gradient(linear,48% -8%,48% 118%,color-stop(0, rgb(2,151,221)),color-stop(0.99, rgb(0,74,139)));
+	background-image:-webkit-linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
+	background-image:-o-linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
+	background-image:-ms-linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
+	background-image:linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
+	width:85px;
+	height:40px;
+	border-color:rgb(0,81,146);
+	border-width:1px;
+	border-style:solid;
+	-moz-box-shadow:0px 2px 2px 0px rgba(0,0,0,0.75) ,inset 0px 1px 0px rgba(255,255,255,0.42);
+	-webkit-box-shadow:0px 2px 2px 0px rgba(0,0,0,0.75) ,inset 0px 1px 0px rgba(255,255,255,0.42);
+	box-shadow:0px 2px 2px 0px rgba(0,0,0,0.75) ,inset 0px 1px 0px rgba(255,255,255,0.42);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff0297dd,endColorstr=#ff004a8b,GradientType=0)
+		progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 2,Color = #bf000000,Positive = true)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff0297dd,endColorstr=#ff004a8b,GradientType=0)
+		progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 2,Color = #bf000000,Positive = true);
+}

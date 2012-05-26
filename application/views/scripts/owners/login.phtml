@@ -1,0 +1,32 @@
+<div id="container">
+	<div class="owner-login">	
+		<?php echo $this->partial('include/owners/login-link.phtml')?>
+		<div class="login-form">
+			<h1>Signing in to your Account</h1>
+			<form method="post" id="login-form">
+				<div class="control-set">
+					<dl>
+						<dt>
+							Username
+						</dt>
+						<dd>
+							<input type="text" name="username"/>
+						</dd>			
+						<dt>
+							Password
+						</dt>
+						<dd class="last">
+							<input type="password" name="password"/>
+						</dd>						
+					</dl>
+				</div>
+				<div class="button-radio-set">
+					<input type="checkbox" name="remember-me"/> Remember me
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+	<footer>
+	</footer>
+</div>

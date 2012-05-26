@@ -1,0 +1,39 @@
+<div>
+	<header>
+		<img src="/public/images/logo.png" alt="The logo"/>
+	</header>
+	
+	<div id="chat-container">
+		<div id="header">
+			<div class="close-container">
+				<button class="close"></button>
+			</div>
+			<h2 class="chat-header-support">CHAT <span class='window'>Window</span></h2>
+		</div>
+		<div id="agent-info">
+			<div id="agent-picture-container" class="picture-container"></div>
+			<div class="agent-info">
+				<span class="name" id="agent-name">Looking for available agent</span>
+				<div class="live-support">Live Support</div>
+			</div>
+		</div>
+		<div id="chat-list">
+			<div class="chat-item">
+				<div class="content">
+				Looking for an agent...
+				</div>				
+			</div>
+
+		</div>
+		<div id="chat-messenger">
+			<form id="chat-form" method="POST">
+				<textarea id="message-text" name="message" placeholder="Type a message"></textarea>
+				<input type="hidden" value="<?php echo $this->website?>" name="website" id="website"/>	
+				<input type="hidden" id="from_id" name="from_id" value="<?php echo $this->visitor_id?>"/>
+				<input type="hidden" id="from_type" name="from_type" value="V"/>
+				<input type="hidden" id="chat_session_id" name="chat_session_id" value="-1"/>
+				<button id="send-chat" type="submit">Send</button>
+			</form>
+		</div>
+	</div>
+</div>

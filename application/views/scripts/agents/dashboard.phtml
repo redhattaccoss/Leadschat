@@ -1,0 +1,43 @@
+<div id="chat-list">
+	<div class="user-dash">
+		<div class='online-icon'></div>&nbsp;<span><?php echo $this->user["first_name"]." ".$this->user["last_name"]?></span>
+	</div>
+	<ul>
+	</ul>
+</div>
+<div id="chat-area">
+	<div id="owner-leads-info">
+		<div id="owner-info">
+			<h1>
+				Website Information
+			</h1>
+			<ul>
+				<li class="clear"><span class='label'>Owner Name: </span><span class='content' id='owner_full_name'></span></li>
+				<li><span class='label'>Owner Type: </span><span class='content' id='owner_type'></span></li>
+				<li class="clear"><span class='label'>Company: </span><span class='content' id='owner_company'></span></li>
+				<li><span class='label'>Website: </span><span class='content' id='owner_website'></span></li>
+			</ul>
+		</div>
+	</div>
+	<div id="chat-area-text">
+	</div>
+	<div id="chat-area-form">
+		<form id="chat-form" method="POST" action="send">
+			<input type="hidden" id="from_id" name="from_id" value="<?php echo $this->user["agent_id"]?>"/>
+			<input type="hidden" id="from_type" name="from_type" value="A"/>
+			<input type="hidden" id="chat_session_id" name="chat_session_id" value="-1"/>
+			<textarea name="message" placeholder="Enter message here" id="message-text"></textarea>
+			<button class="button" type="submit" id="send-chat">Send</button>
+		</form>
+	</div>
+	
+</div>
+<div id="leads-info">
+	<h1>Leads Information</h1>
+	<?php echo $this->infoForm?>
+	<div class="buttons">
+		<button type="submit" class='button' id="save-button">Save</button>
+		<button type="submit" class='button' id="discard-button">Discard</button>
+		<button type="submit" class='button' id="end-chat-button">End Chat</button>
+	</div>
+</div>
