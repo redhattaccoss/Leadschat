@@ -1,5 +1,5 @@
 <?php 
-class Owner_Owner extends BaseModel{
+class Owner_Owner extends BaseModel implements CRUD{
 	
 	public function create($request=null){
 		$db = $this->db;
@@ -15,5 +15,15 @@ class Owner_Owner extends BaseModel{
 		}else{
 			return false;
 		}
+	}
+	
+	public function update($request=null){
+		
+	}
+	public function delete($request=null){
+		
+	}
+	public function read($request=null){
+		
 	}
 }
