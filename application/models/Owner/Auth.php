@@ -8,7 +8,8 @@ class Owner_Auth extends BaseModel implements Authentication{
 		$sql = $db->select()->from("owners")
 					->where("username = ?",$username)
 					->where("password = ?", md5($password))
-					->where("active = 'Y'");
+					->where("activated = 'Y'")
+					->where("approved = 'Y'");
 		$owner = $db->fetchRow($sql);
 		if ($admin){
 			$session->owner_id = $owner["owner_id"];
