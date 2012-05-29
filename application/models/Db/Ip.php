@@ -1,7 +1,7 @@
 <?php 
-class Db_Ip extends BaseModel{
+class Db_Ip extends BaseModel {
 
-	public function isIpBlocked(){
+	public function static isIpBlocked(){
 		$db = $this->db;
 		$ip = ip2long($_SERVER["REMOTE_ADDR"]);
         //perform ip block check
