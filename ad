@@ -1,0 +1,260 @@
+[33mcommit 67a2eebc5ae70a7b04bb1a1d18a72cc38ea7e0db[m
+Author: dhemaz <dhemaz0217@gmail.com>
+Date:   Tue May 29 12:20:44 2012 +0800
+
+    Test Commit
+
+[1mdiff --git a/application/controllers/OwnersController.php b/application/controllers/OwnersController.php[m
+[1mindex 36c6132..3e09637 100644[m
+[1m--- a/application/controllers/OwnersController.php[m
+[1m+++ b/application/controllers/OwnersController.php[m
+[36m@@ -1,101 +1,101 @@[m
+[31m-<?php [m
+[31m-class OwnersController extends BaseLeadController{[m
+[31m-	private $model;[m
+[31m-	public function init(){[m
+[31m-		parent::init();[m
+[31m-		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);[m
+[31m-		$this->model = new Owner_Owner($this->db);[m
+[31m-		$this->model->setRequestObject($this->_request);[m
+[31m-	}[m
+[31m-[m
+[31m-	public function processRegisterAction(){[m
+[31m-		$db = $this->db;[m
+[31m-		if ($this->_request->isXmlHttpRequest()){[m
+[31m-					//auto mail here[m
+[31m-			$validationSettings = array();[m
+[31m-			$validationSettings[] = array("field"=>"first_name",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"last_name",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"website",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"company",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"email",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"username",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"password",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"working_timezone",[m
+[31m-									"configs"=>array(array("validation"=>"required")));[m
+[31m-			$validationSettings[] = array("field"=>"mobile",[m
+[31m-									"configs"=>array(array("validation"=>"required"),[m
+[31m-													 array("validation"=>"exist", "settings"=>array("table"=>"owners"))));[m
+[31m-			[m
+[31m-			$this->model->setValidationSettings($validationSettings);[m
+[31m-			[m
+[31m-			if ($this->model->create()){[m
+[31m-				$this->view->result = array("result"=>true);[m
+[31m-			}else{			[m
+[31m-				$this->view->result = array("result"=>false, "errors"=>$this->model->getErrors());[m
+[31m-			}[m
+[31m-		}else{[m
+[31m-			$this->view->result = array("result"=>false);[m
+[31m-		}[m
+[31m-		$this->_helper->layout->setLayout("plain");[m
+[31m-        $this->_helper->viewRenderer("json");[m
+[31m-	}[m
+[31m-		[m
+[31m-	public function processLoginAction(){[m
+[31m-    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");   [m
+[31m-        if (!$sessionAgent->owner_id&&$this->_request->isXmlHttpRequest()){[m
+[31m-			if ($this->auth->authenticate()){[m
+[31m-				$this->view->result = array("result"=>true, "message"=>"Successful logged in");[m
+[31m-			}else{[m
+[31m-				$this->view->result = array("result"=>false, "message"=>"Invalid Username/Password");[m
+[31m-			}   			    	[m
+[31m-        }else{[m
+[31m-        	if ($sessionAgent->owner_id){[m
+[31m-        		$this->view->result = array("result"=>true, "message"=>"Already logged in");[m
+[31m-        	}else{[m
+[31m-        		$this->view->result = array("result"=>false, "message"=>"Invalid request method");	[m
+[31m-        	}	[m
+[31m-        }[m
+[31m-        $this->_helper->layout->setLayout("plain");[m
+[31m-        $this->_helper->viewRenderer("json");[m
+[31m-    }[m
+[31m-    [m
+[31m-    public function indexAction(){[m
+[31m-    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");[m
+[31m-		$this->view->headTitle("Leads Chat - Home");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-dashboard.js", "text/javascript");[m
+[31m-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-dashboard.css");    	[m
+[31m-    }[m
+[31m-    [m
+[31m-[m
+[31m-	public function registerAction(){[m
+[31m-		$this->view->headTitle("Leads Chat - Register");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");[m
+[31m-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");[m
+[31m-	}[m
+[31m-	[m
+[31m-	public function forgotpasswordAction(){[m
+[31m-		$this->view->headTitle("Leads Chat - Forgot Password");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[31m-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");[m
+[31m-	}[m
+[31m-[m
+[31m-	public function loginAction(){[m
+[31m-		$this->view->headTitle("Leads Chat - Login");[m
+[31m-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[31m-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");[m
+[31m-	}[m
+[31m-	[m
+[31m-	public function registerSuccessAction(){[m
+[31m-		[m
+[31m-	}[m
+[31m-    [m
+[32m+[m[32m<?php[m[41m [m
+[32m+[m[32mclass OwnersController extends BaseLeadController{[m
+[32m+[m	[32mprivate $model;[m
+[32m+[m	[32mpublic function init(){[m
+[32m+[m		[32mparent::init();[m
+[32m+[m		[32m$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);[m
+[32m+[m		[32m$this->model = new Owner_Owner($this->db);[m
+[32m+[m		[32m$this->model->setRequestObject($this->_request);[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32mpublic function processRegisterAction(){[m
+[32m+[m		[32m$db = $this->db;[m
+[32m+[m		[32mif ($this->_request->isXmlHttpRequest()){[m
+[32m+[m					[32m//auto mail here[m
+[32m+[m			[32m$validationSettings = array();[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"first_name",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"last_name",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"website",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"company",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"email",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"username",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"password",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"working_timezone",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required")));[m
+[32m+[m			[32m$validationSettings[] = array("field"=>"mobile",[m
+[32m+[m									[32m"configs"=>array(array("validation"=>"required"),[m
+[32m+[m													[32m array("validation"=>"exist", "settings"=>array("table"=>"owners"))));[m
+[32m+[m[41m			[m
+[32m+[m			[32m$this->model->setValidationSettings($validationSettings);[m
+[32m+[m[41m			[m
+[32m+[m			[32mif ($this->model->create()){[m
+[32m+[m				[32m$this->view->result = array("result"=>true);[m
+[32m+[m			[32m}else{[m[41m			[m
+[32m+[m				[32m$this->view->result = array("result"=>false, "errors"=>$this->model->getErrors());[m
+[32m+[m			[32m}[m
+[32m+[m		[32m}else{[m
+[32m+[m			[32m$this->view->result = array("result"=>false);[m
+[32m+[m		[32m}[m
+[32m+[m		[32m$this->_helper->layout->setLayout("plain");[m
+[32m+[m[32m        $this->_helper->viewRenderer("json");[m
+[32m+[m	[32m}[m
+[32m+[m[41m		[m
+[32m+[m	[32mpublic function processLoginAction(){[m
+[32m+[m[41m    [m	[32m$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");[m[41m   [m
+[32m+[m[32m        if (!$sessionAgent->owner_id&&$this->_request->isXmlHttpRequest()){[m
+[32m+[m			[32mif ($this->auth->authenticate()){[m
+[32m+[m				[32m$this->view->result = array("result"=>true, "message"=>"Successful logged in");[m
+[32m+[m			[32m}else{[m
+[32m+[m				[32m$this->view->result = array("result"=>false, "message"=>"Invalid Username/Password");[m
+[32m+[m			[32m}[m[41m   			    	[m
+[32m+[m[32m        }else{[m
+[32m+[m[41m        [m	[32mif ($sessionAgent->owner_id){[m
+[32m+[m[41m        [m		[32m$this->view->result = array("result"=>true, "message"=>"Already logged in");[m
+[32m+[m[41m        [m	[32m}else{[m
+[32m+[m[41m        [m		[32m$this->view->result = array("result"=>false, "message"=>"Invalid request method");[m[41m	[m
+[32m+[m[41m        [m	[32m}[m[41m	[m
+[32m+[m[32m        }[m
+[32m+[m[32m        $this->_helper->layout->setLayout("plain");[m
+[32m+[m[32m        $this->_helper->viewRenderer("json");[m
+[32m+[m[32m    }[m
+[32m+[m[41m    [m
+[32m+[m[32m    public function indexAction(){[m
+[32m+[m[41m    [m	[32m$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");[m
+[32m+[m		[32m$this->view->headTitle("Leads Chat - Home");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/owner-dashboard.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-dashboard.css");[m[41m    	[m
+[32m+[m[32m    }[m
+[32m+[m[41m    [m
+[32m+[m
+[32m+[m	[32mpublic function registerAction(){[m
+[32m+[m		[32m$this->view->headTitle("Leads Chat - Register");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic function forgotpasswordAction(){[m
+[32m+[m		[32m$this->view->headTitle("Leads Chat - Forgot Password");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32mpublic function loginAction(){[m
+[32m+[m		[32m$this->view->headTitle("Leads Chat - Login");[m
+[32m+[m		[32m$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");[m
+[32m+[m		[32m$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
+[32m+[m	[32mpublic function registerSuccessAction(){[m
+[32m+[m[41m		[m
+[32m+[m	[32m}[m
+[32m+[m[41m    [m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/application/models/AuthFactory.php b/application/models/AuthFactory.php[m
+[1mindex 1d1cb8e..41b5bc3 100644[m
+[1m--- a/application/models/AuthFactory.php[m
+[1m+++ b/application/models/AuthFactory.php[m
+[36m@@ -1,21 +1,21 @@[m
+[31m-<?php [m
+[31m-class AuthFactory{[m
+[31m-	public static $AGENT = 1;[m
+[31m-	public static $OWNER = 2;[m
+[31m-	public static function create($type, $db, $request=null){[m
+[31m-		/**[m
+[31m-		 * @var Authenticate[m
+[31m-		 */[m
+[31m-		$auth = null;[m
+[31m-		if ($type==AuthFactory::$AGENT){	[m
+[31m-			$auth = new Agent_Auth($db);[m
+[31m-		}else if ($type==AuthFactory::$OWNER){[m
+[31m-			$auth = new Owner_Auth($db);[m
+[31m-		}[m
+[31m-		if ($auth!=null){[m
+[31m-			$auth->setRequestObject($request);[m
+[31m-		}[m
+[31m-		return $auth;[m
+[31m-	}[m
+[31m-}[m
+[32m+[m[32m<?php[m[41m [m
+[32m+[m[32mclass AuthFactory{[m
+[32m+[m	[32mpublic static $AGENT = 1;[m
+[32m+[m	[32mpublic static $OWNER = 2;[m
+[32m+[m	[32mpublic static function create($type, $db, $request=null){[m
+[32m+[m		[32m/**[m
+[32m+[m		[32m * @var Authenticate[m
+[32m+[m		[32m */[m
+[32m+[m		[32m$auth = null;[m
+[32m+[m		[32mif ($type==AuthFactory::$AGENT){[m[41m	[m
+[32m+[m			[32m$auth = new Agent_Auth($db);[m
+[32m+[m		[32m}else if ($type==AuthFactory::$OWNER){[m
+[32m+[m			[32m$auth = new Owner_Auth($db);[m
+[32m+[m		[32m}[m
+[32m+[m		[32mif ($auth!=null){[m
+[32m+[m			[32m$auth->setRequestObject($request);[m
+[32m+[m		[32m}[m
+[32m+[m		[32mreturn $auth;[m
+[32m+[m	[32m}[m
+[32m+[m[32m}[m
+ 	[m
+\ No newline at end of file[m
