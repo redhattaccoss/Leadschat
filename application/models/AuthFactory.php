@@ -7,7 +7,7 @@ class AuthFactory{
 		 * @var Authenticate
 		 */
 		$auth = null;
-		if ($type==AuthFactory::$AGENT){			
+		if ($type==AuthFactory::$AGENT){	
 			$auth = new Agent_Auth($db);
 		}else if ($type==AuthFactory::$OWNER){
 			$auth = new Owner_Auth($db);

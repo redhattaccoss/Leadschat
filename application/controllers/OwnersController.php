@@ -33,7 +33,7 @@ class OwnersController extends BaseLeadController{
 									"configs"=>array(array("validation"=>"required"),
 													 array("validation"=>"exist", "settings"=>array("table"=>"owners"))));
 			
-			$this->model->setValidationSettings($validationSettings);		
+			$this->model->setValidationSettings($validationSettings);
 			
 			if ($this->model->create()){
 				$this->view->result = array("result"=>true);
