@@ -57,17 +57,12 @@ class LeadsController extends BaseLeadController
 			      		  "sent"=>$sent,
 					      "owner_id"=>$visitor["owner_id"]);
 			$db->update("leads", $lead, "lead_id = {$lead_id}");
+		
 		}		
 	}
 	
 	public function saveAction(){
 		$this->saveLead(0);
 	}
-	
-
-
-	
-		
-	
 }
 
