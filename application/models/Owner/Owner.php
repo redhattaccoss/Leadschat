@@ -1,6 +1,9 @@
 <?php 
-class Owner_Owner extends BaseModel implements CRUD{
-	
+
+require '/../CRUD.php';
+
+class Owner_Owner extends BaseModel implements CRUD {
+
 	public function create($request=null){
 		$db = $this->db;
 		$this->_skipFields = array("confirmpassword");
