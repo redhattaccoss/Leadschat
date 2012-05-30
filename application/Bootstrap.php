@@ -6,7 +6,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		require_once APPLICATION_PATH.DIRECTORY_SEPARATOR."controllers/BaseLeadController.php";
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
-		
+		require_once $models."/CRUD.php";
 		/* Initialize action controller here */
 		Zend_Loader::loadClass("BaseModel", array($models));
     	Zend_Loader::loadClass("Db_Ip", array($models));

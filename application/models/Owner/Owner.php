@@ -23,7 +23,7 @@ class Owner_Owner extends BaseModel implements CRUD{
 	public function delete($request=null){
 		
 	}
-	public function read($request=null){
+	public function read($condition=array()){
 		
 	}
 }
