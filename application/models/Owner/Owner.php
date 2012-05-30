@@ -4,6 +4,10 @@ require '/../CRUD.php';
 
 class Owner_Owner extends BaseModel implements CRUD {
 
+	public function init(){
+		parent::init();
+		$this->_table = "owners";
+	}
 	public function create($request=null){
 		$db = $this->db;
 		$this->_skipFields = array("confirmpassword");
@@ -13,7 +17,8 @@ class Owner_Owner extends BaseModel implements CRUD {
 		if ($this->validate()){
 			$data = $this->getPostData();
 			$data["password"] = md5($data["password"]);
-			$db->insert("owners", $data);	
+			$data["hashcode"] = md5($data["hashcode"]);
+			$db->insert($this->_table, $data);	
 			return true;
 		}else{
 			return false;
