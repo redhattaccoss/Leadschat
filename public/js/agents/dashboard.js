@@ -76,6 +76,7 @@ jQuery(document).ready(function(){
 	
 	function renderChat(data){
 		leadschat.selectedChatSessionChat = data.chats;	
+		var output = "";
 		jQuery.each(data.chats, function(i, item){
 			var _class = "";
 			var name = "";

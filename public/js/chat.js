@@ -27,8 +27,10 @@ $(document).ready(function(){
 			}else{
 				jQuery.get("/chats/initialize?website="+leadschat.website+"&visitor_id="+leadschat.visitor_id, function(data){
 					data = jQuery.parseJSON(data);
+					
 					if (data.success){
-						leadschat.timer.getaccept = setInterval(getAcceptRequest, 500);
+						getAcceptRequest();
+						leadschat.timer.getaccept = setInterval(getAcceptRequest, 10000);
 					}
 				});	
 			}
@@ -52,6 +54,7 @@ $(document).ready(function(){
 		jQuery.each(data.chats, function(i, item){
 			var _class = "";
 			var name = "";
+			
 			if (item.from_type=="A"){
 				_class = "name agent-name";
 				name = data.agent.first_name+" "+data.agent.last_name;
