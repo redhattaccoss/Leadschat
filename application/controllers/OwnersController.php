@@ -1,11 +1,14 @@
 <?php 
 class OwnersController extends BaseLeadController{
 	private $model;
+	
+	private $ownerModel;
 	public function init(){
 		parent::init();
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
 		$this->model = new Owner_Owner($this->db);
 		$this->model->setRequestObject($this->_request);
+		$this->ownerModel = new App_Owner();
 	}
 
 	public function processRegisterAction(){

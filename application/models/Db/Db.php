@@ -20,5 +20,13 @@ class Db_Db{
 		return $db;
 		
 	}
+	
+	public static function getConnectionParameters(){
+		return array("host" => "localhost",
+						"username" => "mjames99_lchats",
+						"password" => "3NYAxSkljpJV",
+						"dbname" => "mjames99_testleadschat");
+	}
+
 }
 

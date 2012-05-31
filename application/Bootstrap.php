@@ -3,11 +3,30 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 	protected function _initAutoload(){
+		
+		$this->loadOldClasses();
+		
+    	//load the database adapter
+		$connectionParameters = Db_Db::getConnectionParameters();
+		$db = Zend_Db::factory("PDO_MYSQL", $connectionParameters);
+		Zend_Db_Table_Abstract::setDefaultAdapter($db);
+		$this->loadNewClasses();	
+		Zend_Layout::startMvc();
+    	$layout = Zend_Layout::getMvcInstance();
+		$layout->setLayoutPath(APPLICATION_PATH.DIRECTORY_SEPARATOR."views/layouts");
+	}
+	
+	
+	/**
+	 * These are old classes ...
+	 */
+	private function loadOldClasses(){
 		require_once APPLICATION_PATH.DIRECTORY_SEPARATOR."controllers/BaseLeadController.php";
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
 		require_once $models."/CRUD.php";
 		/* Initialize action controller here */
+		Zend_Loader::loadClass("AppModel", array($models));
 		Zend_Loader::loadClass("BaseModel", array($models));
     	Zend_Loader::loadClass("Db_Ip", array($models));
     	Zend_Loader::loadClass("Db_Db", array($models));
@@ -20,9 +39,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Loader::loadClass("Lead_InfoForm", array($forms));
     	Zend_Loader::loadClass("Owner_Owner", array($models));
     	Zend_Loader::loadClass("Owner_Auth", array($models));
-    	Zend_Layout::startMvc();
-    	$layout = Zend_Layout::getMvcInstance();
-		$layout->setLayoutPath(APPLICATION_PATH.DIRECTORY_SEPARATOR."views/layouts");
+	}
+	
+	
+	private function loadNewClasses(){
+		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
+		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
+		Zend_Loader::loadClass("App_Lead", array($models));
+		Zend_Loader::loadClass("App_Owner", array($models));
+		
 	}
 	
 	public function _initView(){

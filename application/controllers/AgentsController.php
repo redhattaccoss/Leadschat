@@ -7,6 +7,8 @@ class AgentsController extends BaseLeadController
 	
 	private $chatSessionModel;
 	
+	private $leadModel;
+	
     public function init()
     {
         /* Initialize action controller here */
@@ -14,6 +16,7 @@ class AgentsController extends BaseLeadController
     	$this->auth = AuthFactory::create(AuthFactory::$AGENT, $this->db, $this->_request);
     	$this->chatRequestModel = new Chat_Request($this->db);
     	$this->chatSessionModel =  new Chat_Session($this->db);
+    	$this->leadModel = new App_Lead();
     }
 
     public function loadAcceptedChatRequestsAction(){
@@ -192,11 +195,8 @@ class AgentsController extends BaseLeadController
 		        						"created"=>$date,
 		        						"chat_start"=>$date,
 		        						);
-		        			$db->insert("leads", $lead);
-		        			$lead_id = $db->lastInsertId("leads");
-		     				//create a chat session
-		     				
-		        			
+		        			$lead_id = $this->leadModel->partialCreate($lead);			
+		        			//create a chat session
 		        			$chat_session = array("visitor_id"=>$request["visitor_id"], 
 		     										"agent_id"=>$sessionAgent->agent_id,
 		     										"lead_id"=>$lead_id,
