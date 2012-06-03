@@ -2,15 +2,25 @@
 class OwnersController extends BaseLeadController{
 	private $model;
 	
-	private $ownerModel;
+	private $ownerModel, $timezoneModel;
 	public function init(){
 		parent::init();
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
 		$this->model = new Owner_Owner($this->db);
 		$this->model->setRequestObject($this->_request);
-		$this->ownerModel = new App_Owner();
+		$this->ownerModel = new App_Owner(array("db"=>"main_db"));
+		$this->timezoneModel = new App_Timezone(array("db"=>"main_db"));
 	}
 
+
+	public function processListAction(){
+		$result = $this->ownerModel->listAll($this->_request->getQuery["page"], $this->_request->getQuery["count"], true);
+		$this->view->result = array("result"=>true, "dataLoaded"=>$result);
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
+	}
+	
+	
 	public function processRegisterAction(){
 		$db = $this->db;
 		if ($this->_request->isXmlHttpRequest()){
@@ -48,6 +58,11 @@ class OwnersController extends BaseLeadController{
 		}
 		$this->_helper->layout->setLayout("plain");
         $this->_helper->viewRenderer("json");
+	}
+	
+	
+	public function adminMainAction(){
+					
 	}
 		
 	public function processLoginAction(){
@@ -97,8 +112,4 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
 	
-	public function registerSuccessAction(){
-		
-	}
-    
 }

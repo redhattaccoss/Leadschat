@@ -3,18 +3,29 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 	protected function _initAutoload(){
-		
 		$this->loadOldClasses();
 		
     	//load the database adapter
 		$connectionParameters = Db_Db::getConnectionParameters();
-		$db = Zend_Db::factory("PDO_MYSQL", $connectionParameters);
-		Zend_Db_Table_Abstract::setDefaultAdapter($db);
 		$this->loadNewClasses();	
+		$db = Zend_Db::factory("PDO_MYSQL", $connectionParameters);
+		Zend_Registry::set("main_db", $db);
+		Zend_Db_Table_Abstract::setDefaultAdapter($db);
 		Zend_Layout::startMvc();
     	$layout = Zend_Layout::getMvcInstance();
 		$layout->setLayoutPath(APPLICATION_PATH.DIRECTORY_SEPARATOR."views/layouts");
 	}
+	
+	
+	private function defineACL(){
+		$acl = new Zend_Acl();
+		$acl->addRole(new Zend_Acl_Role("admin"))
+			->addRole(new Zend_Acl_Role("agent"))
+			->addRole(new Zend_Acl_Role("member"))
+			->addRole(new Zend_Acl_Role("owner"));
+	
+	}
+	
 	
 	
 	/**
@@ -47,7 +58,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
 		Zend_Loader::loadClass("App_Lead", array($models));
 		Zend_Loader::loadClass("App_Owner", array($models));
-		
+		Zend_Loader::loadClass("App_Timezone", array($models));	
 	}
 	
 	public function _initView(){

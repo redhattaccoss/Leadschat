@@ -1,7 +1,5 @@
 <?php 
 
-require '/../CRUD.php';
-
 class Owner_Owner extends BaseModel implements CRUD {
 
 	public function init(){

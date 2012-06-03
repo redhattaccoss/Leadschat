@@ -4,6 +4,9 @@ abstract class AppModel extends Zend_Db_Table_Abstract{
 	protected $_errors = array();
 	protected $_validationSettings = array();
 	
+	public function init(){
+		parent::init();
+	}
 	
 	/**
 	 * Validate data from request object ...

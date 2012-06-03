@@ -2,6 +2,7 @@
 class App_Owner extends AppModel{
 	protected $_name = "owners";
 	protected $_schema = "owners";
+	protected $_primary = "owner_id";
 	
 	public function create($data){
 		$validationSettings = array();
@@ -33,4 +34,38 @@ class App_Owner extends AppModel{
 			return false;
 		}
 	}
+	
+	
+	public function listAll($page, $count, $detailed = false){
+		
+		$select = $this->getAdapter()->select();
+		
+		$sql = $select->from($this->_name, array("owner_id", "first_name", "last_name", "website",
+											  "company", "email", "username", 
+											  "activated", "credits", "owner_type",
+											  "timezone_id", "mobile", "number_hits",
+											  "approved", "deleted", "fullname_webmaster",
+											  "email_webmaster", "phone_webmaster",
+											  "date_created", "date_updated"))
+							  ->order("date_created DESC");
+							  
+		if ($page!=null&&$count!=null){
+			$sql = $sql->limitPage($page, $count);
+		}else{
+			$sql = $sql->limitPage(1, 50);
+		}
+		$result = $this->getAdapter()->fetchAll($sql);	
+		$appTimezone = new App_Timezone();
+		if ($detailed){
+			foreach($result as $key=>$value){
+				try{
+					$result[$key]["timezone"] = $appTimezone->find($value["timezone_id"])->getRow(0)->toArray();	
+				}catch(Exception $e){
+					$result[$key]["timezone"] = null;
+				}
+			}
+		}
+		return $result;
+	}
+	
 }

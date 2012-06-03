@@ -95,24 +95,6 @@ class BaseModel{
 		}
 	}
 	
-	
-	/**
-	 * Validate data from request object ...
-	 * @param $validationSettings
-	 */
-	public function validateData($data, $validationSettings=array()){
-		$valid = true;
-		if (!empty($validationSettings)){
-			$this->_validationSettings = $validationSettings;
-		}
-		foreach($this->_validationSettings as $validationSetting){
-			$configs = $validationSetting["configs"];
-			$field = $validationSetting["field"];
-			$value = $data[$validationSetting["field"]];
-			$valid = $this->performValidation($value, $configs);	
-		}
-		return $valid;
-	}
 	/**
 	 * Perform validation on the background ...
 	 * @param $value The value to validate
