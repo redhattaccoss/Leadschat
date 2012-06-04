@@ -1,7 +1,6 @@
 <?php 
 class OwnersController extends BaseLeadController{
 	private $model;
-	
 	private $ownerModel, $timezoneModel;
 	public function init(){
 		parent::init();
@@ -11,7 +10,6 @@ class OwnersController extends BaseLeadController{
 		$this->ownerModel = new App_Owner(array("db"=>"main_db"));
 		$this->timezoneModel = new App_Timezone(array("db"=>"main_db"));
 	}
-
 
 	public function processListAction(){
 		$result = $this->ownerModel->listAll($this->_request->getQuery["page"], $this->_request->getQuery["count"], true);
@@ -62,9 +60,12 @@ class OwnersController extends BaseLeadController{
 	
 	
 	public function adminMainAction(){
-					
+		$this->view->headTitle("Leads Chat - Admin Home");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/ext/ext-debug.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/app.js", "text/javascript");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/ext/resources/css/ext-all.css");
 	}
-		
+	
 	public function processLoginAction(){
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");   
         if (!$sessionAgent->owner_id&&$this->_request->isXmlHttpRequest()){
@@ -96,8 +97,16 @@ class OwnersController extends BaseLeadController{
 	public function registerAction(){
 		$this->view->headTitle("Leads Chat - Register");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.validate.min.js", "text/javascript");
+		
+		$this->view->headScript()->appendFile($this->baseUrl."/js/ui/jquery.ui.selectmenu.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");
+		
+		
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.all.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.selectmenu.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");
+		
 	}
 	
 	public function forgotpasswordAction(){
@@ -111,5 +120,4 @@ class OwnersController extends BaseLeadController{
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
-	
 }

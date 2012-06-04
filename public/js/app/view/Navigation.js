@@ -1,4 +1,4 @@
 Ext.define("Leadschat.view.Navigation", {
-	extend:"Ext.panel.Panel",
+	extend:"Ext.tree.Panel",
 	alias:"widget.navigation"
 });

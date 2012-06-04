@@ -1,6 +1,6 @@
 Ext.application({
 	name:"Leadschat",
-	appFolder:"app",
+	appFolder:"../public/js/app",
 	autoCreateViewport: true,
 	launch:function(){
 		

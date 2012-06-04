@@ -3,8 +3,8 @@ Ext.define("Leadschat.view.Viewport", {
 	requires:[
 		"Leadschat.view.Main",
 		"Leadschat.view.Navigation",
-		"Leadschat.view.Header",
-		"Leadschat.view.owner.Main"
+		"Leadschat.view.owner.Main",
+		"Leadschat.store.Navigation"
 	],
 	layout:"fit",
 	initComponent:function(){
@@ -14,22 +14,28 @@ Ext.define("Leadschat.view.Viewport", {
 				dock:"top",
 				xtype:"toolbar",
 				items:[
-					{xtype:"component", html:"<img src='/images/leadchat-small.png'/>"}
-				]
+					{
+						xtype:"component", 
+						html:"<img src='/public/images/leadchat-small.png'/>"
+					}
+				],
+				height:40
 			}],
 			layout:"column",
 			items:[
 				{
 					xtype:"navigation",
-					width:"0.3",					
+					columnWidth:"0.2",
+					title:"Main Navigation"
 				},
 				{
 					xtype:"main",
-					width:"0.7"
+					columnWidth:"0.8"
 				}
-			]
-			
+			],
+			width:"100%",
 		}
 		
+		this.callParent(arguments);
 	}
 });

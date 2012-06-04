@@ -1,5 +1,4 @@
 <?php
-
 class ChatsController extends BaseLeadController
 {
 
@@ -121,7 +120,6 @@ class ChatsController extends BaseLeadController
 		if ($this->_request->isXmlHttpRequest()){
 			$visitor_id = $this->_request->getQuery("visitor_id");
 			$website = $this->_request->getQuery("website");
-
 			if ($visitor_id){
 				//delete beforehand visitors' chat requests
 				$db->delete("chat_requests", "visitor_id = $visitor_id");
@@ -134,8 +132,6 @@ class ChatsController extends BaseLeadController
 				->order("updated");
 				$agents = $db->fetchAll($sql);
 				if (!empty($agents)){
-
-					//make a chat request into available agents
 					$date = date("Y-m-d h:i:s");
 					foreach($agents as $agent){
 						$request = array(
