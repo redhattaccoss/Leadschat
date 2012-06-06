@@ -13,6 +13,12 @@ class OwnersController extends BaseLeadController{
 
 	public function processListAction(){
 		$result = $this->ownerModel->listAll($this->_request->getQuery["page"], $this->_request->getQuery["count"], true);
+		if (!empty($result)){
+			foreach($result as $key=>$value){
+				$result[$key]["selected"] = false;
+			}
+		}
+		
 		$this->view->result = array("result"=>true, "dataLoaded"=>$result);
 		$this->_helper->layout->setLayout("plain");
 		$this->_helper->viewRenderer("json");
