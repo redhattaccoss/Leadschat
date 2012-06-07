@@ -59,6 +59,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_Lead", array($models));
 		Zend_Loader::loadClass("App_Owner", array($models));
 		Zend_Loader::loadClass("App_Timezone", array($models));	
+		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
+		Zend_Loader::loadClass("Owner_Registration", array($forms));
+    	
 	}
 	
 	public function _initView(){

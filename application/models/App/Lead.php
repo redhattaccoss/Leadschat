@@ -1,6 +1,7 @@
 <?php 
 class App_Lead extends AppModel{
 	protected $_name = "leads";
+	protected $_primary = "lead_id";
 	
 	public function partialCreate($data){
 		$validationSettings = array();

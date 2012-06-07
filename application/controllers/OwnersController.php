@@ -1,7 +1,7 @@
 <?php 
 class OwnersController extends BaseLeadController{
 	private $model;
-	private $ownerModel, $timezoneModel;
+	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel;
 	public function init(){
 		parent::init();
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
@@ -9,6 +9,9 @@ class OwnersController extends BaseLeadController{
 		$this->model->setRequestObject($this->_request);
 		$this->ownerModel = new App_Owner(array("db"=>"main_db"));
 		$this->timezoneModel = new App_Timezone(array("db"=>"main_db"));
+		$this->timezoneGroupModel = new App_TimezoneGroup();
+		$this->businessTypeModel = new App_BusinessType();
+		
 	}
 
 	public function processListAction(){
@@ -101,14 +104,30 @@ class OwnersController extends BaseLeadController{
     
 
 	public function registerAction(){
+		$form = new Owner_Registration();
+		$timezoneId = $form->getElement("timezone_id");
+		$business_type = $form->getElement("business_type"); 
 		$this->view->headTitle("Leads Chat - Register");
+		$timezoneGroups = $this->timezoneGroupModel->getAllTimezonesGrouped();
+		foreach($timezoneGroups as $timezoneGroup){
+			$timezones = $timezoneGroup["timezones"];
+			$item[$timezoneGroup["name"]] = array();
+			foreach($timezones as $timezone){
+				$item[$timezoneGroup["name"]][] = array($timezone["timezone_id"]=>$timezone["name"]);
+			}
+			$timezoneId->addMultiOption($item);
+		}
+		$businessTypes = $this->businessTypeModel->fetchAll()->toArray();
+		foreach($businessTypes as $businessType){
+			$business_type->addMultiOption(array($business_type["id"]=>$business_type["name"]));	
+		}
+		$this->view->timezoneGroups = $timezones;
+		$this->view->form = $form;
+		//render include files
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.validate.min.js", "text/javascript");
-		
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ui/jquery.ui.selectmenu.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");
-		
-		
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.all.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.selectmenu.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");
