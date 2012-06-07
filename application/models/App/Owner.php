@@ -1,7 +1,6 @@
 <?php 
 class App_Owner extends AppModel{
 	protected $_name = "owners";
-	protected $_schema = "owners";
 	protected $_primary = "owner_id";
 	
 	public function create($data){

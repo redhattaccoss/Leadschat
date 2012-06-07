@@ -3,21 +3,15 @@
 	padding: 0;
 }
 body {
-	background-color:rgb(82,82,82);
+	background-color:#D6D6D6;
 	padding:0;
 	margin:0;
 }
 #chat-container{
-	background-color:rgb(232,232,232);
-	-moz-box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
-	-webkit-box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
-	box-shadow:0px 1px 1px 0px rgba(0,0,0,0.75);
-	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true)";
-	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true);
-	width:650px;
-	min-height:591px;
-	border-radius: 5px;
+	width:598px;
+	min-height:455px;
 	margin-bottom:10px;
+	margin-top:8px;
 }
 #header{
 	background-color:rgb(35,35,35);
@@ -57,9 +51,47 @@ span.window{
 	background-color:rgb(255,255,255);
 	overflow-x:hidden;
 	overflow-y:auto;
-	margin:0 12px;
+	margin-left:5px;
 	padding-bottom: 13px;
-	height: 329px;
+	height: 339px;
+	width:451px;
+	float:left;
+}
+#livechat{
+	float:left;
+	width:135px;
+	height:339px;
+	padding-left:6px;
+}
+#secure-pic{
+	margin-top:80px;
+	background-color:#757575;
+	width:129px;
+	overflow:hidden;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	-moz-border-top-left-radius:5px;
+	-moz-border-top-right-radius:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-left-radius:5px;
+	
+}
+#secure-pic h1{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	line-height:120%;
+	color:rgb(255,255,255);
+	text-align:left;
+	height:15px;
+	padding:7px 0 10px 7px;
+	float:left;
+}
+#secure-pic h1 span{
+	margin-left:10px;
+}
+#secure-pic img{
+	float:left;
 }
 .chat-item .content .name{
 	float:left;
@@ -148,33 +180,36 @@ span.window{
 	line-height:120%;
 	color:rgb(255,255,255);
 	padding-top:2px;
+	float:left;
+	clear:both;
 }
 #chat-messenger{
-	margin:17px 12px 12px 12px;
+	margin:17px 12px 12px 5px;
 	padding-bottom:29px;
 	overflow: hidden;
+	float:left;
 }
 #chat-messenger textarea{
-	padding:10px 9px;
+	padding:12px;
 	background-color:rgb(255,255,255);
-	width:502px;
-	height:60px;
+	width:426px;
+	height:14px;
 	border-color:rgb(204,204,204);
 	border-width:1px;
 	-moz-border-radius:1px;
 	-webkit-border-radius:1px;
 	border-radius:1px;
 	border-style:solid;
-	max-width: 502px;
-	max-height: 80px;
-	min-width: 502px;
-	min-height: 80px;
+	max-width: 426px;
+	max-height: 14px;
+	min-width: 426px;
+	min-height: 14px;
 	float: left;
 	margin-right: 13px;
 	font-family:Tahoma, Geneva, sans-serif;
 	font-size:12px;
 	line-height:120%;
-	color:rgb(204,204,204);
+	color:#000;
 	text-shadow:0px 1px 0px rgba(233,233,233,0.75);
 	-ms-filter:"progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true)";zoom:1;
 	filter:progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfe9e9e9,Positive = true);
@@ -197,7 +232,7 @@ span.window{
 	background-image:-o-linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
 	background-image:-ms-linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
 	background-image:linear-gradient(-90deg,rgb(2,151,221) 0%,rgb(0,74,139) 99%);
-	width:85px;
+	width:95px;
 	height:40px;
 	border-color:rgb(0,81,146);
 	border-width:1px;
@@ -209,4 +244,7 @@ span.window{
 		progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 2,Color = #bf000000,Positive = true)";
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff0297dd,endColorstr=#ff004a8b,GradientType=0)
 		progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 2,Color = #bf000000,Positive = true);
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
 }

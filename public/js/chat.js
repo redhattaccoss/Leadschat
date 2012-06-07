@@ -17,12 +17,14 @@ $(document).ready(function(){
 				leadschat.timer.loadChat = setInterval(loadChats, 10000);
 				jQuery.get("/chats/get-session-info?chat_session_id="+leadschat.selectedChatSessionId, function(data){
 					data = jQuery.parseJSON(data);
+					/*
 					if (data.success){
 						jQuery("#agent-name").text(data.agent.first_name+" "+data.agent.last_name);
 						if (data.agent.picture!=null){
 							jQuery("#agent-picture.container").html("<img src='/public"+data.agent.picture+"' alt='"+data.agent.first_name+"'/>");
 						}
 					}
+					*/
 				});
 			}else{
 				jQuery.get("/chats/initialize?website="+leadschat.website+"&visitor_id="+leadschat.visitor_id, function(data){
@@ -103,10 +105,12 @@ $(document).ready(function(){
 				jQuery.get("/chats/get-session-info?chat_session_id="+leadschat.selectedChatSessionId, function(data){
 					data = jQuery.parseJSON(data);
 					if (data.success){
+						/*
 						jQuery("#agent-name").text(data.agent.first_name+" "+data.agent.last_name);
 						if (data.agent.picture!=null){
 							jQuery("#agent-picture.container").html("<img src='/public"+data.agent.picture+"' alt='"+data.agent.first_name+"'/>");
 						}
+						*/
 					}
 				});
 			}else{

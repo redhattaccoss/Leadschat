@@ -62,5 +62,11 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 		$sql = $db->select()->from("agents")->where("username = 'allanaire'");
 		
 	}
+	
+	public function postDispatch(){
+		parent::postDispatch();
+		$this->getResponse()->setHeader("Cache-Control", "no-cache, must-revalidate");
+		$this->view->baseUrl = $this->baseUrl;
+	}
 }
 

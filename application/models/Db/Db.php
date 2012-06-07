@@ -5,10 +5,18 @@ class Db_Db{
 	 * @return Zend_Db_Adapter_Pdo_Mysql
 	 */
 	public function conn(){
+		
+		/*
 		$connParams = array("host" => "localhost",
 		"username" => "mjames99_lchats",
 		"password" => "3NYAxSkljpJV",
 		"dbname" => "mjames99_testleadschat");
+		*/
+		$connParams = array("host" => "localhost",
+						"username" => "root",
+						"password" => "",
+						"dbname" => "leadschat");
+		
 		$db = new Zend_Db_Adapter_Pdo_Mysql($connParams);
 		return $db;
 		
@@ -16,9 +24,16 @@ class Db_Db{
 	
 	public static function getConnectionParameters(){
 		return array("host" => "localhost",
+						"username" => "root",
+						"password" => "",
+						"dbname" => "leadschat");
+		
+		/*return array("host" => "localhost",
 						"username" => "mjames99_lchats",
 						"password" => "3NYAxSkljpJV",
 						"dbname" => "mjames99_testleadschat");
+		*/
+		
 	}
 
 }

@@ -96,7 +96,7 @@ class ChatsController extends BaseLeadController
 			$sql = $db->select()
 			->from("chats")
 			->where("chat_session_id = ?", $chat_session_id)
-			->order("created");
+			->order("created ASC");
 			$chats = $db->fetchAll($sql);
 			$sql = $db->select()->from("chat_sessions", array())
 				->joinInner("agents", "agents.agent_id = chat_sessions.agent_id")

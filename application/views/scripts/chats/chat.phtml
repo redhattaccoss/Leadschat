@@ -1,29 +1,17 @@
 <div>
-	<header>
-		<img src="/public/images/logo.png" alt="The logo"/>
-	</header>
-	
 	<div id="chat-container">
-		<div id="header">
-			<div class="close-container">
-				<button class="close"></button>
-			</div>
-			<h2 class="chat-header-support">CHAT <span class='window'>Window</span></h2>
-		</div>
-		<div id="agent-info">
-			<div id="agent-picture-container" class="picture-container"></div>
-			<div class="agent-info">
-				<span class="name" id="agent-name">Looking for available agent</span>
-				<div class="live-support">Live Support</div>
-			</div>
-		</div>
 		<div id="chat-list">
 			<div class="chat-item">
 				<div class="content">
-				Looking for an agent...
+				Looking for an available agent...
 				</div>				
 			</div>
-
+		</div>
+		<div id="livechat">
+			<div id="secure-pic">
+				<h1><img src="<?php echo $this->baseUrl?>/images/lock.png"/><span>Live Chat</span></h1>
+				<img src="<?php echo $this->baseUrl?>/images/agent.png"/>
+			</div>
 		</div>
 		<div id="chat-messenger">
 			<form id="chat-form" method="POST">
