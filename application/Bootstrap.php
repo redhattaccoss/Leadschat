@@ -26,7 +26,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	
 	}
 	
-	
+	private function _initSetupBaseUrl(){
+		$this->bootstrap('frontcontroller');
+		$ctrl = Zend_Controller_Front::getInstance();
+		$router = $ctrl->getRouter();
+		$route = new Zend_Controller_Router_Route_Static("about/*",
+					array("controller"=>"public", "action"=>"about"));
+		$router->addRoute("about", $route);
+	}
 	
 	/**
 	 * These are old classes ...
@@ -53,6 +60,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	}
 	
 	
+	
+	
 	private function loadNewClasses(){
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
@@ -60,6 +69,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_Owner", array($models));
 		Zend_Loader::loadClass("App_Timezone", array($models));	
 		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
+		Zend_Loader::loadClass("App_BusinessType", array($models));
+		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	
 	}

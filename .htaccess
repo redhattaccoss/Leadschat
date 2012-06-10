@@ -1,4 +1,19 @@
-SetEnv APPLICATION_ENV development
-
+Options +FollowSymLinks
 RewriteEngine On
-RewriteRule .* index.php
+
+RewriteRule ^about.*$ - [NC,L]
+RewriteRule ^about/wp-content.*$ - [NC,L]
+RewriteRule ^about/wp-admin.*$ - [NC,L]
+RewriteRule ^about/wp-login.php.*$ - [NC,L]
+
+RewriteCond %{REQUEST_URI} ^/about/.*$
+RewriteRule ^(.*)$ /about/$1
+
+RewriteRule ^\.htaccess$ - [F]
+RewriteCond %{REQUEST_URI} =""
+RewriteRule ^.*$ /public/index.php [NC,L]
+RewriteCond %{REQUEST_URI} !^/public/.*$
+RewriteRule ^(.*)$ /public/$1
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^public/.*$ /public/index.php [NC,L]
