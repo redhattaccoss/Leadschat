@@ -108,7 +108,55 @@ body{
 }
 .control-set dl dd{
 	margin-bottom:11px;
+	white-space:nowrap;
+}
+.control-set dl dd em.error{
+	display:inline-block;
+	margin-left:13px;
+	padding-left:31px;
+	background:url(../images/error.png) no-repeat transparent;
+	height:16px;
+	vertical-align:middle;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	line-height:180%;
+	color:rgb(204,204,204);
+	text-align:left;
+}
+.control-set dl dd em.success{
+	background:url(../images/check.png) no-repeat transparent;	
 }
 .control-set dl dd.last{
 	margin-bottom:0px;
+}
+span.help{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+	line-height:120%;
+	font-weight:bold;
+	font-style:italic;
+	color:rgb(0,108,176);
+	text-align:left;
+}
+.accept{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:14px;
+	line-height:120%;
+	color:rgb(255,255,255);
+	text-align:left;
+		
+}
+#timezone_id-element .ui-selectmenu, 
+#timezone_id-element .ui-widget,
+#business_type-element .ui-selectmenu,
+#business_type-element .ui-widget,
+#number_of_hit_id-element .ui-selectmenu,
+#number_of_hit_id-element .ui-widget{
+	font-size:12px;
+}
+.ui-selectmenu-menu .ui-selectmenu-group{
+	font-size:12px;
+}
+.ui-selectmenu-menu-dropdown li{
+	font-size:12px;
 }

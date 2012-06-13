@@ -11,7 +11,7 @@ class App_TimezoneGroup extends AppModel{
 		$timezoneGroups = $timezoneGroups->toArray();
 		$timezone = new App_Timezone();
 		foreach($timezoneGroups as $key=>$timezoneGroup){
-			$timezoneGroups[$key]["timezones"] = $timezone->fetchByTimezoneGroup($timezoneGroup["id"]);
+			$timezoneGroups[$key]["timezones"] = $timezone->fetchByTimezoneGroup($timezoneGroup["id"])->toArray();
 		}
 		return $timezoneGroups;
 	}

@@ -1,7 +1,7 @@
 <?php 
 class OwnersController extends BaseLeadController{
 	private $model;
-	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel;
+	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel, $numberOfHitModel;
 	public function init(){
 		parent::init();
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
@@ -11,7 +11,7 @@ class OwnersController extends BaseLeadController{
 		$this->timezoneModel = new App_Timezone(array("db"=>"main_db"));
 		$this->timezoneGroupModel = new App_TimezoneGroup();
 		$this->businessTypeModel = new App_BusinessType();
-		
+		$this->numberOfHitModel = new App_NumberOfHit();		
 	}
 
 	public function processListAction(){
@@ -104,35 +104,78 @@ class OwnersController extends BaseLeadController{
     
 
 	public function registerAction(){
+		
 		$form = new Owner_Registration();
 		$timezoneId = $form->getElement("timezone_id");
 		$business_type = $form->getElement("business_type"); 
+		$number_hits = $form->getElement("number_of_hit_id");
 		$this->view->headTitle("Leads Chat - Register");
 		$timezoneGroups = $this->timezoneGroupModel->getAllTimezonesGrouped();
+		$items = array();
+		$items[""] = "Please Select";
 		foreach($timezoneGroups as $timezoneGroup){
 			$timezones = $timezoneGroup["timezones"];
-			$item[$timezoneGroup["name"]] = array();
 			foreach($timezones as $timezone){
-				$item[$timezoneGroup["name"]][] = array($timezone["timezone_id"]=>$timezone["name"]);
+				$items[$timezoneGroup["name"]][$timezone["timezone_id"]]=$timezone["name"];
 			}
-			$timezoneId->addMultiOption($item);
 		}
+		$timezoneId->addMultiOptions($items);
 		$businessTypes = $this->businessTypeModel->fetchAll()->toArray();
+		
+		$items = array();
+		$items[""] = "Please Select";
 		foreach($businessTypes as $businessType){
-			$business_type->addMultiOption(array($business_type["id"]=>$business_type["name"]));	
+			$items[$businessType["id"]] = $businessType["name"];
 		}
+		$business_type->addMultiOptions($items);
+		
+		
+		$items = array();
+		$items[""] = "Please Select";
+		$hits = $this->numberOfHitModel->fetchAll()->toArray();
+		foreach($hits as $hit){
+			$items[$hit["id"]] = $hit["name"];
+		}
+		
+		$number_hits->addMultiOptions($items);
+		
 		$this->view->timezoneGroups = $timezones;
-		$this->view->form = $form;
+		$this->view->registration_form = $form;
 		//render include files
-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.js");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-ui-1.8.21.custom.min.js", "text/javascript");	
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.validate.min.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ui/jquery.ui.selectmenu.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");
-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.all.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/ui-darkness/jquery-ui-1.8.21.custom.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.selectmenu.css");
+		
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");
 		
 	}
+	
+	
+	public function emailExistingAction(){
+		$email = $this->_request->getQuery("email");
+		if ($this->_request->isXmlHttpRequest()&&$email){
+			$this->view->result = array("success"=>!$this->ownerModel->isEmailExist($email));
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+        $this->_helper->viewRenderer("json");
+	}
+	public function usernameExistingAction(){
+		$username = $this->_request->getQuery("username");
+		if ($this->_request->isXmlHttpRequest()&&$username){
+			$this->view->result = array("success"=>!$this->ownerModel->isUsernameExist($username));
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+        $this->_helper->viewRenderer("json");
+	}
+	
 	
 	public function forgotpasswordAction(){
 		$this->view->headTitle("Leads Chat - Forgot Password");

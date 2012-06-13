@@ -67,4 +67,15 @@ class App_Owner extends AppModel{
 		return $result;
 	}
 	
+	public function isEmailExist($email){
+		$select = $this->select();
+		return $this->fetchRow($select->where("email = ?", $email))==null;
+	}
+
+	public function isUsernameExist($username){
+		$select = $this->select();
+		return $this->fetchRow($select->where("username = ?", $username))==null;
+	}
+	
+	
 }

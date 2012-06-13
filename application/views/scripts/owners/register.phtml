@@ -1,99 +1,53 @@
+<?php 
+	$form = $this->registration_form;
+?>
 <div id="container">
 	<header>
-		<img src="/public/images/logo.png" alt="Logo"/>
+		<a href="/"><img src="/public/images/logo.png" alt="Logo"/></a>
 	</header>
 	<div class="signup-form-design"></div>
+	
 	<div class="registration-form">
-		<form method="post" id="registration-form">
+		<form method="<?php echo $form->getMethod()?>" id="registration-form">
 			<div class="control-set">
 				<dl>
-					<dt>
-						Firstname
-					</dt>
-					<dd>
-						<input type="text" name="first_name"/>
-					</dd>			
-					<dt>
-						Lastname
-					</dt>
-					<dd class="last">
-						<input type="text" name="last_name"/>
-					</dd>						
+					<?php echo $form->getElement("first_name")->render()?>
+					<?php echo $form->getElement("last_name")->render()?>						
 				</dl>
 			</div>
 			<div class="control-set">
 				<dl>
-					<dt>
-						Email Address
-					</dt>
-					<dd>
-						<input type="text" name="email"/>
-					</dd>			
-					<dt>
-						Username
-					</dt>
-					<dd class="last">
-						<input type="text" name="username"/>
-					</dd>						
+					<?php echo $form->password->render()?>
+					<?php echo $form->confirm_password->render();?>						
 				</dl>
 			</div>
 			<div class="control-set">
 				<dl>
-					<dt>
-						Password
-					</dt>
-					<dd>
-						<input type="password" name="password"/>
-					</dd>			
-					<dt>
-						Confirm Password
-					</dt>
-					<dd class="last">
-						<input type="password" name="confirmpassword"/>
-					</dd>						
+					<?php echo $form->getElement("email")->render()?>
+					<?php echo $form->getElement("username")->render()?>
 				</dl>
 			</div>
 			<div class="control-set">
 				<dl>
-					<dt>
-						Business Type
-					</dt>
-					<dd>
-						<select name="owner_type">
-							<option>Sales</option>
-						</select>
-					</dd>			
-					<dt>
-						Website
-					</dt>
-					<dd>
-						<input type="text" name="website"/>
-					</dd>			
-					<dt>
-						Company(optional)
-					</dt>
-					<dd>
-						<input type="text" name="company"/>
-					</dd>
-					<dt>
-						Mobile(optional)
-					</dt>
-					<dd>
-						<input type="text" name="mobile"/>
-					</dd>						
-					<dt>
-						Number of hits your website receive
-					</dt>
-					<dd>
-						<input type="text" name="number_hits"/>
-					</dd>
-					<dt>
-						Your preferred working timezone
-					</dt>
-					<dd class="last">
-						<select name="working_timezone">
-							<option selected>Asia/Manila</option>
-						</select>
+					<?php echo $form->getElement("business_type")->render()?>
+					<?php echo $form->getElement("timezone_id")->render()?>
+					<?php echo $form->getElement("website")->render()?>
+					<?php echo $form->getElement("number_of_hit_id")->render()?>
+					<?php echo $form->getElement("company")->render()?>
+					<?php echo $form->getElement("mobile")->render()?>
+				</dl>
+			</div>
+			<div class="control-set">
+				<dl>
+					<?php echo $form->getElement("fullname_webmaster")->render()?>
+					<?php echo $form->getElement("email_webmaster")->render()?>
+					<?php echo $form->getElement("phone_webmaster")->render()?>
+				</dl>
+			</div>
+			<div class="control-set">
+				<dl>
+					<dd class="accept">
+						<?php echo $form->getElement("accept")->renderViewHelper()?> I Accept, the Terms and Service
 					</dd>
 				</dl>
 			</div>

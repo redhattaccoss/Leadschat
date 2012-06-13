@@ -70,7 +70,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_Timezone", array($models));	
 		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
 		Zend_Loader::loadClass("App_BusinessType", array($models));
-		
+		Zend_Loader::loadClass("App_NumberOfHit", array($models));		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	
 	}

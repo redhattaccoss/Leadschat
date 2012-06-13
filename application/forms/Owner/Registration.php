@@ -1,35 +1,55 @@
 <?php 
 class Owner_Registration extends Zend_Form{
 	public function init(){
-		$firstname = new Zend_Form_Element_Text("first_name", array('disableLoadDefaultDecorators' => true));
+		$this->addDecorators(array("ViewHelper"), array("Errors"));
+		$firstname = new Zend_Form_Element_Text("first_name");
+		$firstname->setLabel("Firstname");
 		$firstname->setRequired(true);
-		$lastname = new Zend_Form_Element_Text("last_name", array('disableLoadDefaultDecorators' => true));
+		$lastname = new Zend_Form_Element_Text("last_name");
+		$lastname->setLabel("Lastname");
 		$lastname->setRequired(true);
-		$website = new Zend_Form_Element_Text("website", array('disableLoadDefaultDecorators' => true));
+		$website = new Zend_Form_Element_Text("website");
 		$website->setRequired(true);
-		$username = new Zend_Form_Element_Text("username", array('disableLoadDefaultDecorators' => true));
+		$website->setLabel("Website");
+		$username = new Zend_Form_Element_Text("username");
 		$username->setRequired(true);
-		$password = new Zend_Form_Element_Password("password", array('disableLoadDefaultDecorators' => true));
+		$username->setLabel("Username");
+		$password = new Zend_Form_Element_Password("password");
 		$password->setRequired(true);
-		$confirm_password = new Zend_Form_Element_Password("confirm_password", array('disableLoadDefaultDecorators' => true));
+		$password->setLabel("Password");
+		$confirm_password = new Zend_Form_Element_Password("confirm_password");
+		$confirm_password->setLabel("Confirm Password");
 		$confirm_password->setRequired(true);
-		$email = new Zend_Form_Element_Text("email", array('disableLoadDefaultDecorators' => true));
+		$email = new Zend_Form_Element_Text("email");
+		$email->setLabel("Email Address");
 		$email->setRequired(true);
-		$mobile = new Zend_Form_Element_Text("mobile", array('disableLoadDefaultDecorators' => true));
+		$mobile = new Zend_Form_Element_Text("mobile");
+		$mobile->setLabel("Contact <span class=\"help\">(Skype, Mobile)</span>");
 		$mobile->setRequired(true);
-		$fullname_webmaster = new Zend_Form_Element_Text("fullname_webmaster", array('disableLoadDefaultDecorators' => true));
-		$email_webmaster = new Zend_Form_Element_Text("email_webmaster", array('disableLoadDefaultDecorators' => true));
-		$phone_webmaster = new Zend_Form_Element_Text("phone_webmaster", array('disableLoadDefaultDecorators' => true));
-		$company = new Zend_Form_Element_Text("company", array('disableLoadDefaultDecorators' => true));
-		$company_contact = new Zend_Form_Element_Text("company_contact", array('disableLoadDefaultDecorators' => true));
-		$number_hits = new Zend_Form_Element_Select("number_hits", 
-								array('disableLoadDefaultDecorators' => true));
+		$mobile->getDecorator("Label")->setOption("escape", false);
+		$fullname_webmaster = new Zend_Form_Element_Text("fullname_webmaster");
+		$fullname_webmaster->setLabel("Name <span class='help'>(Company's Web Designer)</span>");
+		$fullname_webmaster->getDecorator("Label")->setOption("escape", false);
+		$email_webmaster = new Zend_Form_Element_Text("email_webmaster");
+		$email_webmaster->setLabel("Email Address");
+		$phone_webmaster = new Zend_Form_Element_Text("phone_webmaster");
+		$phone_webmaster->setLabel("Phone Number");
+		$company = new Zend_Form_Element_Text("company");
+		$company->setLabel("Company");
+		$number_hits = new Zend_Form_Element_Select("number_of_hit_id");
 		$number_hits->setRequired(true);
-		$businessType = new Zend_Form_Element_Select("business_type", 
-								array('disableLoadDefaultDecorators' => true));
+		$number_hits->setLabel("How many web hits do you currently receive each month?");
+		$businessType = new Zend_Form_Element_Select("business_type");
 		$businessType->setRequired(true);
-		$timezone = new Zend_Form_Element_Select("timezone_id", array('disableLoadDefaultDecorators' => true));
+		$businessType->setLabel("Business Type");
+		$timezone = new Zend_Form_Element_Select("timezone_id");
 		$timezone->setRequired(true);
+		$timezone->setLabel("What time zone is your business located?");
+		$accept = new Zend_Form_Element_Checkbox("accept");
+		$accept->setLabel("I Accept, the Terms and Service");
+		$accept->setRequired(true);
+		$accept->setDecorators(array('ViewHelper'));
+		
 		$this->addElements(array($firstname,
 			 					 $lastname,
 			 					 $password,
@@ -42,10 +62,10 @@ class Owner_Registration extends Zend_Form{
 			 					 $website,
 			 					 $number_hits,
 			 					 $company,
-			 					 $company_contact,
 			 					 $fullname_webmaster,
 			 					 $email_webmaster,
+			 					 $phone_webmaster,
+			 					 $accept
 			 					 ));
-			 					 	
 	}
 } 
