@@ -3,18 +3,36 @@ jQuery(document).ready(function(){
 	//bootstrap validator
 	jQuery.validator.addMethod("uniqueUserName", function(value, element) {
 	  jQuery.ajax({
-	      type: "POST",
-	       url: "php/get_save_status.php",
-	      data: "checkUsername="+value,
+	      type: "GET",
+	       url: "/owners/username-existing",
+	      data: "username="+value,
 	      dataType:"html",
+	      async:false,
 	   success: function(msg)
 	   {
+		  msg = jQuery.parseJSON(msg);
+		  msg = msg.success;
 	      // if the user exists, it returns a string "true"
-	      if(msg == "true")
-	         return false;  // already exists
-	      return true;      // username is free to use
+	      return !msg;      // username is free to use
 	   }
 	 })}, "Username is Already Taken");
+	
+	jQuery.validator.addMethod("uniqueEmail", function(value, element) {
+		  jQuery.ajax({
+		      type: "GET",
+		       url: "/owners/email-existing",
+		      data: "email="+value,
+		      dataType:"html",
+		      async:false,
+		   success: function(msg)
+		   {
+		      // if the user exists, it returns a string "true"
+		      msg = jQuery.parseJSON(msg);
+		      msg = msg.success;
+		      return !msg;
+		   }
+		 })}, "Email is Already Taken");
+		
 	
 	
 	jQuery("select").selectmenu({
@@ -25,7 +43,7 @@ jQuery(document).ready(function(){
 	jQuery("#registration-form").validate({
 		errorElement: "em",
 		errorPlacement: function(error, element) {
-			error.appendTo( element.parent("dd") );
+			error.appendTo( element.parent("dd") ).removeClass("success");
 		},
 		success: function(label) {
 			label.addClass("success");
@@ -50,11 +68,13 @@ jQuery(document).ready(function(){
 			},
 			email:{
 				required:true,
-				email:true
+				email:true,
+				uniqueEmail:false,
 			},
 			username:{
 				required:true,
-				minlength:6
+				minlength:6,
+				uniqueUserName:false
 			},
 			business_type:{
 				required:true

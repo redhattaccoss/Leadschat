@@ -158,7 +158,7 @@ class OwnersController extends BaseLeadController{
 	public function emailExistingAction(){
 		$email = $this->_request->getQuery("email");
 		if ($this->_request->isXmlHttpRequest()&&$email){
-			$this->view->result = array("success"=>!$this->ownerModel->isEmailExist($email));
+			$this->view->result = array("success"=>$this->ownerModel->isEmailExist($email));
 		}else{
 			$this->view->result = array("success"=>false);
 		}
@@ -167,8 +167,8 @@ class OwnersController extends BaseLeadController{
 	}
 	public function usernameExistingAction(){
 		$username = $this->_request->getQuery("username");
-		if ($this->_request->isXmlHttpRequest()&&$username){
-			$this->view->result = array("success"=>!$this->ownerModel->isUsernameExist($username));
+		if ($username){
+			$this->view->result = array("success"=>$this->ownerModel->isUsernameExist($username));
 		}else{
 			$this->view->result = array("success"=>false);
 		}
