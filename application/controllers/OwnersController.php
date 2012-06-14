@@ -107,7 +107,6 @@ class OwnersController extends BaseLeadController{
 		
 		$form = new Owner_Registration();
 		$timezoneId = $form->getElement("timezone_id");
-		$business_type = $form->getElement("business_type"); 
 		$number_hits = $form->getElement("number_of_hit_id");
 		$this->view->headTitle("Leads Chat - Register");
 		$timezoneGroups = $this->timezoneGroupModel->getAllTimezonesGrouped();
@@ -120,14 +119,6 @@ class OwnersController extends BaseLeadController{
 			}
 		}
 		$timezoneId->addMultiOptions($items);
-		$businessTypes = $this->businessTypeModel->fetchAll()->toArray();
-		
-		$items = array();
-		$items[""] = "Please Select";
-		foreach($businessTypes as $businessType){
-			$items[$businessType["id"]] = $businessType["name"];
-		}
-		$business_type->addMultiOptions($items);
 		
 		
 		$items = array();
@@ -139,7 +130,7 @@ class OwnersController extends BaseLeadController{
 		
 		$number_hits->addMultiOptions($items);
 		
-		$this->view->timezoneGroups = $timezones;
+		$this->view->timezoneGroups = $this->timezoneModel->fetchAll()->toArray();
 		$this->view->registration_form = $form;
 		//render include files
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.js");

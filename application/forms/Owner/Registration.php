@@ -39,7 +39,7 @@ class Owner_Registration extends Zend_Form{
 		$number_hits = new Zend_Form_Element_Select("number_of_hit_id");
 		$number_hits->setRequired(true);
 		$number_hits->setLabel("How many web hits do you currently receive each month?");
-		$businessType = new Zend_Form_Element_Select("business_type");
+		$businessType = new Zend_Form_Element_Text("business_type");
 		$businessType->setRequired(true);
 		$businessType->setLabel("Business Type");
 		$timezone = new Zend_Form_Element_Select("timezone_id");

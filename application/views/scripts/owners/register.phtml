@@ -1,6 +1,10 @@
 <?php 
 	$form = $this->registration_form;
 ?>
+<script type="text/javascript">
+	var timezones = <?php echo json_encode($this->timezoneGroups)?>;
+</script>
+
 <div id="container">
 	<header>
 		<a href="/"><img src="/public/images/logo.png" alt="Logo"/></a>

@@ -153,10 +153,75 @@ span.help{
 #number_of_hit_id-element .ui-selectmenu,
 #number_of_hit_id-element .ui-widget{
 	font-size:12px;
+	text-align:left;
+	text-indent:10px;
 }
 .ui-selectmenu-menu .ui-selectmenu-group{
 	font-size:12px;
+	text-align:left;
 }
 .ui-selectmenu-menu-dropdown li{
 	font-size:12px;
+	text-align:left;
+	text-indent:10px;
+}
+
+/**
+* Flag icons
+*/
+.ui-selectmenu-menu .ui-icon-america, .ui-selectmenu-status .ui-icon-america{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -386px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-australia, .ui-selectmenu-status .ui-icon-australia{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -314px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-canada, .ui-selectmenu-status .ui-icon-canada{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -338px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-uk, .ui-selectmenu-status .ui-icon-uk{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -146px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-wales, .ui-selectmenu-status .ui-icon-wales{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -98px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-scotland, .ui-selectmenu-status .ui-icon-scotland{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -122px;
+	margin-right:2px;
+	display:inline-block;
+}
+.ui-selectmenu-menu .ui-icon-ireland, .ui-selectmenu-status .ui-icon-ireland{
+	height:20px;
+	width:20px;
+	background:url(../images/flags.png);
+	background-position:-2px -74px;
+	margin-right:2px;
+	display:inline-block;
 }

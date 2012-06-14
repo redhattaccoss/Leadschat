@@ -35,9 +35,38 @@ jQuery(document).ready(function(){
 		
 	
 	
-	jQuery("select").selectmenu({
+	jQuery("#timezone_id option").each(function(){
+		var id = jQuery(this).val();
+		var me = jQuery(this);
+		jQuery.each(timezones, function(i, item){
+			if (item.timezone_id == id){
+				me.addClass(item.flag_icon);
+				return false;
+			}
+		})
+	});
+	
+	
+	jQuery("#number_of_hit_id").selectmenu({
 		height:100,
 		width:280
+	});
+	
+	jQuery("#timezone_id").selectmenu({
+		height:100,
+		width:280,
+		icons:[
+		       {find:".america", icon:"ui-icon-america"},
+		       {find:".australia", icon:"ui-icon-australia"},
+		       {find:".canada", icon:"ui-icon-canada"},
+		       {find:".uk", icon:"ui-icon-uk"},
+		       {find:".scotland", icon:"ui-icon-scotland"},
+		       {find:".ireland", icon:"ui-icon-ireland"},
+		       {find:".wales", icon:"ui-icon-wales"},
+		       
+		       
+		]
+	
 	});
 	
 	jQuery("#registration-form").validate({
