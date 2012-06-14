@@ -62,10 +62,10 @@ body{
 }
 .signup-form-design{
 	float:right;
-	margin-top:-7px;
-	margin-right:15px;
-	width:204px;
-	min-height:89px;
+	margin-top:-50px;
+	margin-right:-71px;
+	width:282px;
+	min-height:131px;
 	background:url(../images/signup.png) transparent no-repeat;
 }
 .control-set{
