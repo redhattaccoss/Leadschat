@@ -3,38 +3,36 @@ class App_Owner extends AppModel{
 	protected $_name = "owners";
 	protected $_primary = "owner_id";
 	
+	/**
+	 * Registers a new owner ...
+	 * @param $data The data
+	 */
 	public function create($data){
-		$validationSettings = array();
-		$validationSettings[] = array("field"=>"first_name",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"last_name",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"website",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"company",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"email",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"username",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"password",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"working_timezone",
-								"configs"=>array(array("validation"=>"required")));
-		$validationSettings[] = array("field"=>"mobile",
-								"configs"=>array(array("validation"=>"required"),
-												 array("validation"=>"exist", "settings"=>array("table"=>"owners"))));
-												 
-		$this->_validationSettings = $validationSettings;
-		if ($this->validateData($data)){
-			$this->insert($data);
-			return $this->getAdapter()->lastInsertId();	
-		}else{
-			return false;
-		}
+		unset($data["confirm_password"]);
+		unset($data["accept"]);
+		$data["hashcode"] = $this->getHashCode($data);
+		$data["date_created"] = date("Y-m-d h:i:s");
+		$data["date_updated"] = date("Y-m-d h:i:s");
+		$data["password"] = md5($data["password"]);
+		$this->insert($data);
+		return $this->getAdapter()->lastInsertId($this->_name);	
 	}
 	
 	
+	/**
+	 * Generate hash code ...
+	 * @param $data The data
+	 */
+	private function getHashCode($data){
+		return md5($data["username"].strtotime(date("Y-m-d h:i:s")));
+	}
+	
+	/**
+	 * List all owners ...
+	 * @param $page - The page number
+	 * @param $count - The number of count
+	 * @param $detailed - Detailed view
+	 */
 	public function listAll($page, $count, $detailed = false){
 		
 		$select = $this->getAdapter()->select();
@@ -67,15 +65,42 @@ class App_Owner extends AppModel{
 		return $result;
 	}
 	
+	
+	/**
+	 * Check if user's email exist ...
+	 * @param $email The email
+	 */
 	public function isEmailExist($email){
 		$select = $this->select();
 		return $this->fetchRow($select->where("email = ?", $email))!=null;
 	}
 
+	
+	/**
+	 * Check if user's username exist ...
+	 * @param $username The username
+	 */
 	public function isUsernameExist($username){
 		$select = $this->select();
 		return $this->fetchRow($select->where("username = ?", $username))!=null;
 	}
 	
+	/**
+	 * Check if account has been activated ...
+	 * @param $hashCode The hashcode
+	 */
+	public function isActivated($hashCode){
+		$select = $this->select();
+		$owner = $this->fetchRow($select->where("hashcode = ?", $hashCode));	
+		return $owner->activated=="Y";
+	}
+	
+	/**
+	 * Activate Account ...
+	 * @param $hashCode The Hashcode
+	 */
+	public function activateAccount($hashCode){
+		$this->update(array("activated"=>"Y"), "hashcode = ".mysql_escape_string($hashCode));
+	}
 	
 }

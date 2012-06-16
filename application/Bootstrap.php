@@ -3,9 +3,9 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 	protected function _initAutoload(){
+		$this->loadLibraries();
 		$this->loadOldClasses();
-		
-    	//load the database adapter
+		//load the database adapter
 		$connectionParameters = Db_Db::getConnectionParameters();
 		$this->loadNewClasses();	
 		$db = Zend_Db::factory("PDO_MYSQL", $connectionParameters);
@@ -14,6 +14,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Layout::startMvc();
     	$layout = Zend_Layout::getMvcInstance();
 		$layout->setLayoutPath(APPLICATION_PATH.DIRECTORY_SEPARATOR."views/layouts");
+		
+	}
+	
+	private function loadLibraries(){
+		$views = APPLICATION_PATH.DIRECTORY_SEPARATOR."views";
+		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
+		Zend_Loader::loadClass("Converter", array($models));
+		Zend_Loader::loadClass("MailerTemplates", array($views));
 	}
 	
 	
@@ -49,6 +57,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Loader::loadClass("Db_Ip", array($models));
     	Zend_Loader::loadClass("Db_Db", array($models));
     	Zend_Loader::loadClass("Authentication", array($models));
+    	Zend_Loader::loadClass("AuthenticationModel", array($models));
+    	
     	Zend_Loader::loadClass("Agent_Auth", array($models));
     	Zend_Loader::loadClass("AuthFactory", array($models));
     	Zend_Loader::loadClass("Agent_Login", array($forms));

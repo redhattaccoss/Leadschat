@@ -141,6 +141,10 @@ jQuery(document).ready(function() {
 			website : {
 				required : true,
 				minlength : 10
+			},
+			mobile:{
+				required:true,
+				minlength:10
 			}
 
 		}
@@ -149,6 +153,7 @@ jQuery(document).ready(function() {
 		if (jQuery(this).valid()) {
 			var data = jQuery(this).serialize();
 			jQuery.post("/owners/process-register", data, function(result) {
+				console.log(result);
 				result = jQuery.parseJSON(result);
 				if (result.success) {
 					window.location.href = "/owners/register-success"

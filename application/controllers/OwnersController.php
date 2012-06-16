@@ -7,8 +7,8 @@ class OwnersController extends BaseLeadController{
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
 		$this->model = new Owner_Owner($this->db);
 		$this->model->setRequestObject($this->_request);
-		$this->ownerModel = new App_Owner(array("db"=>"main_db"));
-		$this->timezoneModel = new App_Timezone(array("db"=>"main_db"));
+		$this->ownerModel = new App_Owner();
+		$this->timezoneModel = new App_Timezone();
 		$this->timezoneGroupModel = new App_TimezoneGroup();
 		$this->businessTypeModel = new App_BusinessType();
 		$this->numberOfHitModel = new App_NumberOfHit();		
@@ -30,41 +30,35 @@ class OwnersController extends BaseLeadController{
 	
 	public function processRegisterAction(){
 		$db = $this->db;
-		if ($this->_request->isXmlHttpRequest()){
-					//auto mail here
-			$validationSettings = array();
-			$validationSettings[] = array("field"=>"first_name",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"last_name",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"website",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"company",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"email",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"username",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"password",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"working_timezone",
-									"configs"=>array(array("validation"=>"required")));
-			$validationSettings[] = array("field"=>"mobile",
-									"configs"=>array(array("validation"=>"required"),
-													 array("validation"=>"exist", "settings"=>array("table"=>"owners"))));
+		$form = new Owner_Registration();		
+		if ($this->_request->isXmlHttpRequest()&&$form->isValid($_POST)){
+			$data = $form->getValidValues($_POST);
+			$newRecord = $this->ownerModel->create($data);
+			//query newly create record
+			$owner = $this->ownerModel->find($newRecord)->toArray();
 			
-			$this->model->setValidationSettings($validationSettings);
-			
-			if ($this->model->create()){
-				$this->view->result = array("result"=>true);
-			}else{			
-				$this->view->result = array("result"=>false, "errors"=>$this->model->getErrors());
-			}
+			$this->view->result = array("result"=>true);
 		}else{
-			$this->view->result = array("result"=>false);
+			$this->view->result = array("result"=>false, "errors"=>$form->getErrors());
 		}
 		$this->_helper->layout->setLayout("plain");
         $this->_helper->viewRenderer("json");
+	}
+	
+	public function verifyEmailAction(){
+		$hashcode = $this->getRequest()->getQuery("hashcode");
+		if (!$this->ownerModel->isActivated($hashcode)){
+			$this->ownerModel->activateAccount($hashcode);
+
+			//render congratulation page
+			$this->_helper->layout->setLayout("plain");
+        	$this->_helper->viewRenderer("congrats_activated");
+		}else{
+
+			$this->_helper->layout->setLayout("plain");
+        	$this->_helper->viewRenderer("already_activated");
+		}
+		
 	}
 	
 	
@@ -106,29 +100,8 @@ class OwnersController extends BaseLeadController{
 	public function registerAction(){
 		
 		$form = new Owner_Registration();
-		$timezoneId = $form->getElement("timezone_id");
-		$number_hits = $form->getElement("number_of_hit_id");
 		$this->view->headTitle("Leads Chat - Register");
-		$timezoneGroups = $this->timezoneGroupModel->getAllTimezonesGrouped();
-		$items = array();
-		$items[""] = "Please Select";
-		foreach($timezoneGroups as $timezoneGroup){
-			$timezones = $timezoneGroup["timezones"];
-			foreach($timezones as $timezone){
-				$items[$timezoneGroup["name"]][$timezone["timezone_id"]]=$timezone["name"];
-			}
-		}
-		$timezoneId->addMultiOptions($items);
 		
-		
-		$items = array();
-		$items[""] = "Please Select";
-		$hits = $this->numberOfHitModel->fetchAll()->toArray();
-		foreach($hits as $hit){
-			$items[$hit["id"]] = $hit["name"];
-		}
-		
-		$number_hits->addMultiOptions($items);
 		
 		$this->view->timezoneGroups = $this->timezoneModel->fetchAll()->toArray();
 		$this->view->registration_form = $form;
@@ -173,8 +146,11 @@ class OwnersController extends BaseLeadController{
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
+	
+	
 
 	public function loginAction(){
+		
 		$this->view->headTitle("Leads Chat - Login");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");

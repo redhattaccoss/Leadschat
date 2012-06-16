@@ -34,6 +34,8 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 		$this->db = $db->conn();
 		$this->ipChecker = new Db_Ip($this->db);	
 		$this->checkAdmin();
+		$this->mailer = new Zend_Mail();
+			
 	}
 	
 	private function checkAdmin(){

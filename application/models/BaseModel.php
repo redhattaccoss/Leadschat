@@ -181,4 +181,5 @@ class BaseModel{
 		 $validator = new Zend_Validate_Db_RecordExists(array("field"=>$field, "table"=>$table));
 		 return !$validator->isValid($value);
 	}
+
 }

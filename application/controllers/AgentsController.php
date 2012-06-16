@@ -156,11 +156,11 @@ class AgentsController extends BaseLeadController
 	}
 	
 	public function logoutAction(){
+		
 		$session = new Zend_Session_Namespace("LeadsChat_Auth");
 		if ($session->__isset("agent_id")){
 			$this->auth->logout();
 		}
-	
 		header("Location:/agents/login");
 		exit;
 	}
