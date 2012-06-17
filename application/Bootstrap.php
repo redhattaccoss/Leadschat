@@ -69,9 +69,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Loader::loadClass("Owner_Auth", array($models));
 	}
 	
-	
-	
-	
 	private function loadNewClasses(){
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
@@ -82,10 +79,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_BusinessType", array($models));
 		Zend_Loader::loadClass("App_NumberOfHit", array($models));		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
-    	
+    	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
+    	Zend_Loader::loadClass("Owner_Login", array($forms));
+    	Zend_Loader::loadClass("UserMap", array($models));
+    	Zend_Loader::loadClass("Acl", array($models));
 	}
 	
-	public function _initView(){
+	protected function _initView(){
 		// Initialize view
         $view = new Zend_View();
         $view->addScriptPath(APPLICATION_PATH . '/views/scripts/');
@@ -96,6 +96,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $viewRenderer->setView($view);
 		return $view;
 	}
+	
+	protected function _initUser(){
+		Zend_Registry::set("user", UserMap::getUser());
+	}
+	
+	protected function _initAcl(){
+		$acl = new Acl();
+		Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(UserMap::getRole());
+		Zend_Registry::set('Zend_Acl', $acl);
+		return $acl;
+	}	
 
 }
 

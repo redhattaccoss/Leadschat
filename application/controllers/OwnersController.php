@@ -70,18 +70,24 @@ class OwnersController extends BaseLeadController{
 	}
 	
 	public function processLoginAction(){
-    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");   
-        if (!$sessionAgent->owner_id&&$this->_request->isXmlHttpRequest()){
+    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth"); 
+    	$form = new Owner_Login();  
+        if (!$sessionAgent->owner_id&&$this->_request->isXmlHttpRequest()&&$form->isValid($_POST)){
 			if ($this->auth->authenticate()){
 				$this->view->result = array("result"=>true, "message"=>"Successful logged in");
 			}else{
 				$this->view->result = array("result"=>false, "message"=>"Invalid Username/Password");
-			}   			    	
+			}  			    	
         }else{
+        	if(!$this->_request->isXmlHttpRequest()){
+        		$this->view->result = array("result"=>false, "message"=>"Invalid request method");
+        	}
+        	if (!$form->isValid($_POST)){
+        		$this->view->result = array("result"=>false, "message"=>"Error", "error"=>$form->getErrors());
+        	}
+        	
         	if ($sessionAgent->owner_id){
         		$this->view->result = array("result"=>true, "message"=>"Already logged in");
-        	}else{
-        		$this->view->result = array("result"=>false, "message"=>"Invalid request method");	
         	}	
         }
         $this->_helper->layout->setLayout("plain");
@@ -96,13 +102,26 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-dashboard.css");    	
     }
     
+    
+    public function processForgotPasswordAction(){
+    	
+    }
+    
+    public function resetPasswordAction(){
+    	
+    }
+    
+    
+    public function processResetPasswordAction(){
+    	
+    }
+    
+    
 
 	public function registerAction(){
 		
 		$form = new Owner_Registration();
 		$this->view->headTitle("Leads Chat - Register");
-		
-		
 		$this->view->timezoneGroups = $this->timezoneModel->fetchAll()->toArray();
 		$this->view->registration_form = $form;
 		//render include files
@@ -113,7 +132,6 @@ class OwnersController extends BaseLeadController{
 		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-register.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/ui-darkness/jquery-ui-1.8.21.custom.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.selectmenu.css");
-		
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");
 		
 	}
@@ -141,18 +159,36 @@ class OwnersController extends BaseLeadController{
 	}
 	
 	
-	public function forgotpasswordAction(){
+	public function forgotPasswordAction(){
+		$form = new Owner_ForgotPassword();
+		$this->view->form = $form;
 		$this->view->headTitle("Leads Chat - Forgot Password");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
 	
-	
+	public function isloginAction(){
+		if ($this->_request->isXmlHttpRequest()){
+			$this->view->result = array("result"=>$this->auth->isAuthenticated());
+		}else{
+			$this->view->result = array("result"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+        $this->_helper->viewRenderer("json");
+	}
 
 	public function loginAction(){
-		
+		$form = new Owner_Login();
+		$this->view->form = $form;		
 		$this->view->headTitle("Leads Chat - Login");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-login.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
+	}
+	
+	public function logoutAction(){
+		$this->auth->logout();
+		header("Location:/owners/login");
+		exit;
 	}
 }

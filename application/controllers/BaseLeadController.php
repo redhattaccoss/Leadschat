@@ -65,6 +65,35 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 		
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Controller_Action::preDispatch()
+	 */
+	public function preDispatch(){
+		$controllerName = $this->getRequest()->getControllerName();
+		$controllerAction = $this->getRequest()->getActionName();
+		$acl = Zend_Registry::get("Zend_Acl");
+		$role = UserMap::getRole();
+		if (!$this->getRequest()->isXmlHttpRequest()){
+			if (!$acl->isAllowed(UserMap::getRole(),$controllerName, $controllerAction)&&($controllerAction!="logout")){
+				if ($role=="guest"){		
+					header("Location:/");	
+				}else if ($role=="owner"||$role=="member"){
+					header("Location:/owners/login");
+				}else if ($role=="agent"||$role=="admin"){
+					header("Location:/agents/login");
+				}
+				exit;
+			}
+		}
+		parent::preDispatch();
+		
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see Zend_Controller_Action::postDispatch()
+	 */
 	public function postDispatch(){
 		parent::postDispatch();
 		$this->getResponse()->setHeader("Cache-Control", "no-cache, must-revalidate");
