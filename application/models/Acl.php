@@ -22,7 +22,7 @@ class Acl extends Zend_Acl{
 			$this->addResource(new Zend_Acl_Resource($controller));
 		}
 		
-		$this->allow(self::ROLE_GUEST, null, array("register", "login", "processRegister", "processLogin"));
+		$this->allow(self::ROLE_GUEST, null, array("register", "login", "processRegister", "processLogin", "cache"));
 		$this->deny(self::ROLE_GUEST, "owners", array("index"));
 		$this->allow(self::ROLE_MEMBER, "owners", array("index"));
 		$this->allow(self::ROLE_ADMIN);		

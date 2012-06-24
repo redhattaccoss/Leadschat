@@ -13,7 +13,7 @@ class App_Owner extends AppModel{
 		$data["hashcode"] = $this->getHashCode($data);
 		$data["date_created"] = date("Y-m-d h:i:s");
 		$data["date_updated"] = date("Y-m-d h:i:s");
-		$data["password"] = md5($data["password"]);
+		//$data["password"] = md5($data["password"]);
 		$this->insert($data);
 		return $this->getAdapter()->lastInsertId($this->_name);	
 	}
@@ -24,7 +24,11 @@ class App_Owner extends AppModel{
 	 * @param $data The data
 	 */
 	private function getHashCode($data){
-		return md5($data["username"].strtotime(date("Y-m-d h:i:s")));
+		if (isset($data["username"])){
+			return md5($data["username"].strtotime(date("Y-m-d h:i:s")));	
+		}else{
+			return false;
+		}
 	}
 	
 	/**
@@ -101,6 +105,33 @@ class App_Owner extends AppModel{
 	 */
 	public function activateAccount($hashCode){
 		$this->update(array("activated"=>"Y"), "hashcode = ".mysql_escape_string($hashCode));
+	}
+	
+	/**
+	 * Generate a hashcode to be sent via email as per basis for setting new password
+	 */
+	public function forgotPassword($email){
+		$select = $this->select();
+		$owner = $this->fetchRow($select->from($this->_name, array("username"))->where("email = ?", $email))->toArray();
+		$hashcode = $this->getHashCode($owner);
+		if ($hashcode){
+			$this->update(array("hashcode_reset"=>$hashcode), "owner_id = $owner_id");
+			return $hashcode;			
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public function resetPassword($owner_id, $newPassword){	
+		$data["password"] = md5($newPassword);
+		if ($owner_id){	
+			$this->update($data, "owner_id = $owner_id");	
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 	
 }

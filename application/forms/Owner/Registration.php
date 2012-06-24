@@ -38,6 +38,7 @@ class Owner_Registration extends Zend_Form{
 				"options"=>array(13, 255))			
 		);
 
+/*
 		$username = new Zend_Form_Element_Text("username");
 		$username->setRequired(true);
 		$username->setLabel("Username");
@@ -74,7 +75,7 @@ class Owner_Registration extends Zend_Form{
 				"options"=>array(6, 30))			
 		);
 
-
+*/
 		$email = new Zend_Form_Element_Text("email");
 		$email->setLabel("Email Address");
 		$email->setRequired(true);

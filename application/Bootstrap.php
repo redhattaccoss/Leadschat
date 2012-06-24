@@ -10,6 +10,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$this->loadNewClasses();	
 		$db = Zend_Db::factory("PDO_MYSQL", $connectionParameters);
 		Zend_Registry::set("main_db", $db);
+		Db_Mongo::instantiate();
 		Zend_Db_Table_Abstract::setDefaultAdapter($db);
 		Zend_Layout::startMvc();
     	$layout = Zend_Layout::getMvcInstance();
@@ -58,7 +59,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Loader::loadClass("Db_Db", array($models));
     	Zend_Loader::loadClass("Authentication", array($models));
     	Zend_Loader::loadClass("AuthenticationModel", array($models));
-    	
     	Zend_Loader::loadClass("Agent_Auth", array($models));
     	Zend_Loader::loadClass("AuthFactory", array($models));
     	Zend_Loader::loadClass("Agent_Login", array($forms));
@@ -72,15 +72,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	private function loadNewClasses(){
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
-		Zend_Loader::loadClass("App_Lead", array($models));
+			
+			
+		Zend_Loader::loadClass("App_Chat", array($models));
+		Zend_Loader::loadClass("App_ChatSession", array($models));
+		Zend_Loader::loadClass("App_ChatRequest", array($models));	
 		Zend_Loader::loadClass("App_Owner", array($models));
+			
+		Zend_Loader::loadClass("App_Visitor", array($models));	
+		Zend_Loader::loadClass("App_Lead", array($models));
 		Zend_Loader::loadClass("App_Timezone", array($models));	
 		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
 		Zend_Loader::loadClass("App_BusinessType", array($models));
-		Zend_Loader::loadClass("App_NumberOfHit", array($models));		
+		Zend_Loader::loadClass("App_NumberOfHit", array($models));
+		
+		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));
+		Zend_Loader::loadClass("Owner_ResetPassword", array($forms));
+		Zend_Loader::loadClass("Db_Mongo", array($models));
     	Zend_Loader::loadClass("UserMap", array($models));
     	Zend_Loader::loadClass("Acl", array($models));
 	}

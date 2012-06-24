@@ -65,7 +65,7 @@ class OwnersController extends BaseLeadController{
 	public function adminMainAction(){
 		$this->view->headTitle("Leads Chat - Admin Home");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ext/ext-debug.js", "text/javascript");
-		$this->view->headScript()->appendFile($this->baseUrl."/js/app.js", "text/javascript");
+		$this->view->headScript()->append+File($this->baseUrl."/js/app.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/ext/resources/css/ext-all.css");
 	}
 	
@@ -102,18 +102,54 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-dashboard.css");    	
     }
     
-    
+    /**
+	 * Process a forgot password request.
+	 * @params emailAddress the email address
+	 */
     public function processForgotPasswordAction(){
-    	
+		$form = new Owner_ForgotPassword();
+		if (!$this->getRequest()->isXmlHttpRequest()){
+			$this->view->result = $this->_invalidRequest();
+		}
+		if (!$form->isValid($_POST)){
+			$this->view->result = array("success"=>false, "errors"=>$form->getErrors());
+		}
+
+    	$emailAddress = $this->getRequest()->getPost("email_address");
+		$hashcode = $this->ownerModel->forgotPassword($emailAddress);
+		if ($hashcode){
+			//mail here
+			$this->view->result = array("success"=>true);
+		}else{
+			$this->view->result = $this->_invalidRequest();
+		}	
+		$this->_helper->layout->setLayout("plain");
+        $this->_helper->viewRenderer("json");
     }
     
     public function resetPasswordAction(){
-    	
+    	$this->view->form = new Owner_ResetPassword();
     }
     
     
     public function processResetPasswordAction(){
-    	
+    	$form = new Owner_ResetPassword();
+		if (!$this->getRequest()->isXmlHttpRequest()){
+			$this->view->result = $this->_invalidRequest();
+		}
+		if (!$form->isValid($_POST)){
+			$this->view->result = array("success"=>false, "errors"=>$form->getErrors());
+		}
+		$values = $form->getValidValues($_POST);
+		if ($values["new_password"]==$values["confirm_password"]){
+			$this->view->result = array("success"=>false, "error"=>"The passwords did not match");
+		}
+		
+		if ($this->ownerModel->resetPassword($values["owner_id"], $values["new_password"])){
+			$this->view->result = array("success"=>true);
+		}else{
+			$this->view->result = array("success"=>false, "error"=>"Reset Failed");
+		}
     }
     
     

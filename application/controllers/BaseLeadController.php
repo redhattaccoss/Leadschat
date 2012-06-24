@@ -99,5 +99,12 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 		$this->getResponse()->setHeader("Cache-Control", "no-cache, must-revalidate");
 		$this->view->baseUrl = $this->baseUrl;
 	}
+	
+	/**
+	 * Returns an invalid request JSON data
+	 */
+	protected function _invalidRequest(){
+		return array("result"=>false, "message"=>"Invalid request method");
+	}
 }
 

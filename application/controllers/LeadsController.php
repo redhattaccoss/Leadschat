@@ -57,8 +57,19 @@ class LeadsController extends BaseLeadController
 			      		  "sent"=>$sent,
 					      "owner_id"=>$visitor["owner_id"]);
 			$db->update("leads", $lead, "lead_id = {$lead_id}");
-		
+			
+			$leadModel = new App_Lead();
+			$leadModel->cacheLead($lead_id);		
 		}		
+	}
+	
+	public function cacheAction(){
+		$lead_id = $this->_request->getQuery("lead_id");
+		$leadModel = new App_Lead();
+		$leadModel->cacheLead($lead_id);	
+		$this->view->result = array("success"=>true);
+		$this->_helper->layout->setLayout("plain");
+        $this->_helper->viewRenderer("json");
 	}
 	
 	public function saveAction(){
