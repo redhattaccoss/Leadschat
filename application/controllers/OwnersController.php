@@ -1,4 +1,9 @@
 <?php 
+/**
+ * @copyright Intuitive Marketing LLC
+ * @author Allanaire Tapion
+ *
+ */
 class OwnersController extends BaseLeadController{
 	private $model;
 	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel, $numberOfHitModel;
@@ -14,6 +19,9 @@ class OwnersController extends BaseLeadController{
 		$this->numberOfHitModel = new App_NumberOfHit();		
 	}
 
+	/**
+	 * List of owners
+	 */
 	public function processListAction(){
 		$result = $this->ownerModel->listAll($this->_request->getQuery["page"], $this->_request->getQuery["count"], true);
 		if (!empty($result)){
@@ -27,7 +35,9 @@ class OwnersController extends BaseLeadController{
 		$this->_helper->viewRenderer("json");
 	}
 	
-	
+	/**
+	 * Process Register action
+	 */
 	public function processRegisterAction(){
 		$db = $this->db;
 		$form = new Owner_Registration();		
@@ -45,6 +55,9 @@ class OwnersController extends BaseLeadController{
         $this->_helper->viewRenderer("json");
 	}
 	
+	/**
+	 * Verify email link
+	 */
 	public function verifyEmailAction(){
 		$hashcode = $this->getRequest()->getQuery("hashcode");
 		if (!$this->ownerModel->isActivated($hashcode)){
@@ -62,6 +75,9 @@ class OwnersController extends BaseLeadController{
 	}
 	
 	
+	/**
+	 * Process admin main on Owners Controller
+	 */
 	public function adminMainAction(){
 		$this->view->headTitle("Leads Chat - Admin Home");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ext/ext-debug.js", "text/javascript");
@@ -69,6 +85,9 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/ext/resources/css/ext-all.css");
 	}
 	
+	/**
+	 * Process login request via ajax
+	 */
 	public function processLoginAction(){
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth"); 
     	$form = new Owner_Login();  
@@ -94,6 +113,9 @@ class OwnersController extends BaseLeadController{
         $this->_helper->viewRenderer("json");
     }
     
+    /**
+     * The home page for owners dashboard
+     */
     public function indexAction(){
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");
 		$this->view->headTitle("Leads Chat - Home");
@@ -127,11 +149,17 @@ class OwnersController extends BaseLeadController{
         $this->_helper->viewRenderer("json");
     }
     
+    /**
+     * Reset password action
+     */
     public function resetPasswordAction(){
     	$this->view->form = new Owner_ResetPassword();
     }
     
     
+    /**
+     * Resets password via ajax
+     */
     public function processResetPasswordAction(){
     	$form = new Owner_ResetPassword();
 		if (!$this->getRequest()->isXmlHttpRequest()){
@@ -153,7 +181,9 @@ class OwnersController extends BaseLeadController{
     }
     
     
-
+	/**
+	 * Register an owner to site
+	 */
 	public function registerAction(){
 		
 		$form = new Owner_Registration();
@@ -172,7 +202,9 @@ class OwnersController extends BaseLeadController{
 		
 	}
 	
-	
+	/**
+	 * Check if email is existing
+	 */
 	public function emailExistingAction(){
 		$email = $this->_request->getQuery("email");
 		if ($this->_request->isXmlHttpRequest()&&$email!=""){
@@ -183,6 +215,11 @@ class OwnersController extends BaseLeadController{
 		$this->_helper->layout->setLayout("plain");
         $this->_helper->viewRenderer("json");
 	}
+	
+	
+	/**
+	 * Check if Username is existing
+	 */
 	public function usernameExistingAction(){
 		$username = $this->_request->getQuery("username");
 		if ($this->_request->isXmlHttpRequest()&&$username!=""){
@@ -195,6 +232,10 @@ class OwnersController extends BaseLeadController{
 	}
 	
 	
+	
+	/**
+	 * Forgot password action
+	 */
 	public function forgotPasswordAction(){
 		$form = new Owner_ForgotPassword();
 		$this->view->form = $form;
@@ -203,6 +244,10 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
 	
+	
+	/**
+	 * Checks if owner is login
+	 */
 	public function isloginAction(){
 		if ($this->_request->isXmlHttpRequest()){
 			$this->view->result = array("result"=>$this->auth->isAuthenticated());
@@ -213,6 +258,9 @@ class OwnersController extends BaseLeadController{
         $this->_helper->viewRenderer("json");
 	}
 
+	/**
+	 * Login a user action
+	 */
 	public function loginAction(){
 		$form = new Owner_Login();
 		$this->view->form = $form;		
@@ -222,9 +270,31 @@ class OwnersController extends BaseLeadController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-login.css");
 	}
 	
+	
+	/**
+	 * Logout an owner from login
+	 */
 	public function logoutAction(){
 		$this->auth->logout();
 		header("Location:/owners/login");
 		exit;
+	}
+	
+	/**
+	 * Process an approval on Owner
+	 */
+	public function processApproveAction(){
+		$owner_id = $this->getRequest()->getPost("owner_id");
+		if ($owner_id){
+			if ($this->ownerModel->approve($owner_id)){
+				$this->view->result = array("success"=>true);
+			}else{
+				$this->view->result = array("success"=>false);
+			}
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
 	}
 }

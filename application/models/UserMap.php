@@ -1,5 +1,10 @@
 <?php 
 class UserMap{
+	
+	public static $OWNER = "Owner";
+	public static $AGENT = "Agent";
+	public static $ADMIN = "Admin";
+	
 	/**
 	 * Convinience function to get user ...
 	 */

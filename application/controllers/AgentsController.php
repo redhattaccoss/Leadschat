@@ -9,6 +9,8 @@ class AgentsController extends BaseLeadController
 	
 	private $leadModel;
 	
+	private $appChatRequestModel;
+	
     public function init()
     {
         /* Initialize action controller here */
@@ -16,20 +18,15 @@ class AgentsController extends BaseLeadController
     	$this->auth = AuthFactory::create(AuthFactory::$AGENT, $this->db, $this->_request);
     	$this->chatRequestModel = new Chat_Request($this->db);
     	$this->chatSessionModel =  new Chat_Session($this->db);
+    	$this->appChatRequestModel = new App_ChatRequest();
     	$this->leadModel = new App_Lead();
     }
 
     public function loadAcceptedChatRequestsAction(){
-    	$db = $this->db;
+    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Auth");
     	if ($sessionAgent->agent_id&&$this->isXmlHttpRequest()){
-    		$sql =$db->select()->from("chat_requests")
-        			->joinInner("available_agents", "available_agents.available_agent_id = chat_requests.available_agent_id", array())
-        			->joinInner("visitors", "chat_requests.visitor_id = visitors.visitor_id", array())
-        			->joinInner("owners", "visitors.owner_id = owners.owner_id", array("website"))
-        			->where("available_agents.agent_id = ?", $sessionAgent->agent_id)
-        			->where("chat_requests.accepted = 'Y'")
-        			->order("chat_requests.date_created");
-        	$chat_requests = $db->fetchAll($sql);
+    		$date = date("Y-m-d h:i:s");
+    		$chat_requests = $this->appChatRequestModel->listAcceptedChatRequests($sessionAgent->agent_id, $date);
 	     	$this->view->result = array("result"=>true, "rows"=>$chat_requests);   		
     	}else{
     		$this->view->result = array("result"=>false);
@@ -39,19 +36,10 @@ class AgentsController extends BaseLeadController
     }
     
     public function loadChatRequestsAction(){
-    	$db = $this->db;
-        $sessionAgent = new Zend_Session_Namespace("LeadsChat_Auth");
-        
+    	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Auth");
         if ($sessionAgent->agent_id){
-        	$sql =$db->select()->from("chat_requests")
-        			->joinInner("available_agents", "available_agents.available_agent_id = chat_requests.available_agent_id", array())
-        			->where("available_agents.agent_id = ?", $sessionAgent->agent_id)
-        			->where("chat_requests.accepted = 'N'")
-        			//->where("DATE(chat_requests.date_created) = CURDATE()")
-        			->order("chat_requests.date_created")
-        			->limit(4);
-        	$chat_requests = $db->fetchAll($sql);
-        	//echo $sql->__toString();
+        	$date = date("Y-m-d h:i:s");
+        	$chat_requests = $this->appChatRequestModel->listNewChatRequests($sessionAgent->agent_id, $date);
         	$this->view->result = array("result"=>true, "rows"=>$chat_requests);
         }else{ 
         	$this->view->result = array("result"=>false);

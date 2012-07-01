@@ -123,10 +123,33 @@ class App_Owner extends AppModel{
 		
 	}
 	
+	
+	/**
+	 * Reset password
+	 * @param int $owner_id The owner
+	 * @param string $newPassword The new password
+	 * @return boolean
+	 */
 	public function resetPassword($owner_id, $newPassword){	
 		$data["password"] = md5($newPassword);
 		if ($owner_id){	
 			$this->update($data, "owner_id = $owner_id");	
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	/**
+	 * Approves an owner
+	 * @param $owner_id
+	 * @return boolean
+	 */
+	public function approve($owner_id){
+		$data["approved"] = 1;
+		if ($owner_id){
+			$this->update($data, "owner_id = ".$owner_id);			
 			return true;
 		}else{
 			return false;

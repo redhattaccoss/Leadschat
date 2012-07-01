@@ -2,10 +2,18 @@
 
 class LeadsController extends BaseLeadController
 {
+	private $leadModel;
+	
+	public function __construct(){
+		$this->leadModel = new App_Lead();
+		
+	}
     
 	public function saveAndSendAction(){
 		$this->saveLead(1);
 	}
+	
+	
 	
 	private function saveLead($sent=1){
 		$db = $this->db;
@@ -63,6 +71,23 @@ class LeadsController extends BaseLeadController
 		}		
 	}
 	
+	
+	public function getUserCountLeadsAction(){
+		$owner = UserMap::getUser();
+		if ($owner["level"]==UserMap::$OWNER){
+			$this->leadModel = new App_Lead();
+			$owner_id = $owner["owner_id"];
+			$date_from = $this->getRequest()->getQuery("date_from");
+			$date_to = $this->getRequest()->getQuery("date_to");
+			$counters = $this->leadModel->getCacheLeadsDailyCounter($owner_id, $date_from, $date_to);			
+			$this->view->result = array("success"=>true, "counters"=>$counters);
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
+	}
+	
 	public function cacheAction(){
 		$lead_id = $this->_request->getQuery("lead_id");
 		$leadModel = new App_Lead();
@@ -71,6 +96,7 @@ class LeadsController extends BaseLeadController
 		$this->_helper->layout->setLayout("plain");
         $this->_helper->viewRenderer("json");
 	}
+	
 	
 	public function saveAction(){
 		$this->saveLead(0);

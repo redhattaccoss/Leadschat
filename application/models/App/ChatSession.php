@@ -11,6 +11,7 @@ class App_ChatSession extends AppModel{
 		if ($chat_request_id){
 			$chat_session = $this->fetchRow($select->where("chat_request_id = ?", $chat_request_id))->toArray();
 			$chat_session["chats"] = $this->chatModel->getAllChatFromSession($session["chat_session_id"]);
+			$chat_session["created"] = new MongoDate(strtotime($chat_session["created"]));
 			return $chat_session;			
 		}else{
 			return null;
