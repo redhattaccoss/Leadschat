@@ -1,0 +1,148 @@
+/* Caution! Ensure accessibility in print and other media types... */
+@media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+    .ui-tabs-hide {
+        display: none;
+    }
+}
+
+/* Hide useless elements in print layouts... */
+@media print {
+    .ui-tabs-nav {
+        display: none;
+    }
+}
+
+/* Skin */
+.ui-tabs-nav, .ui-tabs-panel {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+.ui-tabs-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+	font-family: "MergeRegular-1", "MergeRegular-2", Arial, sans-serif;
+	font-size:18px;
+	height:176px;
+	width:100%
+}
+.ui-tabs-hide {
+	display:none}
+
+#topslider { 
+	height:501px;
+	overflow:hidden;
+	margin-left:18px} 
+
+#topslider .ui-tabs-panel {
+	clear:both;
+	background:url(../images/slide_content_bg.jpg) top repeat-x}
+
+.tabs-bottom {
+	position: relative;} 
+
+.tabs-bottom .ui-tabs-panel { 
+	height: 326px; 
+	overflow: hiden;} 
+	
+.tabs-bottom .ui-tabs-nav {
+	position: absolute !important; 
+	left: 0; 
+	bottom: 0; 
+	right:0;
+	background:url(../images/slide_line_black.gif) left bottom no-repeat;
+	padding-left:2px;}
+	
+.ui-tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
+    display: block;
+    clear: both;
+    content: " ";
+}
+.ui-tabs-nav li {
+    float: left;
+    margin:0;
+	width:238px;
+	height:176px;
+	background:url(../images/slide_line_black.gif) right bottom no-repeat;
+	padding-right:2px
+}
+
+
+.ui-tabs-nav a, .ui-tabs-nav a span {
+    display: block;
+    padding: 0;
+	float:left;
+	height:176px;
+	width:238px;
+}
+.ui-tabs-nav a span {
+	padding-top:54px;
+	height:122px;}
+
+.ui-tabs-nav a {
+    margin:0; /* position: relative makes opacity fail for disabled tab in IE */
+    padding: 0;
+    color: #ccc;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap; /* required in IE 6 */    
+}
+.ui-tabs-nav a:hover {
+	color: #ccc;}
+	
+.ui-tabs-nav a span b {
+	font-weight:normal;
+	color:#79d7ff}
+
+.ui-tabs-nav .ui-tabs-selected a {
+	background:url(../images/slide_menu_active.jpg) bottom no-repeat;
+	height:176px;
+    position: relative;
+    z-index: 2;
+	text-align:center
+}
+.ui-tabs-nav a.ico-1 span,
+.ui-tabs-nav a.ico-1:hover span,
+.ui-tabs-nav .ui-tabs-selected a.ico-1 span{
+	background:url(../images/ico-1.png) center 84px no-repeat}
+
+.ui-tabs-nav a.ico-2 span,
+.ui-tabs-nav a.ico-2:hover span,
+.ui-tabs-nav .ui-tabs-selected a.ico-2 span{
+	background:url(../images/ico-2.png) center 84px no-repeat}
+	
+.ui-tabs-nav a.ico-3 span,
+.ui-tabs-nav a.ico-3:hover span,
+.ui-tabs-nav .ui-tabs-selected a.ico-3 span{
+	background:url(../images/ico-3.png) center 84px no-repeat}
+
+.ui-tabs-nav a.ico-4 span,
+.ui-tabs-nav a.ico-4:hover span,
+.ui-tabs-nav .ui-tabs-selected a.ico-4 span{
+	background:url(../images/ico-4.png) center 84px no-repeat}
+
+.ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active,
+.ui-tabs-nav .ui-tabs-deselectable a:hover, .ui-tabs-nav .ui-tabs-deselectable a:focus, .ui-tabs-nav .ui-tabs-deselectable a:active { /* @ Opera, we need to be explicit again here now... */
+    cursor: pointer;
+}
+.ui-tabs-disabled {
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+.ui-tabs-panel {
+    padding:0;
+}
+.ui-tabs-loading em {
+    padding:0;
+    background: url(loading.gif) no-repeat 0 50%;
+}
+
+/* Additional IE specific bug fixes... */
+* html .ui-tabs-nav { /* auto clear, @ IE 6 & IE 7 Quirks Mode */
+    display: inline-block;
+}
+*:first-child+html .ui-tabs-nav  { /* @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
+    display: inline-block;
+}
+
