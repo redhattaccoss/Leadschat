@@ -1,6 +1,6 @@
 <?php
 
-class LeadsController extends BaseLeadController
+class LeadsController extends AppController
 {
 	private $leadModel;
 	

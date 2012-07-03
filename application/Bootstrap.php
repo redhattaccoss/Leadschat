@@ -40,7 +40,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$ctrl = Zend_Controller_Front::getInstance();
 		$router = $ctrl->getRouter();
 		$route = new Zend_Controller_Router_Route_Static("about/*",
-					array("controller"=>"public", "action"=>"about"));
+					array("controller"=>"index", "action"=>"about"));
 		$router->addRoute("about", $route);
 	}
 	

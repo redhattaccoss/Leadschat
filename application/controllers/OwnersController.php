@@ -4,7 +4,7 @@
  * @author Allanaire Tapion
  *
  */
-class OwnersController extends BaseLeadController{
+class OwnersController extends AppController{
 	private $model;
 	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel, $numberOfHitModel;
 	public function init(){

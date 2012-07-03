@@ -1,5 +1,5 @@
 <?php 
-abstract class BaseLeadController extends Zend_Controller_Action{
+abstract class AppController extends Zend_Controller_Action{
 	/**
 	* @var Zend_Db_Adapter_Pdo_Mysql The database object
 	 */
@@ -70,6 +70,7 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 	 * @see Zend_Controller_Action::preDispatch()
 	 */
 	public function preDispatch(){
+		
 		$controllerName = $this->getRequest()->getControllerName();
 		$controllerAction = $this->getRequest()->getActionName();
 		$acl = Zend_Registry::get("Zend_Acl");
@@ -98,6 +99,10 @@ abstract class BaseLeadController extends Zend_Controller_Action{
 		parent::postDispatch();
 		$this->getResponse()->setHeader("Cache-Control", "no-cache, must-revalidate");
 		$this->view->baseUrl = $this->baseUrl;
+		$this->view->actionName = $this->getRequest()->getActionName();
+		$this->view->controllerName = $this->getRequest()->getControllerName();
+		
+		
 	}
 	
 	/**

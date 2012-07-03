@@ -1,6 +1,6 @@
 <?php
 
-class AgentsController extends BaseLeadController
+class AgentsController extends AppController
 {
 
 	private $chatRequestModel;

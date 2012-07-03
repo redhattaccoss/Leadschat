@@ -1,5 +1,5 @@
 <?php
-class ChatsController extends BaseLeadController
+class ChatsController extends AppController
 {
 
 	public function chatAction(){
