@@ -71,16 +71,32 @@ class App_Lead extends AppModel{
 	 */
 	public function cacheLead($lead_id){
 		$select = $this->select();
-		$select->where("lead_id = ?", $lead_id);
-		$lead = $this->fetchRow($select)->toArray();	
-		$lead["owner"] = $this->ownerModel->find($lead["lead_id"])->toArray();
-		$lead["chat_request"] = $this->chatRequestModel->getChatRequestForCaching($lead["chat_request_id"]);	
-		try{
-			$mongoDb = Db_Mongo::instantiate();
-			$leads = $mongoDb->getCollection("leads_cached");
-			$leads->insert($lead);
-			return true;	
-		}catch(Exception $e){
+		if ($lead_id){
+			$select->where("lead_id = ?", $lead_id);
+			$lead = $this->fetchRow($select);
+			
+			if ($lead){	
+				$lead = $lead->toArray();
+				$lead["owner"] = $this->ownerModel->find($lead["lead_id"])->toArray();
+				$lead["chat_request"] = $this->chatRequestModel->getChatRequestForCaching($lead["chat_request_id"]);	
+				try{
+					$mongoDb = Db_Mongo::instantiate();
+					$leadsCollection = $mongoDb->getCollection("leads_cached");
+					$leadResult = $leadsCollection->findOne(array("lead_id"=>$lead["lead_id"]));
+					if ($leadResult){
+						$criteria = array("_id"=>new MongoId($leadResult["_id"]));
+						$leadsCollection->update($criteria, $lead, array("upsert"=>true));
+					}else{
+						$leadsCollection->insert($lead);
+					}
+					return true;	
+				}catch(Exception $e){
+					return false;
+				}
+			}else{
+				return false;
+			}
+		}else{
 			return false;
 		}
 	}

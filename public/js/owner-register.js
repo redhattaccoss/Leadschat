@@ -155,7 +155,7 @@ jQuery(document).ready(function() {
 			jQuery.post("/owners/process-register", data, function(result) {
 				console.log(result);
 				result = jQuery.parseJSON(result);
-				if (result.success) {
+				if (result.result) {
 					window.location.href = "/owners/register-success"
 				}
 			})

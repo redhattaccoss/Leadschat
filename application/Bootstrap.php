@@ -22,7 +22,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$views = APPLICATION_PATH.DIRECTORY_SEPARATOR."views";
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		Zend_Loader::loadClass("Converter", array($models));
-		Zend_Loader::loadClass("MailerTemplates", array($views));
 	}
 	
 	
@@ -48,7 +47,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 * These are old classes ...
 	 */
 	private function loadOldClasses(){
-		require_once APPLICATION_PATH.DIRECTORY_SEPARATOR."controllers/BaseLeadController.php";
+		require_once APPLICATION_PATH.DIRECTORY_SEPARATOR."controllers/AppController.php";
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
 		require_once $models."/CRUD.php";
@@ -78,15 +77,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_ChatSession", array($models));
 		Zend_Loader::loadClass("App_ChatRequest", array($models));	
 		Zend_Loader::loadClass("App_Owner", array($models));
-			
 		Zend_Loader::loadClass("App_Visitor", array($models));	
 		Zend_Loader::loadClass("App_Lead", array($models));
 		Zend_Loader::loadClass("App_Timezone", array($models));	
 		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
 		Zend_Loader::loadClass("App_BusinessType", array($models));
 		Zend_Loader::loadClass("App_NumberOfHit", array($models));
-		
-		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));
@@ -94,6 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("Db_Mongo", array($models));
     	Zend_Loader::loadClass("UserMap", array($models));
     	Zend_Loader::loadClass("Acl", array($models));
+    	Zend_Loader::loadClass("Mailer", array($models));
 	}
 	
 	protected function _initView(){

@@ -47,6 +47,17 @@ class OwnersController extends AppController{
 			//query newly create record
 			$owner = $this->ownerModel->find($newRecord)->toArray();
 			
+			try{
+			//sends an email
+				$mail = new Zend_Mail("utf-8");
+				$mail->addTo($owner["email"], $owner["first_name"]." ".$owner["last_name"]);
+				$mail->setBodyHtml(Mailer::getTemplate("welcome.phtml", array("fullname"=>$owner["first_name"]." ".$owner["last_name"])));
+				$mail->setSubject("welcome to Leadschat");
+				$mail->setFrom("noreply@leadschat.com");
+				$mail->send(Mailer::getTransport());
+			}catch(Exception $e){
+				
+			}
 			$this->view->result = array("result"=>true);
 		}else{
 			$this->view->result = array("result"=>false, "errors"=>$form->getErrors());
@@ -200,6 +211,11 @@ class OwnersController extends AppController{
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/themes/base/jquery.ui.selectmenu.css");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/register.css");
 		
+	}
+	
+	
+	public function registerCompleteAction(){
+		$this->_helper->layout->setLayout("plain");
 	}
 	
 	/**

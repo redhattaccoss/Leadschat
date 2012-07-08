@@ -3,10 +3,9 @@
 class LeadsController extends AppController
 {
 	private $leadModel;
-	
-	public function __construct(){
+	public function init(){
 		$this->leadModel = new App_Lead();
-		
+		parent::init();
 	}
     
 	public function saveAndSendAction(){
@@ -55,7 +54,6 @@ class LeadsController extends AppController
 			$date = date("Y-m-d h:i:s");
 			$ended = 1;
 			$chat_end = $date;
-			$sent = $sent;
 			$lead = array("service_needed"=>$service_needed,
 						  "service_required"=>$service_required,
 						  "notes"=>$notes,
@@ -91,8 +89,12 @@ class LeadsController extends AppController
 	public function cacheAction(){
 		$lead_id = $this->_request->getQuery("lead_id");
 		$leadModel = new App_Lead();
-		$leadModel->cacheLead($lead_id);	
-		$this->view->result = array("success"=>true);
+		if ($leadModel->cacheLead($lead_id)){
+			$this->view->result = array("success"=>true);
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		
 		$this->_helper->layout->setLayout("plain");
         $this->_helper->viewRenderer("json");
 	}
