@@ -1,11 +1,9 @@
 Ext.define("Leadschat.view.Viewport", {
 	extend:"Ext.container.Viewport",
 	requires:[
-	    "Ext.ux.CheckColumn",
 		"Leadschat.view.Main",
 		"Leadschat.view.Navigation",
 		"Leadschat.view.owner.Main",
-		"Leadschat.store.Navigation",
 		"Leadschat.view.owner.List",
 		"Leadschat.view.owner.Main",
 		"Leadschat.view.owner.Toolbar",
@@ -15,6 +13,7 @@ Ext.define("Leadschat.view.Viewport", {
 	initComponent:function(){
 		this.items = {
 			xtype:"panel",
+			name:"maincontainer",
 			dockedItems:[{
 				dock:"top",
 				xtype:"toolbar",
@@ -33,7 +32,8 @@ Ext.define("Leadschat.view.Viewport", {
 					columnWidth:"0.2",
 					title:"Main Navigation",
 					height:"100%",
-					layout:"fit"
+					layout:"fit",
+					name:"navigation"
 				},
 				{
 					xtype:"main",

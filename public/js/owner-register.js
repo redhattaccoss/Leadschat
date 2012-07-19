@@ -156,7 +156,7 @@ jQuery(document).ready(function() {
 				console.log(result);
 				result = jQuery.parseJSON(result);
 				if (result.result) {
-					window.location.href = "/owners/register-success"
+					window.location.href = "/owners/register-complete"
 				}
 			})
 		}

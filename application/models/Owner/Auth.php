@@ -38,8 +38,6 @@ class Owner_Auth extends AuthenticationModel implements Authentication{
 	public function logout(){
 		$session = new Zend_Session_Namespace("LeadsChat_Owner_Auth");
 		$session->unsetAll();
-		
-		print_r($session);
 	}
 	
 	

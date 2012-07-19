@@ -2,31 +2,28 @@ Ext.define("Leadschat.view.owner.List", {
 	extend:"Ext.grid.Panel",
 	title:"Registered Owners",
 	alias:"widget.owner_list",
-	selType: "checkboxmodel",
+	selType: "rowmodel",
 	columns:[
 		{
-			header:"First Name",
-			dataIndex:"first_name"
-		},
-		{
-			header:"Last Name",
-			dataIndex:"last_name"
-		},
-		{
-			header:"Username",
-			dataIndex:"username"
+			header:"Client",
+			dataIndex:"first_name",
+			width:150,
+			renderer:function(value, options, row){
+				return row.get("first_name")+" "+row.get("last_name");
+			}
 		},
 		{
 			header:"Email address",
-			dataIndex:"email"
-		},
-		{
-			header:"Mobile",
-			dataIndex:"mobile"
-		},
+			dataIndex:"email",
+			width:327,
+			sortable:false
+		},	
 		{
 			header:"Timezone",
-			dataIndex:"timezone"
+			dataIndex:"timezone_id",
+			renderer:function(value, options, row){
+				return row.raw.timezone.name;
+			}
 		},
 		{
 			header:"Number of Hits",
@@ -35,6 +32,20 @@ Ext.define("Leadschat.view.owner.List", {
 		{
 			header:"Owner Type",
 			dataIndex:"owner_type"
+		},
+		{
+			header:"Approved",
+			dataIndex:"approved",
+			editor: {
+                xtype: 'checkboxfield',
+            },
+            renderer:function(value, options, row){
+            	if (row.get("approved")){
+            		return "Y";
+            	}else{
+            		return "N";
+            	}
+            }
 		}
 		
 		
@@ -52,5 +63,10 @@ Ext.define("Leadschat.view.owner.List", {
 		]
 		this.callParent(arguments);
 	},
+	plugins: [
+          Ext.create('Ext.grid.plugin.RowEditing', {
+              clicksToEdit: 0
+          })
+      ],
 	height:600,
 });

@@ -10,5 +10,6 @@ Ext.define("Leadschat.store.Owners", {
              root: 'dataLoaded'
          }
     },
+    storeId:"ownersListStore",
     autoLoad: true
 });

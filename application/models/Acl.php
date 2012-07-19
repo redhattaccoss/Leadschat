@@ -28,7 +28,7 @@ class Acl extends Zend_Acl{
 		$this->allow(self::ROLE_GUEST, "owners", array("username-existing"));
 		$this->deny(self::ROLE_GUEST, "owners", array("index"));
 		$this->allow(self::ROLE_MEMBER, "owners", array("index"));
-		$this->allow(self::ROLE_AGENT, "agents", array("index"));
+		$this->allow(self::ROLE_AGENT, "agents", array("index", "dashboard"));
 		$this->allow(self::ROLE_ADMIN);		
 	}
 	

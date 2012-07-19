@@ -4,7 +4,11 @@ jQuery(document).ready(function(){
 		jQuery.post("/agents/process-login", formData, function(data){
 			data = jQuery.parseJSON(data);
 			if (data.result){
-				window.location.href = "/agents/dashboard";
+				if (data.level=="admin"){
+					window.location.href = "/owners/admin-main";
+				}else{
+					window.location.href = "/agents/dashboard";	
+				}
 			}else{
 				alert(data.message);
 			}

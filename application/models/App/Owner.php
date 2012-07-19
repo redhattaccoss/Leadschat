@@ -44,10 +44,11 @@ class App_Owner extends AppModel{
 		$sql = $select->from($this->_name, array("owner_id", "first_name", "last_name", "website",
 											  "company", "email", "username", 
 											  "activated", "credits", "owner_type",
-											  "timezone_id", "mobile", "number_hits",
+											  "timezone_id", "mobile",
 											  "approved", "deleted", "fullname_webmaster",
 											  "email_webmaster", "phone_webmaster",
 											  "date_created", "date_updated"))
+							  ->joinInner(array("no"=>"number_of_hits"), "no.id = owners.number_of_hit_id", array("no.name AS number_hits"))
 							  ->order("date_created DESC");
 							  
 		if ($page!=null&&$count!=null){
@@ -57,15 +58,21 @@ class App_Owner extends AppModel{
 		}
 		$result = $this->getAdapter()->fetchAll($sql);	
 		$appTimezone = new App_Timezone();
-		if ($detailed){
+		
 			foreach($result as $key=>$value){
-				try{
-					$result[$key]["timezone"] = $appTimezone->find($value["timezone_id"])->getRow(0)->toArray();	
-				}catch(Exception $e){
-					$result[$key]["timezone"] = null;
+				if ($detailed){
+					try{
+						$result[$key]["timezone"] = $appTimezone->find($value["timezone_id"])->getRow(0)->toArray();	
+					}catch(Exception $e){
+						$result[$key]["timezone"] = null;
+					}
+				}
+				if ($result[$key]["approved"]=="Y"){
+					$result[$key]["approved"] = 1;
+				}else{
+					$result[$key]["approved"] = 0;
 				}
 			}
-		}
 		return $result;
 	}
 	
@@ -156,5 +163,23 @@ class App_Owner extends AppModel{
 		}
 		
 	}
+	
+	/**
+	 * Disapproves an owner
+	 * @param $owner_id
+	 * @return boolean
+	 */
+	public function disapprove($owner_id){
+		$data["approved"] = 0;
+		if ($owner_id){
+			$this->update($data, "owner_id = ".$owner_id);
+			return true;
+		}else{
+			return false;
+		}
+	
+	}
+	
+	
 	
 }

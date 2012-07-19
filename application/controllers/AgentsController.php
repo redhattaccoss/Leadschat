@@ -253,7 +253,11 @@ class AgentsController extends AppController
     public function loginAction(){
     	$db = $this->db;
     	if ($this->auth->isAuthenticated()){
-    		header("Location:/agents/dashboard/");
+    		if (UserMap::getRole()==UserMap::$ADMIN){
+    			header("Location:/owners/admin-main/");
+    		}else{
+    			header("Location:/agents/dashboard/");
+    		}
     		exit;
     	}
     	$this->view->loginForm = new Agent_Login();
@@ -268,7 +272,7 @@ class AgentsController extends AppController
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Auth");   
         if (!$sessionAgent->agent_id&&$this->_request->isXmlHttpRequest()){
 			if ($this->auth->authenticate()){
-				$this->view->result = array("result"=>true, "message"=>"Successful logged in");
+				$this->view->result = array("result"=>true, "message"=>"Successful logged in", "level"=>UserMap::getRole());
 			}else{
 				$this->view->result = array("result"=>false, "message"=>"Invalid Username/Password");
 			}   			    	

@@ -126,6 +126,15 @@ class App_Lead extends AppModel{
 		}
 	}
 	
+	public function getCachedLeadOnDate($owner_id, $date){
+		try{
+			$mongoDb = Db_Mongo::instantiate();
+			$leadsCollection = $mongoDb->getCollection("leads_cached");
+		}catch(Exception $e){
+			return false;
+		}
+	}
+	
 	/**
 	 * Cache Daily counters for newly delivered leads
 	 */
@@ -182,5 +191,7 @@ class App_Lead extends AppModel{
 			return false;
 		}
 	}
+	
+	
 	
 }

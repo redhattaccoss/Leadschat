@@ -92,7 +92,7 @@ class OwnersController extends AppController{
 	public function adminMainAction(){
 		$this->view->headTitle("Leads Chat - Admin Home");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ext/ext-debug.js", "text/javascript");
-		$this->view->headScript()->append+File($this->baseUrl."/js/app.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/app.js", "text/javascript");
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/ext/resources/css/ext-all.css");
 	}
 	
@@ -312,5 +312,32 @@ class OwnersController extends AppController{
 		}
 		$this->_helper->layout->setLayout("plain");
 		$this->_helper->viewRenderer("json");
+	}
+	
+	/**
+	 * Process disapproval on Owner
+	 */
+	public function processDisapproveAction(){
+		$owner_id = $this->getRequest()->getPost("owner_id");
+		if ($owner_id){
+			if ($this->ownerModel->disapprove($owner_id)){
+				$this->view->result = array("success"=>true);
+			}else{
+				$this->view->result = array("success"=>false);
+			}
+		}else{
+			$this->view->result = array("success"=>false);
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
+	}
+	
+	
+	
+	/**
+	 * Bootstrap dashboard Action
+	 */
+	public function bootstrapDashboardAction(){
+		$owner = UserMap::getUser();
 	}
 }
