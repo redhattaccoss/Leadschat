@@ -1,0 +1,1 @@
+var LeadschatView = new Interface("LeadschatView", ["toString"]);

@@ -147,7 +147,7 @@ class App_Lead extends AppModel{
 			$counters = iterator_to_array($counters);
 			if (empty($counters)){
 				$select = $this->select();
-				$dates = $db->fetchAll($select->distinct()->from($this->_name, array("created"))->where("owner_id = ?", $owner_id)->where("paid = ?", 0))->toArray();
+				$dates = $this->fetchAll($select->distinct()->from($this->_name, array("created"))->where("owner_id = ?", $owner_id)->where("paid = ?", 0))->toArray();
 				foreach($dates as $date){
 					$count = $this->fetchRow($select->from($this->_name,
 														 array(new Zend_Db_Expr("COUNT(lead_id) AS count")))
@@ -190,6 +190,16 @@ class App_Lead extends AppModel{
 		}catch(Exception $e){
 			return false;
 		}
+	}
+	
+
+	public function getReadyToBuyLeads($date,$owner_id){
+		$select = $this->select();
+		$leads = $this->fetchAll($select->from($this->_name, array("created", "lead_id"))
+								->where("DATE(created) = ?", $date)
+								->where("owner_id = ?", $owner_id)
+								->where("expired = 0"))->toArray();
+		return $leads;
 	}
 	
 	

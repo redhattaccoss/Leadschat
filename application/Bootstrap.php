@@ -3,6 +3,9 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 	protected function _initAutoload(){
+		define("TEST", true);
+		
+		
 		$this->loadLibraries();
 		$this->loadOldClasses();
 		//load the database adapter
@@ -83,6 +86,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_TimezoneGroup", array($models));
 		Zend_Loader::loadClass("App_BusinessType", array($models));
 		Zend_Loader::loadClass("App_NumberOfHit", array($models));
+		Zend_Loader::loadClass("App_Member", array($models));
+		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));

@@ -6,7 +6,10 @@
  */
 class OwnersController extends AppController{
 	private $model;
-	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel, $numberOfHitModel;
+	private $ownerModel, $timezoneModel, $timezoneGroupModel, $businessTypeModel, $numberOfHitModel, $leadModel, $memberModel;
+	
+	private $baseUrlDashboard;
+	
 	public function init(){
 		parent::init();
 		$this->auth = AuthFactory::create(AuthFactory::$OWNER, $this->db, $this->_request);
@@ -17,6 +20,9 @@ class OwnersController extends AppController{
 		$this->timezoneGroupModel = new App_TimezoneGroup();
 		$this->businessTypeModel = new App_BusinessType();
 		$this->numberOfHitModel = new App_NumberOfHit();		
+		$this->leadModel = new App_Lead();
+		$this->memberModel = new App_Member();
+		$this->baseUrlDashboard = $this->baseUrl."/js/leadschat-dashboard";
 	}
 
 	/**
@@ -130,9 +136,33 @@ class OwnersController extends AppController{
     public function indexAction(){
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Owner_Auth");
 		$this->view->headTitle("Leads Chat - Home");
-		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.js", "text/javascript");
-		$this->view->headScript()->appendFile($this->baseUrl."/js/owner-dashboard.js", "text/javascript");
-		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owner-dashboard.css");    	
+		if (TEST){
+			$owner = UserMap::getUser();
+			
+			
+			//load Base libraries
+			$this->view->owner = $owner;
+			$this->view->headLink()->appendStylesheet($this->baseUrl."/css/jquery.mCustomScrollbar.css");
+			$this->view->headLink()->appendStylesheet($this->baseUrl."/css/dashboard.css");
+			$this->view->headLink()->appendStylesheet($this->baseUrl."/css/home.css");
+			$this->view->headLink()->appendStylesheet($this->baseUrl."/css/yourleads.css");
+			
+			$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");
+			$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-ui-1.8.21.custom.min.js", "text/javascript");
+			$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.mousewheel.min.js", "text/javascript");
+			$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.mCustomScrollbar.js", "text/javascript");
+			
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/Globals.js");
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/Interface.js");
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/LeadschatView.js");
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/views/HomeView.js");
+				
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/LeadschatEngine.js");
+						
+			$this->view->headScript()->appendFile($this->baseUrlDashboard."/index.js");
+				
+		}
+	
     }
     
     /**
@@ -339,5 +369,29 @@ class OwnersController extends AppController{
 	 */
 	public function bootstrapDashboardAction(){
 		$owner = UserMap::getUser();
+		
+		if ($owner){
+			//load all notifications
+			/*
+			//load all leads per date of owner
+			$today = date("Y-m-d");
+			$yesterday = date("Y-m-d", strtotime("-1 days", strtotime($today)));
+			$last2Days = date("Y-m-d", strtotime("-2 days", strtotime($today)));
+			$allLeads = array();
+			$todayLeads = $this->leadModel->getReadyToBuyLeads($today, $owner["owner_id"]);
+			$yesterdayLeads = $this->leadModel->getReadyToBuyLeads($yesterday, $owner["owner_id"]);
+			$last2DaysLeads = $this->leadModel->getReadyToBuyLeads($last2Days, $owner["owner_id"]);
+	
+			
+			//load group and members
+			if (!is_null($owner["has_member"])){
+				$members = $this->memberModel->loadMembers($owner["owner_id"]);
+			}
+			*/
+		}
+		
+		$this->view->result = array("success"=>true, "owner"=>$owner);
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
 	}
 }
