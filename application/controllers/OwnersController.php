@@ -49,6 +49,8 @@ class OwnersController extends AppController{
 		$form = new Owner_Registration();		
 		if ($this->_request->isXmlHttpRequest()&&$form->isValid($_POST)){
 			$data = $form->getValidValues($_POST);
+			//mark as free trial
+			$data["free_trial"] = 1;
 			$newRecord = $this->ownerModel->create($data);
 			//query newly create record
 			$owner = $this->ownerModel->find($newRecord)->toArray();
@@ -138,6 +140,8 @@ class OwnersController extends AppController{
 		$this->view->headTitle("Leads Chat - Home");
 		if (TEST){
 			$owner = UserMap::getUser();
+			
+			
 			
 			
 			//load Base libraries
@@ -335,10 +339,11 @@ class OwnersController extends AppController{
 			if ($this->ownerModel->approve($owner_id)){
 				$this->view->result = array("success"=>true);
 			}else{
-				$this->view->result = array("success"=>false);
-			}
+				$this->view->result = array("success"=>false, "error"=>"An error has occured");
+			}	
+			
 		}else{
-			$this->view->result = array("success"=>false);
+			$this->view->result = $this->_invalidRequest();
 		}
 		$this->_helper->layout->setLayout("plain");
 		$this->_helper->viewRenderer("json");
@@ -351,6 +356,9 @@ class OwnersController extends AppController{
 		$owner_id = $this->getRequest()->getPost("owner_id");
 		if ($owner_id){
 			if ($this->ownerModel->disapprove($owner_id)){
+				
+				
+				
 				$this->view->result = array("success"=>true);
 			}else{
 				$this->view->result = array("success"=>false);
@@ -371,6 +379,10 @@ class OwnersController extends AppController{
 		$owner = UserMap::getUser();
 		
 		if ($owner){
+			
+			
+			
+			
 			//load all notifications
 			/*
 			//load all leads per date of owner

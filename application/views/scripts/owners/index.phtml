@@ -1,56 +1,11 @@
 <?php 
 	$owner = $this->owner;
-
 ?>
 <div class="wrapper">
-	<header>
-		<div class="navigation-container">
-			<ul class="main-menu">
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">HOW IT WORKS</a></li>
-				<li><a href="#">SERVICE</a></li>
-				<li><a href="#">PRICING</a></li>
-				<li><a href="#">CONTACT US</a></li>
-				<li class="spacer"></li>
-				<li class="last"><a href="#"><img src="images/logout.png" /><span>LOGOUT</span></a></li>
-			</ul>
-
-
-			<ul class="tabs">
-				<li class="selected">Newly Delivered</li>
-				<li class="last">Your Leads</li>
-			</ul>
-		</div>
-		<div class="logo">
-			<img src="images/dashboard-logo.png" />
-		</div>
-		<div id="trial-advisory-header" class="trial-advisory">
-			You have <span class="days-counter">10 Days</span> in Your<br /> Free
-			Trial with Unlimited Leads
-		</div>
-
-	</header>
-	<div class="spacer-top-header"></div>
-	<div class="spacer-bottom-header"></div>
-
+	<?php echo $this->partial('include/owners/index-header.phtml');?>
 	<div id="main-container" class="main-container">
 
-		<div id="navigation-main" class="navigation-main">
-			<ul class="main-nav">
-				<li>
-					<div class="home-icon icon"></div>Home
-				</li>
-				<li>
-					<div class="usergroup-icon icon"></div>User Groups
-				</li>
-				<li><div class="plugin-icon icon"></div>Your plugin</li>
-				<li><div class="leadschat-icon icon"></div>Mobile</li>
-				<li><div class="settings-icon icon"></div>Settings</li>
-
-			</ul>
-
-
-		</div>
+		<?php echo $this->partial("include/owners/index-sidebar.phtml")?>
 		<div id="main-content-container" class="main-content-container">
 			<div id="main-content-container-pointer"
 				class="main-content-container-pointer"></div>
@@ -65,18 +20,36 @@
 			<div id="contact-info" class="contact-info">
 				<div class="info">
 					<span><span class="darkblue">Hi,</span> <span id="member-name"><?php echo $owner["first_name"]." ".$owner["last_name"]?></span></span><br />
-					<button class="button-trial">Free Trial User</button>
-					<p>You just got,</p>
-					<p>
-						4 <span class="darkblue">Leads.</span>
-					</p>
-
+					
+					<?php
+						$class = ""; 
+						if ($owner["free_trial"]){
+							$class = "free-trial";
+							$text = "Free Trial User";		
+						}else{
+							
+							if ($owner["paying_service_type"]=="PAY AS YOU GO"){
+								$class = "pay-as-you-go";
+								$text = "Pay As You Go";
+							}else{
+								$class = "bulk-subscriber";
+								$text = "Bulk Subscriber";
+							}
+						}
+					?>
+					<button class="button-trial <?php echo $class?>"><?php echo $text?></button>
+					<?php if ($owner["paying_service_type"]=="BULK SUBSCRIBER"){?>
+						<p>You still have,</p>
+						<p>
+							<?php echo $owner["credits"]?> <span class="darkblue">Credits.</span> remaining.
+						</p>
+					<?php }?>
 				</div>
 				<div class="picture-frame">
 					<img src="images/danilo.jpg" />
 				</div>
 				<div class="spacer"></div>
-				<div class="address">11639 S. St. Andrews Pl, Los Angeles, CA</div>
+				<div class="address"><?php echo $owner["website"]?></div>
 			</div>
 
 			<div id="chat-area" class="chat-area">
@@ -96,11 +69,6 @@
 				</ul>
 
 			</div>
-			<!--
-					<div id="trial-advisory-side" class="trial-advisory trial-advisory-side">
-						You have <span class="days-counter">10 Days</span> in Your<br/> Free Trial with Unlimited Leads 
-					</div>
-					-->
 		</div>
 
 
@@ -109,22 +77,6 @@
 
 	<div class="push"></div>
 </div>
-<footer>
-	<div class="footer-line"></div>
-	<div class="footer-left">
-		<img src="images/leadschat-footer-logo.png" />
-		<div class="footer-links">
-			<a href="#">TERMS OF SERVICE</a><a href="#" class="last">PRIVATE
-				POLICY</a>
-		</div>
-
-	</div>
-	<div class="footer-center">COPYRIGHT © 2012 LEADS CHAT, LLC. ALL RIGHTS
-		RESERVED</div>
-	<div class="footer-right">
-		<a href="#"><img src="images/fb.png" /></a><a href="#"><img
-			src="images/twitter.png" /></a><a href="#"><img src="images/plus.png" /></a><a
-			href="#"><img src="images/mail.png" /></a><a href="#" class="last"><img
-			src="images/rss.png" /></a>
-	</div>
-</footer>
+<?php 
+	echo $this->partial("include/owners/index-footer.phtml");
+?>

@@ -3,6 +3,10 @@ class App_Owner extends AppModel{
 	protected $_name = "owners";
 	protected $_primary = "owner_id";
 	
+	const PAYING_SERVICE_TYPE_PAY_AS_YOU_GO = "PAY AS YOU GO";
+	const PAYING_SERVICE_TYPE_BULK_SUBSCRIBERS = "BULK SUBSCRIBERS";
+	
+	
 	/**
 	 * Registers a new owner ...
 	 * @param $data The data
@@ -155,8 +159,10 @@ class App_Owner extends AppModel{
 	 */
 	public function approve($owner_id){
 		$data["approved"] = 1;
+		$data["date_approved"] = date("Y-m-d h:i:s");
+		$data["date_free_trial_expire"] = date("Y-m-d h:i:s", strtotime("+7 day", strtotime($data["date_approved"])));
 		if ($owner_id){
-			$this->update($data, "owner_id = ".$owner_id);			
+			$this->update($data, "owner_id = ".$owner_id);
 			return true;
 		}else{
 			return false;
@@ -171,6 +177,8 @@ class App_Owner extends AppModel{
 	 */
 	public function disapprove($owner_id){
 		$data["approved"] = 0;
+		$data["date_approved"] = null;
+		$data["date_free_trial_expire"] = null;
 		if ($owner_id){
 			$this->update($data, "owner_id = ".$owner_id);
 			return true;
@@ -178,6 +186,48 @@ class App_Owner extends AppModel{
 			return false;
 		}
 	
+	}
+	
+	/**
+	 * Checks if owner has sufficient credit
+	 * @param $owner_id
+	 * @return boolean
+	 */
+	public function hasSufficientCredit($owner_id){
+		if ($owner_id){
+			$owner = $this->find($owner_id);
+			return $owner["credits"]>0;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns true if owner is a Bulk Subscriber
+	 * @param $owner_id - The owner
+	 * @return boolean
+	 */
+	public function isBulkSubscriber($owner_id){
+		if ($owner_id){
+			$owner = $this->find($owner_id);
+			return $owner["paying_service_type"]==self::PAYING_SERVICE_TYPE_BULK_SUBSCRIBERS;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns true if owner is a Pay as you go 
+	 * @param $owner_id The owner
+	 * @return boolean
+	 */
+	public function isPayAsYouGo($owner_id){
+		if ($owner_id){
+			$owner = $this->find($owner_id);
+			return $owner["paying_service_type"]==self::PAYING_SERVICE_TYPE_PAY_AS_YOU_GO;
+		}else{
+			return false;
+		}
 	}
 	
 	

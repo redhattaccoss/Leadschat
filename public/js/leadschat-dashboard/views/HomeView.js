@@ -9,7 +9,7 @@ HomeView.prototype.toString = function(){
 			"</h1>";
 	
 	output+="<div class=\"welcome\">";
-		output+="<p><span class=\"welcome-img\"></span><span class=\"welcome-message\">Welcome";
+		output+="<p><span class=\"welcome-img\"></span><span class=\"welcome-message\">Welcome ";
 		output+="to our leadschat environment! You will find all your leads when you click on 'Your Leads' tab in the main navigation. To get back to this page, you can always click on 'Home Screen' navigation item.</span></p>";
 	output+="</div>";
 	

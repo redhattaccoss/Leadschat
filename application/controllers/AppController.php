@@ -109,7 +109,7 @@ abstract class AppController extends Zend_Controller_Action{
 	 * Returns an invalid request JSON data
 	 */
 	protected function _invalidRequest(){
-		return array("result"=>false, "message"=>"Invalid request method");
+		return array("result"=>false, "success"=>false, "message"=>"Invalid request method");
 	}
 }
 

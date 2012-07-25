@@ -1,0 +1,42 @@
+<?php 
+	$owner = $this->owner;
+?>
+
+<header>
+	<div class="navigation-container">
+		<ul class="main-menu">
+			<li><a href="/">HOME</a></li>
+			<li><a href="#">HOW IT WORKS</a></li>
+			<li><a href="#">SERVICE</a></li>
+			<li><a href="/pricing">PRICING</a></li>
+			<li><a href="/contact">CONTACT US</a></li>
+			<li class="spacer"></li>
+			<li class="last"><a href="/owners/logout"><img src="images/logout.png" /><span>LOGOUT</span></a></li>
+		</ul>
+
+
+		<ul id="leads-tab" class="tabs">
+			<li class="selected">Newly Delivered</li>
+			<li class="last">Your Leads</li>
+		</ul>
+	</div>
+	<div class="logo">
+		<img src="images/dashboard-logo.png" />
+	</div>
+	<?php if ($owner["free_trial"]){
+			$days = dateDiff(date("Y-m-d"), $owner["date_free_trial_expire"]);
+			if ($days>1){
+				$days .=" Days";
+			}else{
+				$days .=" Day"; 
+			}
+	?>
+		<div id="trial-advisory-header" class="trial-advisory">
+			You have <span class="days-counter"><?php echo $days?></span> in Your<br /> Free
+			Trial with Unlimited Leads
+		</div>
+	<?php }else{echo $owner["free_trial"];}?>
+
+</header>
+<div class="spacer-top-header"></div>
+<div class="spacer-bottom-header"></div>

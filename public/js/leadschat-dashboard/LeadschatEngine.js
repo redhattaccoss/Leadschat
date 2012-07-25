@@ -21,7 +21,15 @@ LeadschatEngine.prototype.__loadTemplates = function(){
 }
 
 LeadschatEngine.prototype.__events = function(){
+	jQuery("#leads-tab li").click(function(){
+		jQuery("#leads-tab li").removeClass("selected");
+		jQuery(this).addClass("selected");
+	});
 	
+	jQuery("#main-nav li").click(function(){
+		jQuery("#main-nav li").removeClass("selected");
+		jQuery(this).addClass("selected");
+	});
 }
 
 LeadschatEngine.prototype.__renderBaseDashboard = function(){

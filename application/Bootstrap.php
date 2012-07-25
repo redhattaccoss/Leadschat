@@ -124,3 +124,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 }
 
+function dateDiff($startDate, $endDate){
+	$startArry = date_parse($startDate);
+	$endArry = date_parse($endDate);
+	$start_date = gregoriantojd($startArry["month"], $startArry["day"], $startArry["year"]);
+	$end_date = gregoriantojd($endArry["month"], $endArry["day"], $endArry["year"]);
+	return round(($end_date - $start_date), 0);
+}
