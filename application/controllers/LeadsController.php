@@ -2,14 +2,46 @@
 
 class LeadsController extends AppController
 {
+	/**
+	 * @var App_Lead
+	 */
 	private $leadModel;
+	
+	/**
+	 * @var App_Owner
+	 */
+	private $ownerModel;
 	public function init(){
 		$this->leadModel = new App_Lead();
+		$this->ownerModel = new App_Owner();
 		parent::init();
 	}
     
 	public function saveAndSendAction(){
 		$this->saveLead(1);
+	}
+	
+	public function processApproveAction(){
+		if ($this->getRequest()->isXmlHttpRequest()){
+			$lead_id = $this->getRequest()->getPost("lead_id");
+			if ($lead_id){
+				$lead = $this->leadModel->find($lead_id)->toArray();
+				if ($lead){
+					$owner_id = $lead["owner_id"];
+					if ($this->ownerModel->hasSufficientCredit($owner_id)&&$this->ownerModel->isBulkSubscriber($owner_id)){
+						$this->leadModel->approve($lead_id);
+					}else{
+						$this->view->result = array("success"=>false, "error"=>"Has no sufficient credit");
+					}
+				}
+			}else{
+				$this->view->result = $this->_invalidRequest();
+			}
+		}else{
+			$this->view->result = $this->_invalidRequest();
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
 	}
 	
 	
@@ -69,30 +101,25 @@ class LeadsController extends AppController
 		}		
 	}
 	
-	
-	public function getUserCountLeadsAction(){
-		$owner = UserMap::getUser();
-		if ($owner["level"]==UserMap::$OWNER){
-			$this->leadModel = new App_Lead();
-			$owner_id = $owner["owner_id"];
-			$date_from = $this->getRequest()->getQuery("date_from");
-			$date_to = $this->getRequest()->getQuery("date_to");
-			$counters = $this->leadModel->getCacheLeadsDailyCounter($owner_id, $date_from, $date_to);			
-			$this->view->result = array("success"=>true, "counters"=>$counters);
+	public function getLeadsOfOwnerAction(){
+		$owner_id =$this->_request->getQuery("owner_id");
+		if ($owner_id){
+			$leads = $this->leadModel->getAll($owner_id);
+			$this->view->result = array("success"=>true, "leads"=>$leads);
 		}else{
-			$this->view->result = array("success"=>false);
+			$this->view->result = $this->_invalidRequest();
 		}
-		$this->_helper->layout->setLayout("plain");
-		$this->_helper->viewRenderer("json");
 	}
+	
 	
 	public function cacheAction(){
 		$lead_id = $this->_request->getQuery("lead_id");
-		$leadModel = new App_Lead();
-		if ($leadModel->cacheLead($lead_id)){
-			$this->view->result = array("success"=>true);
-		}else{
-			$this->view->result = array("success"=>false);
+		if ($lead_id){
+			if ($this->leadModel->cacheLead($lead_id)){
+				$this->view->result = array("success"=>true);
+			}else{
+				$this->view->result = array("success"=>false);
+			}
 		}
 		
 		$this->_helper->layout->setLayout("plain");

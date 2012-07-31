@@ -5,7 +5,7 @@ Ext.Loader.setPath('Ext.ux', '../examples/ux');
 
 Ext.application({
 	name:"Leadschat",
-	appFolder:"../public/js/app",
+	appFolder:"../public/js/admin",
 	autoCreateViewport: true,
 	controllers:[
 	             "Owners", "Main"

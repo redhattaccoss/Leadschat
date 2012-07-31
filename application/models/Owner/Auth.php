@@ -18,6 +18,12 @@ class Owner_Auth extends AuthenticationModel implements Authentication{
 				$owner = Converter::object_to_array($owner);
 				$session->owner_id = $owner["owner_id"];
 				$session->owner = $owner;
+				
+				
+				$dataToLog["owner_name"] = $owner["first_name"]." ".$owner["last_name"];
+				$dataToLog["owner_id"] = $owner["owner_id"];
+				
+				Mongo_Logger::logEvent($dataToLog, Mongo_Logs_LogFactory::LoginOwner, Mongo_Interface::LOGS);
 				if ($rememberMe){
 					$cookie = new Zend_Http_Cookie("userid", $sessionAgent->owner_id, $_SERVER["SERVER_NAME"]); 
 				}
@@ -36,6 +42,10 @@ class Owner_Auth extends AuthenticationModel implements Authentication{
 	}
 	
 	public function logout(){
+		$owner = UserMap::getUser();
+		$dataToLog["owner_name"] = $owner["first_name"]." ".$owner["last_name"];
+		$dataToLog["owner_id"] = $owner["owner_id"];
+		Mongo_Logger::logEvent($dataToLog, Mongo_Logs_LogFactory::LogoutOwer, Mongo_Interface::LOGS);
 		$session = new Zend_Session_Namespace("LeadsChat_Owner_Auth");
 		$session->unsetAll();
 	}

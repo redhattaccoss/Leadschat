@@ -92,7 +92,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));
 		Zend_Loader::loadClass("Owner_ResetPassword", array($forms));
+		
+		//Boot all MongoDb Files
 		Zend_Loader::loadClass("Db_Mongo", array($models));
+		Zend_Loader::loadClass("Mongo_Interface", array($models));
+		Zend_Loader::loadClass("Mongo_Logger", array($models));
+		Zend_Loader::loadClass("Mongo_Utility", array($models));
+		Zend_Loader::loadClass("Mongo_Logs_Log", array($models));
+		Zend_Loader::loadClass("Mongo_Logs_LogFactory", array($models));
+		Zend_Loader::loadClass("Mongo_Logs_LoginOwner", array($models));
+		Zend_Loader::loadClass("Mongo_Logs_LogoutOwner", array($models));
+		
+		
+		
     	Zend_Loader::loadClass("UserMap", array($models));
     	Zend_Loader::loadClass("Acl", array($models));
     	Zend_Loader::loadClass("Mailer", array($models));
