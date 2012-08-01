@@ -254,7 +254,7 @@ class AgentsController extends AppController
     	$db = $this->db;
     	if ($this->auth->isAuthenticated()){
     		if (UserMap::getRole()==UserMap::$ADMIN){
-    			header("Location:/owners/admin-main/");
+    			header("Location:/admin/");
     		}else{
     			header("Location:/agents/dashboard/");
     		}

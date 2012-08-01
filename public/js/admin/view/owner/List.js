@@ -39,6 +39,7 @@ Ext.define("Leadschat.view.owner.List", {
 			editor: {
                 xtype: 'checkboxfield',
             },
+            align:"center",
             renderer:function(value, options, row){
             	if (row.get("approved")){
             		return "Y";
@@ -46,6 +47,27 @@ Ext.define("Leadschat.view.owner.List", {
             		return "N";
             	}
             }
+		},
+		{
+            align:"center",
+			header:"Action",
+			xtype:"actioncolumn",
+			items:[
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard.png"
+			       },
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_delete.png"
+			       },
+
+			       {
+			    	   xtype:"spacer"
+			       },
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_edit.png"
+			       },
+			]
+		
 		}
 		
 		

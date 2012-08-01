@@ -7,6 +7,7 @@ Ext.define("Leadschat.view.Navigation", {
         children: [
             {
                 text: 'Owners',
+                icon:"/js/ext/examples/shared/icons/fam/group.png",
                 expanded:true,
                 children: [
                    {
@@ -20,6 +21,7 @@ Ext.define("Leadschat.view.Navigation", {
                 ]
             },
             {
+            	icon:"/js/ext/examples/shared/icons/fam/table_multiple.png",
                 text: 'Leads',
                 expanded:true,
                 children: [
@@ -34,11 +36,16 @@ Ext.define("Leadschat.view.Navigation", {
                    {
                        text: 'Expired leads',
                        leaf: true
-                   }
+                   },
+                   {
+                       text: 'Archived leads',
+                       leaf: true
+                   },                   
                 ]
             },
             {
             	text:"Visitors and Chats",
+            	icon:"/js/ext/examples/shared/icons/fam/user_suit.png",
             	expanded:true,
             	children: [
                    {
@@ -53,6 +60,7 @@ Ext.define("Leadschat.view.Navigation", {
             },
             {
             	text: "Administration",
+            	icon:"/js/ext/examples/shared/icons/fam/database.png",
             	expanded:true,
             	children:[
             	     {

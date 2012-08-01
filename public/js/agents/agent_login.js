@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 			data = jQuery.parseJSON(data);
 			if (data.result){
 				if (data.level=="admin"){
-					window.location.href = "/owners/admin-main";
+					window.location.href = "/admin/";
 				}else{
 					window.location.href = "/agents/dashboard";	
 				}

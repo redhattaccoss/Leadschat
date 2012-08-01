@@ -102,6 +102,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("Mongo_Logs_LogFactory", array($models));
 		Zend_Loader::loadClass("Mongo_Logs_LoginOwner", array($models));
 		Zend_Loader::loadClass("Mongo_Logs_LogoutOwner", array($models));
+		Zend_Loader::loadClass("Mongo_Model", array($models));
+		Zend_Loader::loadClass("Mongo_Accounts_Model", array($models));
+		Zend_Loader::loadClass("Mongo_Accounts_Account", array($models));
 		
 		
 		
