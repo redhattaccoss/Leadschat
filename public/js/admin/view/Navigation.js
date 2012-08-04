@@ -11,11 +11,11 @@ Ext.define("Leadschat.view.Navigation", {
                 expanded:true,
                 children: [
                    {
-                       text: 'Newly Registered',
-                       leaf: true
+                	   text:"Manage Owners",
+                	   leaf:true
                    },
                    {
-                	   text:"Manage Owners",
+                	   text:"Manage Accounts",
                 	   leaf:true
                    }
                 ]

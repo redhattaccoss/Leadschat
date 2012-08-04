@@ -9,6 +9,9 @@ Ext.define("Leadschat.controller.Owners", {
 	views:[
 	    "owner.List",
 	    "owner.Main",
-	    "owner.Toolbar"
+	    "owner.Toolbar",
+	    "owner.Window",
+	    "owner.Tab",
+	    
 	]
 });

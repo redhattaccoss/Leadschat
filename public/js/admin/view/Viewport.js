@@ -7,7 +7,9 @@ Ext.define("Leadschat.view.Viewport", {
 		"Leadschat.view.owner.List",
 		"Leadschat.view.owner.Main",
 		"Leadschat.view.owner.Toolbar",
-		
+		"Leadschat.view.owner.Window",
+		"Leadschat.view.owner.Tab",
+		"Leadschat.view.owner.BasicInformation",
 	],
 	layout:"fit",
 	initComponent:function(){
@@ -38,7 +40,6 @@ Ext.define("Leadschat.view.Viewport", {
 				{
 					xtype:"main",
 					columnWidth:"0.8",
-					layout:"fit"
 				}
 			],
 			width:"100%",

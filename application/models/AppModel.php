@@ -95,5 +95,9 @@ abstract class AppModel extends Zend_Db_Table_Abstract{
 	}
 	
 	
+	public function getCountSQL(){
+		return $this->getAdapter()->fetchOne("SELECT FOUND_ROWS()");
+	}
+	
 }
 

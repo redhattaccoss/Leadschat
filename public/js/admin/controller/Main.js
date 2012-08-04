@@ -45,8 +45,13 @@ Ext.define("Leadschat.controller.Main", {
     },
     navigate: function(tree, record) {
         var label = record.get("text");
+        var container =tree.up("viewport").down("main").getLayout();
         if (label=="Logout"){
         	location.href="/agents/logout";
+        }else if (label=="Manage Accounts"){
+        	container.setActiveItem("test");
+        }else if (label=="Manage Owners"){
+        	container.setActiveItem("owner_main");
         }
     }
 });

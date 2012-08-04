@@ -14,7 +14,7 @@ class Db_Db{
 		*/
 		$connParams = array("host" => "localhost",
 						"username" => "root",
-						"password" => "",
+						"password" => "slasherpix01",
 						"dbname" => "leadschat");
 		
 		$db = new Zend_Db_Adapter_Pdo_Mysql($connParams);
@@ -25,7 +25,7 @@ class Db_Db{
 	public static function getConnectionParameters(){
 		return array("host" => "localhost",
 						"username" => "root",
-						"password" => "",
+						"password" => "slasherpix01",
 						"dbname" => "leadschat");
 		
 		/*return array("host" => "localhost",

@@ -29,14 +29,14 @@ class OwnersController extends AppController{
 	 * List of owners
 	 */
 	public function processListAction(){
-		$result = $this->ownerModel->listAll($this->_request->getQuery["page"], $this->_request->getQuery["count"], true);
+		$result = $this->ownerModel->listAll($this->_request->getParam("page"), $this->_request->getParam("limit"), true);
 		if (!empty($result)){
 			foreach($result as $key=>$value){
 				$result[$key]["selected"] = false;
 			}
 		}
 		
-		$this->view->result = array("result"=>true, "dataLoaded"=>$result);
+		$this->view->result = array("success"=>true, "dataLoaded"=>$result, "total"=>$this->ownerModel->getCountSQL());
 		$this->_helper->layout->setLayout("plain");
 		$this->_helper->viewRenderer("json");
 	}

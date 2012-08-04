@@ -2,11 +2,51 @@ Ext.define("Leadschat.view.owner.List", {
 	extend:"Ext.grid.Panel",
 	title:"Registered Owners",
 	alias:"widget.owner_list",
-	selType: "rowmodel",
+	selModel: Ext.create('Ext.selection.CheckboxModel'),
 	columns:[
+	    {
+	    	header:"Owner #",
+	    	dataIndex:"owner_id",
+	    	locked:true,
+	    	width:50
+	    },
+	    {
+            align:"center",
+			header:"Action",
+			xtype:"actioncolumn",
+			locked:true,
+			items:[
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard.png",
+			    	   name:"click",
+			    	   handler: function(grid, rowIndex, colIndex) {
+			    		   var record = grid.getStore().getAt(rowIndex);
+			    		   var window = Ext.create("Leadschat.view.owner.Window",{
+			    			  title:record.get("first_name")+"'s Information" 
+			    		   });
+			    		   
+			    		   window.show();
+			    	   }
+			       },
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_delete.png",
+			    	   handler: function(grid, rowIndex, colIndex) {
+			    		   
+			    	   }
+			       },
+			       {
+			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_edit.png",
+			    	   handler: function(grid, rowIndex, colIndex) {
+			    		   
+			    	   }
+			       },
+			]
+		
+		},
 		{
 			header:"Client",
 			dataIndex:"first_name",
+			locked:true,
 			width:150,
 			renderer:function(value, options, row){
 				return row.get("first_name")+" "+row.get("last_name");
@@ -22,7 +62,8 @@ Ext.define("Leadschat.view.owner.List", {
 			header:"Timezone",
 			dataIndex:"timezone_id",
 			renderer:function(value, options, row){
-				return row.raw.timezone.name;
+				var timezone = row.get("timezone");
+				return timezone.name;
 			}
 		},
 		{
@@ -47,28 +88,8 @@ Ext.define("Leadschat.view.owner.List", {
             		return "N";
             	}
             }
-		},
-		{
-            align:"center",
-			header:"Action",
-			xtype:"actioncolumn",
-			items:[
-			       {
-			    	   icon:"/js/ext/examples/shared/icons/fam/vcard.png"
-			       },
-			       {
-			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_delete.png"
-			       },
-
-			       {
-			    	   xtype:"spacer"
-			       },
-			       {
-			    	   icon:"/js/ext/examples/shared/icons/fam/vcard_edit.png"
-			       },
-			]
-		
 		}
+		
 		
 		
 	],	
@@ -86,9 +107,10 @@ Ext.define("Leadschat.view.owner.List", {
 		this.callParent(arguments);
 	},
 	plugins: [
+	       
           Ext.create('Ext.grid.plugin.RowEditing', {
-              clicksToEdit: 0
+              clicksToEdit: 2
           })
       ],
-	height:600,
+	height:400,
 });

@@ -7,10 +7,6 @@ Ext.define("Leadschat.model.Timezone", {
 	        {name:'operational', type:'string'},
 	        {name:'flag_icon', type:'string'}
 	],
-	associations:[
-	  {type:"hasOne", model:"TimezoneGroup", name:"timezone_group"},
-	],
-	belongsTo:"Owner",
 	hasOne:[{model:"TimezoneGroup", name:"timezone_group"}]
 
 })

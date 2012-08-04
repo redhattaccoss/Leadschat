@@ -22,7 +22,11 @@ Ext.define("Leadschat.model.Owner", {
 	     {name: 'email_webmaster', type:'string'},
 	     {name: 'phone_webmaster', type:'string'},
 	     {name: 'date_created', type:'string'},
-	     {name: 'date_updated', type:'string'}
+	     {name: 'date_updated', type:'string'},
+	     {name: 'timezone', type:'auto'}
 	 ],
-	 hasOne: [{model:"Timezone", name:"timezone"}]
+	 associations:[
+	     {type:"hasOne", model:"Timezone", primaryKey: 'id', foreignKey: 'timezone_id'}          
+	 ],
+	 
 })

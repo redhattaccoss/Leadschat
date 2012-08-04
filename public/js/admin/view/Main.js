@@ -4,7 +4,12 @@ Ext.define("Leadschat.view.Main", {
 	layout:"card",
 	items:[
 		{
-			xtype:"owner_main"
+			xtype:"owner_main",
+			id:"owner_main"
+		},{
+			html:"Wazzup!!!",
+			id:"test"
 		}
+		
 	]
 })

@@ -7,7 +7,8 @@ Ext.define("Leadschat.store.Owners", {
          url: '/owners/process-list',
          reader: {
              type: 'json',
-             root: 'dataLoaded'
+             root: 'dataLoaded',
+             totalProperty:"total"
          }
     },
     storeId:"ownersListStore",

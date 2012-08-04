@@ -37,15 +37,15 @@ class App_Owner extends AppModel{
 	
 	/**
 	 * List all owners ...
-	 * @param $page - The page number
-	 * @param $count - The number of count
+	 * @param $page The page number
+	 * @param $count The number of count
 	 * @param $detailed - Detailed view
 	 */
 	public function listAll($page, $count, $detailed = false){
 		
 		$select = $this->getAdapter()->select();
 		
-		$sql = $select->from($this->_name, array("owner_id", "first_name", "last_name", "website",
+		$sql = $select->from($this->_name, array(new Zend_Db_Expr("SQL_CALC_FOUND_ROWS owner_id"), "first_name", "last_name", "website",
 											  "company", "email", "username", 
 											  "activated", "credits", "owner_type",
 											  "timezone_id", "mobile",
@@ -53,8 +53,7 @@ class App_Owner extends AppModel{
 											  "email_webmaster", "phone_webmaster",
 											  "date_created", "date_updated"))
 							  ->joinInner(array("no"=>"number_of_hits"), "no.id = owners.number_of_hit_id", array("no.name AS number_hits"))
-							  ->order("date_created DESC");
-							  
+							  ->order("date_created DESC");	  
 		if ($page!=null&&$count!=null){
 			$sql = $sql->limitPage($page, $count);
 		}else{
