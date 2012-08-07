@@ -27,6 +27,7 @@ Ext.define("Leadschat.view.owner.List", {
 					    			  title:record.get("first_name")+"'s Information",
 					    			  record:record
 					    		   });
+			    				   window.down("owner_basicinformation").setLabel(record);
 			    				   window.down("form").loadRecord(record);
 					    		   window.show();	   
 			    			   }

@@ -1,10 +1,10 @@
 Ext.define("Leadschat.controller.Owners", {
 	extend:"Ext.app.Controller",
 	stores:[
-	     "Owners", "OwnerTypes"
+	     "Owners", "OwnerTypes", "NumberOfHits", "Timezones"
 	],
 	models:[
-	     "Owner", "Timezone", "TimezoneGroup"
+	     "Owner", "Timezone", "TimezoneGroup", "NumberOfHit"
 	],
 	views:[
 	    "owner.List",

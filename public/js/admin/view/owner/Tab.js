@@ -3,8 +3,8 @@ Ext.define("Leadschat.view.owner.Tab", {
 	layout:"fit",
 	alias:"widget.owner_tab",
 	height:590,
-	width:1000,
-	autoScroll:true,
+	width:980,
+	autoScroll:false,
 	initComponent:function(){
 		this.items = [
 		       {
@@ -16,7 +16,13 @@ Ext.define("Leadschat.view.owner.Tab", {
 		    	   ]
 		       },
 		       {
-		    	   title:"Login Credentials"  
+		    	   title:"Login Credentials",
+		    	   items:[
+		    	          {
+		    	        	  xtype:"owner_logincredentials"
+		    	          }
+		    	   ]
+		       
 		       },
 		       {
 		    	   title:"Accounts"

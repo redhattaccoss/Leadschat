@@ -1,7 +1,7 @@
 Ext.define("Leadschat.model.Timezone", {
 	extend:"Ext.data.Model",
 	fields:[
-	        {name:'id', type:'int'},
+	        {name:'timezone_id', type:'int'},
 	        {name:'name', type:'string'},
 	        {name:'timezone_group_id', type:'int'},
 	        {name:'operational', type:'string'},

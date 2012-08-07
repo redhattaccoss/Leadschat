@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.x-panel-body .owner_information_header{
+	font-size:20px;
+	font-weight:bold;
+	margin:10px 0 10px 10px;
+}

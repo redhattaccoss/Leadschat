@@ -6,27 +6,26 @@ Ext.define("Leadschat.view.owner.BasicInformation", {
 		xtype:"fieldset"
 	},
 	layout:"column",
-	record:null,
 	setLabel:function(record){
 		var component = Ext.ComponentQuery.query("panel[name=header_basic_info_owner]");
 		component = component[0];
-		//component.dom.innerHtml = "<h1 class='owner_information_header'> Lead # "+record.get("owner_id")+"</h1>";
+		component.html = "<h1 class='owner_information_header'> Lead # "+record.get("owner_id")+"</h1>";
 	},
 	initComponent:function(){
-		console.log(this.record)
 		this.items = [
 			    {
 			    	columnWidth:1,
 			    	html:"<h1 class='owner_information_header'> Lead # </h1>",
 			    	name:"header_basic_info_owner",
-			    	xtype:"panel"
+			    	xtype:"panel",
+			    	border:false
 			    },
 			    {
 			    	xtype:"fieldset",
 			    	title:"Contact Information",
 			    	defaults:{
 			    		xtype:"textfield",
-			    		width:250
+			    		width:400
 			    	},
 			    	columnWidth:0.5,
 			    	items:[
@@ -105,7 +104,7 @@ Ext.define("Leadschat.view.owner.BasicInformation", {
 			    	title:"Business Information",
 			    	defaults:{
 			    		xtype:"textfield",
-			    		width:250
+			    		width:400
 			    	},
 			    	columnWidth:0.5,
 			    	items:[
@@ -123,11 +122,37 @@ Ext.define("Leadschat.view.owner.BasicInformation", {
 						},
 						{
 							name:"timezone_id",
-							fieldLabel:"Operational Timezone"
+							fieldLabel:"Operational Timezone",
+							xtype:"combobox",
+							store:"Timezones",
+							valueField:"timezone_id",
+							tpl: Ext.create('Ext.XTemplate',
+							        '<tpl for=".">',
+							            '<div class="x-boundlist-item">{name}</div>',
+							        '</tpl>'
+							),
+							displayTpl: Ext.create('Ext.XTemplate',
+							        '<tpl for=".">',
+							            '{name}',
+							        '</tpl>'
+							)
 						},
 						{
 							name:"number_of_hit_id",
-							fieldLabel:"Number of Hits per day"
+							fieldLabel:"Number of Hits per day",
+							xtype:"combobox",
+							store:"NumberOfHits",
+							valueField:"id",
+							tpl: Ext.create('Ext.XTemplate',
+							        '<tpl for=".">',
+							            '<div class="x-boundlist-item">{name}</div>',
+							        '</tpl>'
+							),
+							displayTpl: Ext.create('Ext.XTemplate',
+							        '<tpl for=".">',
+							            '{name}',
+							        '</tpl>'
+							)
 						},
 						{
 							name:"fullname_webmaster",

@@ -8,6 +8,8 @@ class AdminController extends AppController{
 		$this->view->headTitle("Leads Chat - Admin Home");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/ext/ext-debug.js", "text/javascript");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/admin.js", "text/javascript");
+		
 		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/ext/resources/css/ext-all.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/admin/admin.css");
 	}
 }
