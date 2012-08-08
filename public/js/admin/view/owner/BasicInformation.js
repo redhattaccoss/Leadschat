@@ -11,6 +11,7 @@ Ext.define("Leadschat.view.owner.BasicInformation", {
 		component = component[0];
 		component.html = "<h1 class='owner_information_header'> Lead # "+record.get("owner_id")+"</h1>";
 	},
+	bodyPadding:5, 
 	initComponent:function(){
 		this.items = [
 			    {
@@ -88,7 +89,7 @@ Ext.define("Leadschat.view.owner.BasicInformation", {
 							fieldLabel:"Postal"
 						},
 						{
-							name:"country",
+							name:"country_id",
 							fieldLabel:"Country"
 						}
 						 

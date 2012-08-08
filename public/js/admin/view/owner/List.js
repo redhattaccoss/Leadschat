@@ -51,6 +51,21 @@ Ext.define("Leadschat.view.owner.List", {
 		
 		},
 		{
+			header:"Approved",
+			dataIndex:"approved",
+			editor: {
+                xtype: 'checkboxfield',
+            },
+            align:"center",
+            renderer:function(value, options, row){
+            	if (row.get("approved")){
+            		return "Y";
+            	}else{
+            		return "N";
+            	}
+            }
+		},
+		{
 			header:"Client",
 			dataIndex:"first_name",
 			locked:true,
@@ -80,22 +95,8 @@ Ext.define("Leadschat.view.owner.List", {
 		{
 			header:"Owner Type",
 			dataIndex:"owner_type"
-		},
-		{
-			header:"Approved",
-			dataIndex:"approved",
-			editor: {
-                xtype: 'checkboxfield',
-            },
-            align:"center",
-            renderer:function(value, options, row){
-            	if (row.get("approved")){
-            		return "Y";
-            	}else{
-            		return "N";
-            	}
-            }
 		}
+		
 		
 		
 		

@@ -8,7 +8,8 @@ Ext.define("Leadschat.view.owner.Main", {
 		    	docked:"top"
 		    },
 		    {
-		    	xtype:"owner_list"
+		    	xtype:"owner_list",
+		    	name:"owner_list"
 		    }
 		    
 		]

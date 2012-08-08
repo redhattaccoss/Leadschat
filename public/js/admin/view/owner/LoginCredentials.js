@@ -5,11 +5,12 @@ Ext.define("Leadschat.view.owner.LoginCredentials", {
 	defaults:{
 		xtype:"fieldset"
 	},
+	bodyPadding:5, 
 	initComponent:function(){
 		this.items = [
                {
 			    	html:"<h1 class='owner_information_header'>Generate Password</h1>",
-			    	name:"header_basic_info_owner",
+			    	name:"header_login_info_owner",
 			    	xtype:"panel",
 			    	border:false
 			    },

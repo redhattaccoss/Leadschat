@@ -4,11 +4,16 @@ Ext.define("Leadschat.view.owner.Window", {
 	height:600,
 	width:1000,
 	resizable:false,
-	items:[
-	       {
-	    	   xtype:"owner_tab"
-	       }
-	],
+	record:null,
+	initComponent:function(){
+		this.items = [
+		              Ext.create("Leadschat.view.owner.Tab", {
+		            	  record:this.record
+		              })
+		];
+		
+		this.callParent(arguments);
+	},
 	buttons:[
 	         {
 	        	 text:"Save",

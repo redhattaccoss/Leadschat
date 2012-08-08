@@ -30,7 +30,7 @@ Ext.define("Leadschat.model.Owner", {
 		type:"ajax",
 		 api: {
 		    create  : '/owners/new',
-		    read    : '/owners/get?id=',
+		    read    : '/owners/get',
 		    update  : '/owners/update',
 		    destroy : '/owners/destroy_action'
 		}

@@ -5,6 +5,7 @@ Ext.define("Leadschat.view.owner.Tab", {
 	height:590,
 	width:980,
 	autoScroll:false,
+	record:null,
 	initComponent:function(){
 		this.items = [
 		       {
@@ -18,9 +19,9 @@ Ext.define("Leadschat.view.owner.Tab", {
 		       {
 		    	   title:"Login Credentials",
 		    	   items:[
-		    	          {
-		    	        	  xtype:"owner_logincredentials"
-		    	          }
+		    	          Ext.create("Leadschat.view.owner.LoginCredentials", {
+		    	        	  record:this.record
+		    	          })
 		    	   ]
 		       
 		       },

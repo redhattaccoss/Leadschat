@@ -381,6 +381,24 @@ class OwnersController extends AppController{
 	}
 	
 	
+
+	public function multipleApproveAction(){
+		$ids = $this->getRequest()->getParam("owner_ids");
+		if ($ids){
+			foreach($ids as $id){
+				if ($id){
+					$this->ownerModel->approve($id);
+				}
+			}
+			$this->view->result = array("success"=>true);
+		}else{
+			$this->view->result = $this->_invalidRequest();
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
+	}
+	
+	
 	/**
 	 * Bootstrap dashboard Action
 	 */
@@ -388,10 +406,6 @@ class OwnersController extends AppController{
 		$owner = UserMap::getUser();
 		
 		if ($owner){
-			
-			
-			
-			
 			//load all notifications
 			/*
 			//load all leads per date of owner

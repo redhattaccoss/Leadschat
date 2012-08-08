@@ -268,6 +268,7 @@ class AgentsController extends AppController
     	$this->view->headLink()->appendStylesheet($this->baseUrl."/css/agent/login.css");
     }
     
+    
     public function processLoginAction(){
     	$sessionAgent = new Zend_Session_Namespace("LeadsChat_Auth");   
         if (!$sessionAgent->agent_id&&$this->_request->isXmlHttpRequest()){

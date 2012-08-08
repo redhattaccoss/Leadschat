@@ -88,6 +88,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_NumberOfHit", array($models));
 		Zend_Loader::loadClass("App_Member", array($models));
 		Zend_Loader::loadClass("App_Address", array($models));
+		Zend_Loader::loadClass("App_Country", array($models));
+		
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));
