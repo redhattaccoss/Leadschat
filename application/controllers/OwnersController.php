@@ -359,6 +359,26 @@ class OwnersController extends AppController{
 		$this->_helper->viewRenderer("json");
 	}
 	
+	/**
+	 * Get owner using id
+	 */
+	public function getAction(){
+		$owner_id = $this->getRequest()->getParam("id");
+		
+		$owner = $this->ownerModel->find($owner_id);
+		if ($owner->count()==1){
+			$owner = $owner->toArray();
+			$owner = $owner[0];
+			unset($owner["password"]);
+			unset($owner["hashcode"]);
+			$owner["address"] = $this->ownerModel->getAddressModel()->getAddressByOwner($owner["owner_id"]);
+			$this->view->result = $owner;
+		}else{
+			$this->view->result = array();
+		}
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");
+	}
 	
 	
 	/**

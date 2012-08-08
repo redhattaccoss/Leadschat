@@ -21,11 +21,17 @@ Ext.define("Leadschat.view.owner.List", {
 			    	   name:"click",
 			    	   handler: function(grid, rowIndex, colIndex) {
 			    		   var record = grid.getStore().getAt(rowIndex);
-			    		   var window = Ext.create("Leadschat.view.owner.Window",{
-			    			  title:record.get("first_name")+"'s Information" 
-			    		   });
+			    		   Ext.ModelManager.getModel("Leadschat.model.Owner").load(record.get("owner_id"), {
+			    			   success:function(user){
+			    				   var window = Ext.create("Leadschat.view.owner.Window",{
+					    			  title:record.get("first_name")+"'s Information",
+					    			  record:record
+					    		   });
+			    				   window.down("form").loadRecord(record);
+					    		   window.show();	   
+			    			   }
+			    		   })
 			    		   
-			    		   window.show();
 			    	   }
 			       },
 			       {

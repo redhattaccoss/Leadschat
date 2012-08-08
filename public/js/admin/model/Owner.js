@@ -23,8 +23,19 @@ Ext.define("Leadschat.model.Owner", {
 	     {name: 'phone_webmaster', type:'string'},
 	     {name: 'date_created', type:'string'},
 	     {name: 'date_updated', type:'string'},
-	     {name: 'timezone', type:'auto'}
+	     {name: 'timezone', type:'auto'},
+	     {name: "address", type:"auto"}
 	 ],
+	 proxy:{
+		type:"ajax",
+		 api: {
+		    create  : '/owners/new',
+		    read    : '/owners/get?id=',
+		    update  : '/owners/update',
+		    destroy : '/owners/destroy_action'
+		}
+		 
+	 },
 	 associations:[
 	     {type:"hasOne", model:"Timezone", primaryKey: 'id', foreignKey: 'timezone_id'}          
 	 ],

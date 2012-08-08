@@ -3,9 +3,23 @@ class App_Owner extends AppModel{
 	protected $_name = "owners";
 	protected $_primary = "owner_id";
 	
+	
+	private $addressModel = null;
 	const PAYING_SERVICE_TYPE_PAY_AS_YOU_GO = "PAY AS YOU GO";
 	const PAYING_SERVICE_TYPE_BULK_SUBSCRIBERS = "BULK SUBSCRIBERS";
 	
+	public function init(){
+		parent::init();
+		$this->addressModel = new App_Address();
+	}
+	
+	/**
+	 * Return the Address Model
+	 * @return App_Address
+	 */
+	public function getAddressModel(){
+		return $this->addressModel;
+	}
 	
 	/**
 	 * Registers a new owner ...
@@ -228,6 +242,8 @@ class App_Owner extends AppModel{
 			return false;
 		}
 	}
+	
+	
 	
 	
 	

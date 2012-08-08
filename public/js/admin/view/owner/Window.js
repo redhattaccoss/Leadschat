@@ -1,8 +1,8 @@
 Ext.define("Leadschat.view.owner.Window", {
 	extend:"Ext.window.Window",
 	alias:"widget.owner_window",
-	height:450,
-	width:800,
+	height:600,
+	width:1000,
 	items:[
 	       {
 	    	   xtype:"owner_tab"

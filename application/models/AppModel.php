@@ -99,5 +99,14 @@ abstract class AppModel extends Zend_Db_Table_Abstract{
 		return $this->getAdapter()->fetchOne("SELECT FOUND_ROWS()");
 	}
 	
+	public function get($id){
+		$data = $this->find($id);
+		if (is_null($data)){
+			$data = $data->toArray();
+			return $data[0];
+		}else{
+			return array();
+		}
+	}
 }
 
