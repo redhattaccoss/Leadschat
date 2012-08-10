@@ -8,7 +8,7 @@ Ext.application({
 	appFolder:"../public/js/admin",
 	autoCreateViewport: true,
 	controllers:[
-	             "Owners", "Main"
+	             "Owners", "Main", "Accounts", "Agents"
 	],
 	launch:function(){
 		

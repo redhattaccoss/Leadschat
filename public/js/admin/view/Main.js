@@ -6,9 +6,11 @@ Ext.define("Leadschat.view.Main", {
 		{
 			xtype:"owner_main",
 			id:"owner_main"
-		},{
-			html:"Wazzup!!!",
-			id:"test"
+		},
+
+		{
+			xtype:"agents_main",
+			id:"agents_main"
 		}
 		
 	]

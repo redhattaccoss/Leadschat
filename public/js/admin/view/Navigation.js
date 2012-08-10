@@ -64,51 +64,20 @@ Ext.define("Leadschat.view.Navigation", {
             	expanded:true,
             	children:[
             	     {
-            	    	 text: 'Call Center',
-            	    	 expanded:true,
-            	    	 children:[
-            	    	           {
-            	    	        	  text:"Manage Call Centers",
-            	    	        	  leaf:true
-            	    	           },
-            	    	           {
-            	    	        	   text:"Add New Call Center",
-            	    	        	   leaf:true   
-            	    	           },
-            	    	 ]
+            	    	 text: 'Manage Call Centers',
+            	    	 leaf:true
             	     },
             	     {
-            	    	 text: 'Agents',
-            	    	 expanded:true,
-            	    	 children:[
-            	    	           {
-            	    	        	  text:"Manage Agents",
-            	    	        	  leaf:true
-            	    	           },
-            	    	           {
-            	    	        	   text:"Register an Agent",
-            	    	        	   leaf:true   
-            	    	           },
-            	    	 ]
+	    	        	  text:"Manage Agents",
+	    	        	  leaf:true
             	     },
             	     {
-            	    	text:"Schedules",
-            	    	expanded:true,
-           	    	 	children:[
-           	    	 	          {
-           	    	 	        	text:"Manage Schedules",
-           	    	 	        	leaf:true
-           	    	 	          }
-           	    	 	]
+	    	 	        	text:"Manage Schedules",
+	    	 	        	leaf:true
             	     },
             	     {
-            	    	 text:"Invoices",
-            	    	 children:[
-            	    	           {
-            	    	        	   text:"Manage Invoices",
-            	    	        	   leaf:true
-            	    	           }
-            	    	 ]
+	    	        	   text:"Manage Invoices",
+	    	        	   leaf:true
             	     }
             	          
             	]

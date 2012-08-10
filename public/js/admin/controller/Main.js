@@ -31,8 +31,6 @@ Ext.define("Leadschat.controller.Main", {
     	}else{
     		url = "/owners/process-disapprove";
     	}
-    	
-
 		Ext.Ajax.request({
 			url:url,
 			params:{
@@ -49,9 +47,11 @@ Ext.define("Leadschat.controller.Main", {
         if (label=="Logout"){
         	location.href="/agents/logout";
         }else if (label=="Manage Accounts"){
-        	container.setActiveItem("test");
+        	//container.setActiveItem("test");
         }else if (label=="Manage Owners"){
         	container.setActiveItem("owner_main");
+        }else if (label=="Manage Agents"){
+        	container.setActiveItem("agents_main");
         }
     }
 });

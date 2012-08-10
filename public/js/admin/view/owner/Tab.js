@@ -26,7 +26,14 @@ Ext.define("Leadschat.view.owner.Tab", {
 		       
 		       },
 		       {
-		    	   title:"Accounts"
+		    	   title:"Accounts",
+		    	   items:[
+		    	          {
+		    	        	  xtype:"account_information"
+		    	          }
+		    	          
+		    	   ]
+		       
 		       },
 		       {
 		    	   title:"Lead History"

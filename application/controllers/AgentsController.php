@@ -11,6 +11,8 @@ class AgentsController extends AppController
 	
 	private $appChatRequestModel;
 	
+	private $agentModel;
+	
     public function init()
     {
         /* Initialize action controller here */
@@ -20,6 +22,7 @@ class AgentsController extends AppController
     	$this->chatSessionModel =  new Chat_Session($this->db);
     	$this->appChatRequestModel = new App_ChatRequest();
     	$this->leadModel = new App_Lead();
+    	$this->agentModel = new App_Agent();
     }
 
     public function loadAcceptedChatRequestsAction(){
@@ -305,6 +308,28 @@ class AgentsController extends AppController
     	$this->view->headScript()->appendFile($this->baseUrl."/js/agents/dashboard.js", "text/javascript");
     	$this->view->headLink()->prependStylesheet($this->baseUrl."/css/agent/dashboard.css");
     	$this->_helper->layout->setLayout("agent-portal");        
+    }
+    
+    
+    public function listAction(){
+    	$agents = $this->agentModel->listAgents();
+    	foreach ($agents as $key=>$agent){
+    		unset($agents[$key]["password"]);
+    	}
+    	$this->view->result = array("success"=>true, "dataLoaded"=>$agents);
+    	$this->_helper->layout->setLayout("plain");
+    	$this->_helper->viewRenderer("json");
+    }
+    
+    public function listAllAction(){
+    	$agents = $this->agentModel->listAll();
+    	foreach ($agents as $key=>$agent){
+    		unset($agents[$key]["password"]);
+    	}
+    	$this->view->result = array("success"=>true, "dataLoaded"=>$agents);
+    	$this->_helper->layout->setLayout("plain");
+    	$this->_helper->viewRenderer("json");
+ 
     }
 
 }

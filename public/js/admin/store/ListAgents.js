@@ -1,15 +1,15 @@
-Ext.define("Leadschat.store.Owners", {
+Ext.define("Leadschat.store.ListAgents", {
 	extend:"Ext.data.Store",
-	model:"Leadschat.model.Owner",
+	model:"Leadschat.model.Agent",
 	proxy: {
          type: 'ajax',
-         url: '/owners/process-list',
+         url: '/agents/list-all',
          reader: {
              type: 'json',
              root: 'dataLoaded',
              totalProperty:"total"
          }
     },
-    storeId:"ownersListStore",
+    storeId:"agentsListStore",
     autoLoad: true
 });

@@ -2,7 +2,8 @@ Ext.define("Leadschat.view.owner.List", {
 	extend:"Ext.grid.Panel",
 	title:"Registered Owners",
 	alias:"widget.owner_list",
-	selModel: Ext.create('Ext.selection.CheckboxModel'),
+	
+	
 	columns:[
 	    {
 	    	header:"Owner #",
@@ -103,7 +104,8 @@ Ext.define("Leadschat.view.owner.List", {
 	],	
 	store:"Owners",
 	initComponent:function(){
-		
+
+	    this.selModel = Ext.create('Ext.selection.CheckboxModel');
 		this.dockedItems = [
 			{
 				xtype:"pagingtoolbar",
@@ -115,7 +117,7 @@ Ext.define("Leadschat.view.owner.List", {
 		this.callParent(arguments);
 	},
 	plugins: [
-	       
+	  	
           Ext.create('Ext.grid.plugin.RowEditing', {
               clicksToEdit: 2
           })

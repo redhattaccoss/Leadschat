@@ -10,7 +10,15 @@ Ext.define("Leadschat.view.Viewport", {
 		"Leadschat.view.owner.Window",
 		"Leadschat.view.owner.Tab",
 		"Leadschat.view.owner.BasicInformation",
-		"Leadschat.view.owner.LoginCredentials"
+		"Leadschat.view.owner.LoginCredentials",
+		"Leadschat.view.account.Information",
+		"Leadschat.view.account.InformationToolbar",
+		
+		"Leadschat.view.agents.List",
+		"Leadschat.view.agents.Main",
+		"Leadschat.view.agents.Toolbar"
+		
+		
 	],
 	layout:"fit",
 	initComponent:function(){
