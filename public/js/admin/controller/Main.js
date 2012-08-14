@@ -19,10 +19,18 @@ Ext.define("Leadschat.controller.Main", {
             },
             "viewport owner_list":{
             	edit:this.onRowEditOnGrid
+            },
+            "button[name=close]":{
+            	click:this.close
             }
             
         });
     },
+    close:function(button){
+    	var window = button.up("window");
+    	window.close();
+    },
+    
     onRowEditOnGrid:function(editor, e){
     	var owner_id = e.record.get("owner_id");
     	var url = "";
@@ -46,8 +54,8 @@ Ext.define("Leadschat.controller.Main", {
         var container =tree.up("viewport").down("main").getLayout();
         if (label=="Logout"){
         	location.href="/agents/logout";
-        }else if (label=="Manage Accounts"){
-        	//container.setActiveItem("test");
+        }else if (label=="Manage Call Centers"){
+        	container.setActiveItem("callcenters_main");
         }else if (label=="Manage Owners"){
         	container.setActiveItem("owner_main");
         }else if (label=="Manage Agents"){

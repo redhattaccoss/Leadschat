@@ -13,12 +13,13 @@ Ext.define("Leadschat.view.Viewport", {
 		"Leadschat.view.owner.LoginCredentials",
 		"Leadschat.view.account.Information",
 		"Leadschat.view.account.InformationToolbar",
-		
 		"Leadschat.view.agents.List",
 		"Leadschat.view.agents.Main",
-		"Leadschat.view.agents.Toolbar"
-		
-		
+		"Leadschat.view.agents.Toolbar",
+		"Leadschat.view.callcenters.List",
+		"Leadschat.view.callcenters.Main",
+		"Leadschat.view.callcenters.Toolbar",
+		"Leadschat.view.callcenters.AddUpdateWindow"	
 	],
 	layout:"fit",
 	initComponent:function(){

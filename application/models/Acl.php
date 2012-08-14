@@ -16,7 +16,7 @@ class Acl extends Zend_Acl{
 		$this->addRole(new Zend_Acl_Role(self::ROLE_ADMIN), self::ROLE_AGENT);
 	
 		
-		$controllers  = array("agents", "chats", "index", "leads", "owners", "qa", "admin", "number-of-hits", "timezones", "countries");
+		$controllers  = array("agents", "chats", "index", "leads", "owners", "qa", "admin", "number-of-hits", "timezones", "countries", "call-center");
 		//define ROLE GUEST
 		foreach($controllers as $controller){
 			$this->addResource(new Zend_Acl_Resource($controller));

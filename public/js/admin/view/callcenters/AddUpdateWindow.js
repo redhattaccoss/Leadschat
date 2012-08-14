@@ -1,10 +1,18 @@
 Ext.define('Leadschat.view.callcenters.AddUpdateWindow', {
     extend: 'Ext.window.Window',
-
+    alias:"widget.callcenters_addupdatewindow",
     height: 225,
     width: 504,
-    title: 'Add New Call Center/Update Call Center',
-
+    buttons:[{
+	   	 text:"Save",
+		 icon:"/js/ext/examples/shared/icons/fam/disk.png",
+		 name:"save"
+	 },
+	 {
+		 text:"Close",
+		 icon:"/js/ext/examples/shared/icons/fam/cross.png",
+		 name:"close"
+	 }], 
     initComponent: function() {
         var me = this;
 

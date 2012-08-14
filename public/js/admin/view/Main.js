@@ -11,6 +11,12 @@ Ext.define("Leadschat.view.Main", {
 		{
 			xtype:"agents_main",
 			id:"agents_main"
+		},
+		
+		{
+			xtype:"callcenters_main",
+			id:"callcenters_main"
+			
 		}
 		
 	]

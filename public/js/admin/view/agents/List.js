@@ -10,7 +10,7 @@ Ext.define("Leadschat.view.agents.List", {
 	 	    	width:50
 	 	    },
 	 	   {
-				header:"Client",
+				header:"Agent Name",
 				dataIndex:"first_name",
 				width:150,
 				renderer:function(value, options, row){

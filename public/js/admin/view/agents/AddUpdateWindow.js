@@ -1,6 +1,6 @@
 Ext.define('Leadschat.view.agents.AddUpdateWindow', {
     extend: 'Ext.window.Window',
-
+    alias:"widget.agents_addupdatewindow",
     height: 315,
     width: 635,
     title: 'Add User/Update User',
