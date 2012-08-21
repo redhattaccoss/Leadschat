@@ -24,7 +24,7 @@ class Acl extends Zend_Acl{
 		
 		$this->allow(self::ROLE_GUEST, null, array("register", "login", "process-register", "process-login", "cache", "forgotpassword", "register-complete"));
 		
-		$this->allow(self::ROLE_GUEST, "index", array("index", "about", "contact", "pricing"));
+		$this->allow(self::ROLE_GUEST, "index", array("index", "about", "contact", "pricing", "how-it-works", "why", "benefits-livechat"));
 		$this->allow(self::ROLE_GUEST, "owners", array("username-existing", "get"));
 		$this->deny(self::ROLE_GUEST, "owners", array("index"));
 		$this->allow(self::ROLE_MEMBER, "owners", array("index"));

@@ -137,12 +137,8 @@ h4 {
 /*--------- layout */
 body {
 	font: 13px Arial,Helvetica,Sans-serif;
-	color: #656565;
-	background-color: #f2f6f7;
-	background-image: url(../images/body_top_thin.jpg);
-	background-repeat: repeat-x;
-	background-position: top;
-}
+	background:#f2f6f7;
+	color:#656565}
 	
 .container {
 	width:996px;
@@ -154,28 +150,42 @@ body {
 	background:url(../images/body_top_thin.jpg) top repeat-x}
 
 /*--------- header */
-.header {
+#header {
 	padding-top:6px;
 	height:154px}
 
-.logo {
+#logo {
 	margin-top: 5px;
 	width:396px;
 	float:left;}
+#logo:hover{-webkit-animation: cssAnimation 1s  16 ease;
+-moz-animation: cssAnimation 1s  16 ease;
+-o-animation: cssAnimation 1s  16 ease;} 
+@-webkit-keyframes cssAnimation {
+from { -webkit-transform:  rotate(0deg) scale(0.1) skew(0deg) translate(0px); }
+  to { -webkit-transform:  rotate(0deg) scale(1.006) skew(0deg) translate(0px); }
+} 
+@-moz-keyframes cssAnimation {
+from { -moz-transform:  rotate(0deg) scale(0.1) skew(0deg) translate(0px); }
+  to { -moz-transform:  rotate(0deg) scale(1.000) skew(0deg) translate(0px); } 
+} 
+@-o-keyframes cssAnimation {
+from { -o-transform:  rotate(0deg) scale(0.1) skew(0deg) translate(0px); }
+  to { -o-transform:  rotate(0deg) scale(1.000) skew(0deg) translate(0px); } }
 
-.topmenu {
+#topmenu {
 	height:75px;
 	width:600px;
 	float:left;
 	font-size: 17px;
 	font-family: "MergeRegular-1", "MergeRegular-2", Arial, sans-serif;}
 
-.topmenu ul li {
+#topmenu ul li {
 	display:block;
 	float:left;
 	height:75px;}
 
-.topmenu a {
+#topmenu a {
 	display:block;
 	float:left;
 	height:75px;
@@ -183,23 +193,22 @@ body {
 	color:#3e424c;
 	text-decoration:none}
 
-.topmenu a span {
+#topmenu a span {
 	display:block;
 	float:left;
 	height:75px;
 	padding:0 10px}
 
-.topmenu a.active,
-.topmenu a:hover {
+#topmenu a.active,
+#topmenu a:hover {
 	background:url(../images/topm_bg_right.gif) right top no-repeat;
 	color:#fff;}
 
-.topmenu a.active span,
-.topmenu a:hover span{
-	background: url(../images/topm_bg_left.gif) left top no-repeat;
-}
+#topmenu a.active span,
+#topmenu a:hover span{
+	background:url(../images/topm_bg_left.gif) left top no-repeat}
 
-.topmenu .last {
+#topmenu .last {
 	background:url(../images/topm_line.gif) left center no-repeat;
 	padding-left:2px}
 

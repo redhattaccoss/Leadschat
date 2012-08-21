@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<?php 
+			echo $this->headTitle();
+			echo $this->headLink();
+			echo $this->headScript();
+		?>		
+	</head>
+	<body>
+		<div class="bodywrap">
+			<div class="container">
+				
+				<?php echo $this->partial("include/index/header.phtml");?>
+				
+				<!-- middle -->
+				<div class="middle">
+					<!-- content -->
+					<div class="wrapper">
+						<div class="content">
+							<?php echo $this->layout()->content
+							?>
+						</div>
+					</div>
+					<!--/ content -->
+					<?php echo $this->partial("include/index/{$this->sidebar}")?>
+					<div class="clear"></div>
+				</div>
+				<!--/ middle -->
+			</div>
+			<!--/ container -->
+			<?php echo $this->partial("include/index/footer.phtml");?>
+		</div>
+		<?php echo $this->partial("include/index/tracker.phtml")?>
+	</body>
+</html>

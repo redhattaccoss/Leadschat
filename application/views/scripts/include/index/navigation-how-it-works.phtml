@@ -1,0 +1,42 @@
+<?php
+	if ($this->actionName=="how-it-works"){
+		$how = "class='active'";
+	}else{
+		$how = "";
+	}
+	
+	if ($this->actionName=="why"){
+		$why = "class='active'";
+	}else{
+		$why = "";
+	}
+	
+	if ($this->actionName=="benefits-livechat"){
+		$benefits = "class='active'";
+	}else{
+		$benefits = "";
+	}
+?>
+<!-- navigation -->
+<div class="navigation">
+	<div class="left-menu">
+		<ul>
+			<li <?php echo $how?>>
+				<a href="/index/how-it-works">How It Works</a>
+			</li>
+			<li <?php echo $why?>>
+				<a href="/index/why">Why LeadsChat?</a>
+			</li>
+			<li <?php echo $benefits?>>
+				<a href="/index/benefits-livechat">Benefits of Live Chat </a>
+			</li>
+		</ul>
+	</div>
+	<p>
+		<a href="/owners/register"><img src="/images/btn-free-signup.gif" alt="Free Sign Up" width="179" height="40" border="0" /></a>
+	</p>
+	<p>
+		<a href="/index/pricing"><img src="/images/btn-pricing.gif" alt="Plans and Pricing" width="179" height="40" border="0" /></a>
+	</p>
+</div>
+<!--/ navigation -->
