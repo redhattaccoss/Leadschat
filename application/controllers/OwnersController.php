@@ -310,6 +310,62 @@ class OwnersController extends AppController{
 	}
 	
 	
+	public function registerStep1Action(){
+		$form = new Owner_RegistrationStep1();
+		if ($form->isValid($_POST)){
+			$session = new Zend_Session_Namespace(SessionManager::REGISTER);
+			$session->owner = $_POST;
+			header("Location:/owners/register-step-3");
+			die;
+		}
+		$this->view->form = $form;
+		$this->view->headTitle("Leads Chat - Register Step 1");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/modernizr.custom.43502.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery.validate.min.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/register/register-step-1.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/bootstrap/js/bootstrap.min.js", "text/javascript");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/bootstrap/css/bootstrap.min.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/sticky.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/style.css");
+		$this->_helper->layout->setLayout("register");
+	}
+	
+	public function registerStep2Action(){
+		$form = new Owner_RegistrationStep2();
+		$this->view->form = $form;
+		$this->view->headTitle("Leads Chat - Register Step 2");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/modernizr.custom.43502.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/owners/register-step-1.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/bootstrap/js/bootstrap.min.js", "text/javascript");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/bootstrap/css/bootstrap.min.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/sticky.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/style.css");
+		$this->_helper->layout->setLayout("register");
+	}
+	
+	public function registerStep3Action(){
+		$form = new Owner_RegistrationStep3();
+		$this->view->form = $form;
+		$this->view->headTitle("Leads Chat - Register Step 3");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/modernizr.custom.43502.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/owners/register-step-1.js", "text/javascript");
+		$this->view->headScript()->appendFile($this->baseUrl."/js/bootstrap/js/bootstrap.min.js", "text/javascript");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/js/bootstrap/css/bootstrap.min.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/sticky.css");
+		$this->view->headLink()->appendStylesheet($this->baseUrl."/css/owners/register/style.css");
+		$this->_helper->layout->setLayout("register");		
+	}
+		
+	public function processRegisterStep1Action(){
+		$session = new Zend_Session_Namespace();
+	
+		$this->_helper->layout->setLayout("plain");
+		$this->_helper->viewRenderer("json");		
+	}
+	
 	/**
 	 * Logout an owner from login
 	 */

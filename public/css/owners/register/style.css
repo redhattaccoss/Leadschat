@@ -1,0 +1,179 @@
+
+body {
+	background-color: rgb(119,119,119);
+	font-family: Tahoma, Geneva, sans-serif;
+}
+.right {
+	text-align: right;
+}
+.container-fluid {
+	background: url(../../../images/owners/register/background.png) repeat;
+	padding-left: 0;
+	padding-right: 0;
+	height: 100%;
+}
+.logo {
+	margin-top: 37px;
+}
+.header {
+	height: 144px;
+	background-color: rgb(35,35,35);
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.divider {
+	border-top: 1px solid #65B3DC;
+	height: 4px;
+	background-color: #007DBF;
+	border-bottom: 1px solid #777777;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.navigation {
+	float: right;
+	margin-top: 45px;
+}
+.navigation-main ul {
+	list-style-type: none;
+}
+.navigation-main ul li {
+	float: left;
+	margin-right: 43px;
+}
+.header .contact-number {
+	text-align: right;
+	margin-top: 23px;
+}
+.navigation-main {
+	overflow: hidden;
+}
+.navigation-main ul li.last {
+	margin-right: 0;
+}
+.navigation-main ul li a {
+	line-height: 120%;
+	color: rgb(255,255,255);
+	text-align: left;
+	/* Firefox v4.0+ , Safari v5.1+ , Chrome v10.0+, IE v10+ and by Opera v10.5+ */
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.75);
+	-ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true)";
+	zoom: 1;
+	filter: progid :DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bf000000,Positive = true);
+}
+.contact-number {
+	font-family: "Myriad Pro";
+	font-size: 30px;
+	line-height: 120%;
+	color: rgb(254,254,254);
+	text-align: right;
+}
+.container-progress {
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 65px;
+}
+.step-form {
+	width: 696px;
+	padding: 9px;
+	background-color: rgba(17,17,17,0.5);
+	z-index: 9;
+	position: relative;
+}
+.step-form form {
+	margin-bottom: 0;
+}
+.step-form .well {
+	margin-bottom: 0;
+	border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+}
+.step-form h1 {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 120%;
+	color: rgb(1,101,168);
+	text-align: left;
+	/* Firefox v4.0+ , Safari v5.1+ , Chrome v10.0+, IE v10+ and by Opera v10.5+ */
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.75);
+	-ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfffffff,Positive = true)";
+	zoom: 1;
+	filter: progid :DXImageTransform.Microsoft.dropshadow(OffX = 0,OffY = 1,Color = #bfffffff,Positive = true);
+	border-bottom: 1px solid rgb(204,204,204);
+	height: 51px;
+	margin-bottom: 17px;
+}
+.step-form h1 img {
+	float: right;
+	margin-right: -34px;
+}
+.step-form .submit-form {
+	background-color: rgb(204,204,204);
+	height: 56px;
+	text-align: right;
+	padding: 17px 14px;
+}
+.step-form .two-row.well {
+	padding-left: 0;
+	padding-top: 0;
+}
+.step-form .two-row.well label:first-child {
+	margin-left: 0;
+}
+.step-form .two-row.well input:last-child {
+	margin-left: 20px;
+}
+.step-form .no-clear {
+	clear: none;
+}
+.step-form .submit-form .btn {
+	padding: 8px;
+}
+.step-form .arrow-next {
+	background: url(../../../images/owners/register/save-next.png) no-repeat transparent;
+	height: 21px;
+	width: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.step-form label strong {
+	font-size: 11px;
+	line-height: 118%;
+	color: rgb(153,153,153);
+	text-align: left;
+}
+.step-form .submit-form .aside {
+	float: left;
+}
+.shadow {
+	background: url(../../../images/owners/register/shadow-box.png) no-repeat transparent;
+	height: 89px;
+	width: 716px;
+	margin-top: -60px;
+	z-index: 8;
+	margin-bottom: 200px;
+	position: relative;
+}
+.footer {
+	background-color: rgb(32,35,41);
+	height: 45px;
+	padding-top: 10px;
+}
+.footer .copyright {
+	font-size: 12px;
+	line-height: 120%;
+	color: rgb(107,107,107);
+	text-align: center;
+}
+.footer {
+	background: none rgb(32,35,41) !important;
+}
+.footer a {
+	font-size: 12px;
+	line-height: 120%;
+	color: rgb(255,255,255);
+	text-align: left;
+}
+.footer .container span6 {
+	margin-top: 10px;
+}

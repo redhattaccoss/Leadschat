@@ -74,7 +74,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	private function loadNewClasses(){
 		$models = APPLICATION_PATH.DIRECTORY_SEPARATOR."models";
 		$forms = APPLICATION_PATH.DIRECTORY_SEPARATOR."forms";
-			
+		$components = APPLICATION_PATH.DIRECTORY_SEPARATOR."components";	
 			
 		Zend_Loader::loadClass("App_Chat", array($models));
 		Zend_Loader::loadClass("App_ChatSession", array($models));
@@ -92,10 +92,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Loader::loadClass("App_Agent", array($models));
 		Zend_Loader::loadClass("App_CallCenter", array($models));
 		
+		
+		//Forms
 		Zend_Loader::loadClass("Owner_Registration", array($forms));
     	Zend_Loader::loadClass("Owner_ForgotPassword", array($forms));
     	Zend_Loader::loadClass("Owner_Login", array($forms));
 		Zend_Loader::loadClass("Owner_ResetPassword", array($forms));
+		Zend_Loader::loadClass("Owner_RegistrationStep1", array($forms));
+		Zend_Loader::loadClass("Owner_RegistrationStep2", array($forms));
+		Zend_Loader::loadClass("Owner_RegistrationStep3", array($forms));
+		
 		
 		//Boot all MongoDb Files
 		Zend_Loader::loadClass("Db_Mongo", array($models));
@@ -113,8 +119,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		
 		
     	Zend_Loader::loadClass("UserMap", array($models));
-    	Zend_Loader::loadClass("Acl", array($models));
+    	Zend_Loader::loadClass("Acl", array($components));
     	Zend_Loader::loadClass("Mailer", array($models));
+    	Zend_Loader::loadClass("SessionManager", array($components));
 	}
 	
 	protected function _initView(){

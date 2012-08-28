@@ -1,11 +1,14 @@
-<div class="container container-progress"><img src="images/register/step-2-progress.png" alt="Step 1"/>
+<?php 
+	$form = $this->form;
+?>
+<div class="container container-progress"><img src="/images/owners/register/step-2-progress.png" alt="Step 1"/>
 </div>
 <div class="container step-form">
 	<form>
 		<div class="well">
-			<h1><img src="images/register/2-3.png" alt="2 out of 3"/>Company Information</h1>
+			<h1><img src="/images/owners/register/2-3.png" alt="2 out of 3"/>Company Information</h1>
 			<label>Company Name</label>
-			<input type="text" class="span4"/>
+			<?php echo $form->company->renderViewHelper()?>
 			<label>Business Type</label>
 			<input type="text" class="span4"/>
 			<label>What time zone is your business located?</label>

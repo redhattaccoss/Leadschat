@@ -1,0 +1,16 @@
+/* Sticky Footer styles begin */
+html, body {
+	height: 100%;
+}
+#push {
+	height: 55px;
+}
+footer[role="contentinfo"] {
+	height: 45px; /* accounts for padding */
+}
+body > .sticky-body{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -55px;
+}

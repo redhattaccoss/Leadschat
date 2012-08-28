@@ -1,6 +1,7 @@
 <?php
 class Owner_RegistrationStep1 extends Zend_Form{
 	public function init(){
+		$this->setMethod(Zend_Form::METHOD_POST);
 		$this->addDecorators(array("ViewHelper"), array("Errors"));
 		$firstname = new Zend_Form_Element_Text("first_name");
 		$firstname->setLabel("Firstname");
@@ -37,7 +38,7 @@ class Owner_RegistrationStep1 extends Zend_Form{
 				"options"=>array(6, 50))			
 		);
 		$confirm_email = new Zend_Form_Element_Text("confirm_email");
-		$confirm_email->setLabel("Email Address");
+		$confirm_email->setLabel("Confirm Email Address");
 		$confirm_email->setRequired(true);
 		$confirm_email->addValidators(array(
 		array("validator"=>"NotEmpty",
