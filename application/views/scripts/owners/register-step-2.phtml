@@ -4,35 +4,55 @@
 <div class="container container-progress"><img src="/images/owners/register/step-2-progress.png" alt="Step 1"/>
 </div>
 <div class="container step-form">
-	<form>
+	<form method="<?php echo $form->getMethod()?>" id="registration-form-2">
 		<div class="well">
 			<h1><img src="/images/owners/register/2-3.png" alt="2 out of 3"/>Company Information</h1>
-			<label>Company Name</label>
-			<?php echo $form->company->renderViewHelper()?>
-			<label>Business Type</label>
-			<input type="text" class="span4"/>
-			<label>What time zone is your business located?</label>
-			<input type="text" class="span4"/>
-			<label>Website/URL <strong>e.g.leadschat.com</strong></label>
-			<input type="text" class="span4"/>
-			<label>How many web hits do you currently receieve each month?</label>
-			<input type="text" class="span4"/>
-			<label>Contact <strong>(Skype, Mobile)</strong></label>
-			<input type="text" class="span4"/>
-			<label>Address 1</label>
-			<input type="text" class="span6"/>
-			<label>Address 2</label>
-			<input type="text" class="span6"/>
+			<div class="control-group">
+				<label>Company Name</label>
+				<?php echo $form->company->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>Business Type</label>
+				<?php echo $form->business_type->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>What time zone is your business located?</label>
+				<?php echo $form->timezone_id->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>Website/URL <strong>e.g.leadschat.com</strong></label>
+				<?php echo $form->website->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>How many web hits do you currently receieve each month?</label>
+				<?php echo $form->number_of_hit_id->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>Contact <strong>(Skype, Mobile)</strong></label>
+				<?php echo $form->mobile->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>Address 1</label>
+				<?php echo $form->address1->renderViewHelper()?>
+			</div>
+			<div class="control-group">
+				<label>Address 2</label>
+				<?php echo $form->address2->renderViewHelper()?>
+			</div>
 			<div class="two-row form-inline well">
 				<label class="span4">City</label><label class="span2">Postal</label>
 				<br/>
-				<input type="text" class="span4"/>
-				<input type="text" class="span2"/>
+				<?php echo $form->city->renderViewHelper()?>
+				<?php echo $form->postal->renderViewHelper()?>
 			</div>
-			<label>State</label>
-			<input type="text" class="span4"/>
-			<label>Country</label>
-			<input type="text" class="span4"/>
+			<div class="control-group">
+				<label>State</label>
+				<?php echo $form->state->renderViewHelper()?>
+			</div>
+			<div class="control-group">			
+				<label>Country</label>
+				<?php echo $form->country_id->renderViewHelper()?>
+			</div>
 		</div>
 		<div class="submit-form">
 			<button type="submit" class="btn btn-primary">

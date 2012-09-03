@@ -315,7 +315,7 @@ class OwnersController extends AppController{
 		if ($form->isValid($_POST)){
 			$session = new Zend_Session_Namespace(SessionManager::REGISTER);
 			$session->owner = $_POST;
-			header("Location:/owners/register-step-3");
+			header("Location:/owners/register-step-2");
 			die;
 		}
 		$this->view->form = $form;
@@ -333,6 +333,18 @@ class OwnersController extends AppController{
 	
 	public function registerStep2Action(){
 		$form = new Owner_RegistrationStep2();
+		$session = new Zend_Session_Namespace(SessionManager::REGISTER);
+		if (!$session->owner){
+			header("Location:/owners/register-step-1");
+			die;
+		}
+		if ($form->isValid($_POST)){
+			foreach($_POST as $key=>$value){
+				$session->owner[$key] = $this->getRequest()->getPost($key);
+			}
+			header("Location:/owners/register-step-3");
+			die;
+		}
 		$this->view->form = $form;
 		$this->view->headTitle("Leads Chat - Register Step 2");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");
@@ -347,6 +359,11 @@ class OwnersController extends AppController{
 	
 	public function registerStep3Action(){
 		$form = new Owner_RegistrationStep3();
+		$session = new Zend_Session_Namespace(SessionManager::REGISTER);
+		if (!$session->owner){
+			header("Location:/owners/register-step-1");
+			die;
+		}
 		$this->view->form = $form;
 		$this->view->headTitle("Leads Chat - Register Step 3");
 		$this->view->headScript()->appendFile($this->baseUrl."/js/jquery-1.7.2.min.js", "text/javascript");

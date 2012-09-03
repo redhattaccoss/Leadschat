@@ -6,6 +6,7 @@ class Owner_RegistrationStep1 extends Zend_Form{
 		$firstname = new Zend_Form_Element_Text("first_name");
 		$firstname->setLabel("Firstname");
 		$firstname->setRequired(true);
+		$firstname->class = "span4";
 		$firstname->addValidators(array(
 		array("validator"=>"NotEmpty",
 				  "breakChainOnFailure"=>true),
@@ -18,6 +19,7 @@ class Owner_RegistrationStep1 extends Zend_Form{
 		$lastname = new Zend_Form_Element_Text("last_name");
 		$lastname->setLabel("Lastname");
 		$lastname->setRequired(true);
+		$lastname->class = "span4";
 		$lastname->addValidators(array(
 		array("validator"=>"NotEmpty",
 				  "breakChainOnFailure"=>true),
@@ -30,6 +32,7 @@ class Owner_RegistrationStep1 extends Zend_Form{
 		$email = new Zend_Form_Element_Text("email");
 		$email->setLabel("Email Address");
 		$email->setRequired(true);
+		$email->class = "span4";
 		$email->addValidators(array(
 		array("validator"=>"NotEmpty",
 				  "breakChainOnFailure"=>true)),
@@ -40,6 +43,7 @@ class Owner_RegistrationStep1 extends Zend_Form{
 		$confirm_email = new Zend_Form_Element_Text("confirm_email");
 		$confirm_email->setLabel("Confirm Email Address");
 		$confirm_email->setRequired(true);
+		$confirm_email->class = "span4";
 		$confirm_email->addValidators(array(
 		array("validator"=>"NotEmpty",
 				  "breakChainOnFailure"=>true)),
